@@ -1,0 +1,22 @@
+{
+	"name": "itsamoreh/nextjs-headless-wordpress",
+	"description": "Project template for headless WordPress / Next.js monorepo.",
+	"minimum-stability": "dev",
+	"prefer-stable": true,
+	"repositories": [
+		{
+			"type": "composer",
+			"url": "https://wpackagist.org"
+		},
+		{
+			"type": "vcs",
+			"url": "git@github.com:itsamoreh/bring-your-own-blocks"
+		}
+	],
+	"require": {
+		"itsamoreh/bring-your-own-blocks": "^0.1.0",
+		"pristas-peter/wp-graphql-gutenberg": "^0.3.11",
+		"wpackagist-plugin/advanced-custom-fields": "^5.11",
+		"wpackagist-plugin/wp-graphql": "^1.6.7"
+	}
+}
