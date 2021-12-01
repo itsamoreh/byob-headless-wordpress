@@ -1,4 +1,4 @@
-## Next.js Headless WordPress Starter
+# Next.js Headless WordPress Starter
 
 ## Setup
 
