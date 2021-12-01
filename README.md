@@ -39,13 +39,7 @@ This URL will be used to access WordPress.
 
 This URL will be used to access the Next.js frontend.
 
-```bash
-✍️  What is your Disqus comments shortname? (leave blank if you are not using): 
-```
-
-Leave this blank if you are not going to use the Disqus comments, else enter your Disqus comments shortname.
-
-This is going to:
+**This is going to:**
 
 - Create the `.env` file in the frontend directory.
 - Setup the WordPress backend with all plugins via composer (if you chose to use this project's WordPress backend setup).
