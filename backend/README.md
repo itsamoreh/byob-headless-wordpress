@@ -63,11 +63,14 @@ docker-compose -f docker-compose.yml down && \
 docker-compose -f docker-compose.yml up -d
 ```
 
-**Note:** If you changed the ports in `docker-compose.yml` in addition to running the commands above.
+**Note:** If you changed the ports in `docker-compose.yml`, delete the `db` directory in addition to running the commands above. Make sure you have a backup first!
 
 ## Docker Images
 
 [WordPress](https://hub.docker.com/_/wordpress)
+
 [Composer](https://hub.docker.com/_/composer)
+
 [MySQL 8.0](https://hub.docker.com/_/mysql)
+
 [phpMyAdmin](https://hub.docker.com/_/phpmyadmin)
