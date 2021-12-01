@@ -37,8 +37,8 @@ This URL will be used to access the Next.js frontend. The default is http://loca
 - Setup the WordPress backend with all plugins via composer (if you chose to use this project's WordPress backend setup).
 - Install npm packages for Next.js frontend and start the development server.
 
-**WordPress backend** will be available at [http://localhost:8080](http://localhost:8080) by default.
-**Next.js frontend** will be available on at [http://localhost:3000](http://localhost:3000) by default.
+The **WordPress backend** will be available at [http://localhost:8080](http://localhost:8080) by default.
+The **Next.js frontend** will be available on at [http://localhost:3000](http://localhost:3000) by default.
 
 ### After Setup
 
@@ -46,7 +46,7 @@ This URL will be used to access the Next.js frontend. The default is http://loca
 - Update the block registry by going to "WordPress Admin Panel > GraphQL Gutenberg".
 - Update the permalink by going to "WordPress Admin Panel > Settings > Permalinks". Choose "Post name" under "Common Settings" and hit "Save".
 - Set a Homepage and Posts page by going to "WordPress Admin Panel > Settings > Reading".
-- See "Debugging" Step 1.
+- See "Debugging" if you're having problems.
 
 ### During development
 
@@ -62,7 +62,7 @@ Useful commands (run these from the project root):
 
 ## Debugging
 
-### If you get a server error on the frontend, check to see that the `.htaccess` file in `backend/wordpress` has the following rules. They may have been overwritten during setup.
+**If you get a server error on the frontend, check to see that the `.htaccess` file in `backend/wordpress` has the following rules. They may have been overwritten during setup.**
 
 ```shell script
 # BEGIN WordPress
@@ -82,13 +82,13 @@ RewriteRule . /index.php [L]
 # END WordPress
 ```
 
-### If you're getting another error on the frontend.
+**If you're getting another error on the frontend.**
 
 - Check if all the required WordPress plugins form `backend/wordpress/composer.json` are Activated by going to "WordPress Admin Panel > Plugins".
 - Ensure you have updated the block registry by going to "WordPress Admin Panel > GraphQL Gutenberg".
 - Ensure that `.env` file has the correct env variables and values in `frontend/.env`.
 
-### If you need to change `php.ini`'s `upload_max_filesize` directive, add the following to the `.htaccess` file in `backend/wordpress`, customizing limits for your needs.
+**If you need to change `php.ini`'s `upload_max_filesize` directive, add the following to the `.htaccess` file in `backend/wordpress`, customizing limits for your needs.**
 
 ```shell script
 
