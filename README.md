@@ -1,6 +1,4 @@
-## Next.js Headless WordPress
-
-Headless WordPress, using Decoupled Architecture with Next.js.
+## Next.js Headless WordPress Starter
 
 ## Setup
 
