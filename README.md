@@ -11,33 +11,25 @@ git clone https://github.com/itsamoreh/nextjs-headless-wordpress.git
 cd nextjs-headless-wordpress
 ```
 
-- Install Docker from [docs.docker.com/get-docker](https://docs.docker.com/get-docker/).
+Next install Docker from [docs.docker.com/get-docker](https://docs.docker.com/get-docker/) and make sure Docker is running before you continue.
 
-Set up the project with: `./nextwp configure`.
+Set up the project with: `./nextwp configure`. You'll be asked a few questions.
 
-You'll be asked a few questions.
+**Would you like to use this project's WordPress backend setup?**
 
-```bash
-Would you like to use this project's WordPress backend setup? [y/n]:
-```
-
-**Answer**
+Answer:
 
 `y`: If you would like to use this project's WordPress backend setup using Docker.
 
 `n`: If you want to use your own WordPress setup.
 
-```bash
-✍️  What is your WordPress URL? (defaults to http://localhost:8080): 
-```
+**What is your WordPress URL?**
 
-This URL will be used to access WordPress.
+This URL will be used to access WordPress. The default is http://localhost:8080 if you just press enter.
 
-```bash
-✍️  What is your Next.js frontend URL? (defaults to http://localhost:3000):
-```
+**What is your Next.js frontend URL?**
 
-This URL will be used to access the Next.js frontend.
+This URL will be used to access the Next.js frontend. The default is http://localhost:3000 if you just press enter.
 
 **This is going to:**
 
@@ -70,7 +62,7 @@ Useful commands (run these from the project root):
 
 ## Debugging
 
-If you get a server error on the frontend, check to see that the `.htaccess` file in `backend/wordpress` has the following rules. They may have been overwritten during setup.
+### If you get a server error on the frontend, check to see that the `.htaccess` file in `backend/wordpress` has the following rules. They may have been overwritten during setup.
 
 ```shell script
 # BEGIN WordPress
@@ -90,13 +82,13 @@ RewriteRule . /index.php [L]
 # END WordPress
 ```
 
-If you're getting another error on the frontend.
+### If you're getting another error on the frontend.
 
 - Check if all the required WordPress plugins form `backend/wordpress/composer.json` are Activated by going to "WordPress Admin Panel > Plugins".
 - Ensure you have updated the block registry by going to "WordPress Admin Panel > GraphQL Gutenberg".
 - Ensure that `.env` file has the correct env variables and values in `frontend/.env`.
 
-If you need to change `php.ini`'s `upload_max_filesize` directive, add the following to the `.htaccess` file in `backend/wordpress`, customizing limits for your needs.
+### If you need to change `php.ini`'s `upload_max_filesize` directive, add the following to the `.htaccess` file in `backend/wordpress`, customizing limits for your needs.
 
 ```shell script
 
