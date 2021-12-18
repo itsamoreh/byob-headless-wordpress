@@ -2,3 +2,11 @@
 !composer*
 !.htaccess
 !.gitignore
+
+# Track custom plugins
+!/wp-content/
+!/wp-content/plugins/
+
+# Track the BYOB plugin
+!/wp-content/plugins/byob
+!/wp-content/plugins/byob/*
