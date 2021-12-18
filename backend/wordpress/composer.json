@@ -1,6 +1,6 @@
 {
-  "name": "itsamoreh/nextjs-headless-wordpress",
-  "description": "Project template for headless WordPress / Next.js monorepo.",
+  "name": "itsamoreh/byob-headless-wordpress",
+  "description": "Headless WordPress setup for Gutenberg blocks from scratch.",
   "minimum-stability": "dev",
   "prefer-stable": true,
   "repositories": [
@@ -9,13 +9,36 @@
       "url": "https://wpackagist.org"
     },
     {
-      "type": "vcs",
-      "url": "git@github.com:itsamoreh/bring-your-own-blocks"
+      "type": "git",
+      "url": "https://github.com/findcanary/wp-graphql-the-seo-framework.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/itsamoreh/byob-headless-wordpress-theme"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/pristas-peter/wp-graphql-gutenberg-acf.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/pristas-peter/wp-graphql-gutenberg.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/sybrew/the-seo-framework.git"
+    },
+    {
+      "type": "git",
+      "url": "https://github.com/pristas-peter/wp-graphql-gutenberg-acf.git"
     }
   ],
   "require": {
-    "itsamoreh/bring-your-own-blocks": "^0.1.0",
-    "pristas-peter/wp-graphql-gutenberg": "^0.3.11",
+    "findcanary/wp-graphql-the-seo-framework": "master",
+    "itsamoreh/byob-headless-wordpress-theme": "^0.1.3",
+    "sybrew/the-seo-framework": "^4.2.0",
+    "pristas-peter/wp-graphql-gutenberg": "^0.3.0",
+    "pristas-peter/wp-graphql-gutenberg-acf": "^0.3.0",
     "wpackagist-plugin/advanced-custom-fields": "^5.11",
     "wpackagist-plugin/wp-graphql": "^1.6.7"
   }

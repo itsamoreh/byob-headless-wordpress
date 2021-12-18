@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "49af24f7a71f302e24bee945d513173c",
+    "content-hash": "45025a1804559479c9b8598e007e4328",
     "packages": [
         {
             "name": "composer/installers",
@@ -158,18 +158,38 @@
             "time": "2021-09-13T08:19:44+00:00"
         },
         {
-            "name": "itsamoreh/bring-your-own-blocks",
-            "version": "v0.1.1",
+            "name": "findcanary/wp-graphql-the-seo-framework",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/itsamoreh/bring-your-own-blocks.git",
-                "reference": "9770a771291d10f3a844ad19c5346b912ad46279"
+                "url": "https://github.com/findcanary/wp-graphql-the-seo-framework.git",
+                "reference": "92010b8846c526328b4d35e615661e81794e1320"
             },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/itsamoreh/bring-your-own-blocks/zipball/9770a771291d10f3a844ad19c5346b912ad46279",
-                "reference": "9770a771291d10f3a844ad19c5346b912ad46279",
-                "shasum": ""
+            "default-branch": true,
+            "type": "wordpress-plugin",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Henrik Wirth",
+                    "homepage": "https://henrikwirth.com"
+                },
+                {
+                    "name": "FindCanary.com",
+                    "homepage": "https://findcanary.com"
+                }
+            ],
+            "description": "Adds The SEO framework support to the WPGraphQL Plugin for posts, pages and custom post types.",
+            "time": "2021-08-15T21:33:50+00:00"
+        },
+        {
+            "name": "itsamoreh/byob-headless-wordpress-theme",
+            "version": "v0.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/itsamoreh/byob-headless-wordpress-theme",
+                "reference": "e63ec309515ea2b3d572a24f145844ea12a91d28"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -178,12 +198,8 @@
             "license": [
                 "GPL-2.0-or-later"
             ],
-            "description": "A simple WordPress theme for sites where editors don't need control of the design. BYO... Blocks.",
-            "support": {
-                "source": "https://github.com/itsamoreh/bring-your-own-blocks/tree/v0.1.1",
-                "issues": "https://github.com/itsamoreh/bring-your-own-blocks/issues"
-            },
-            "time": "2021-11-16T05:53:16+00:00"
+            "description": "BYOB Headless WordPress Theme",
+            "time": "2021-12-15T02:34:22+00:00"
         },
         {
             "name": "opis/json-schema",
@@ -260,12 +276,6 @@
                 "url": "https://github.com/pristas-peter/wp-graphql-gutenberg.git",
                 "reference": "7b2d4ca0590d2587c23b75ddb30027b44c0a80d4"
             },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/pristas-peter/wp-graphql-gutenberg/zipball/7b2d4ca0590d2587c23b75ddb30027b44c0a80d4",
-                "reference": "7b2d4ca0590d2587c23b75ddb30027b44c0a80d4",
-                "shasum": ""
-            },
             "require": {
                 "opis/json-schema": "^1.0",
                 "voku/simple_html_dom": "4.7.17"
@@ -285,26 +295,106 @@
                     "src/"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
-            "description": "Query gutenberg blocks with wp-graphql",
-            "support": {
-                "issues": "https://github.com/pristas-peter/wp-graphql-gutenberg/issues",
-                "source": "https://github.com/pristas-peter/wp-graphql-gutenberg/tree/v0.3.11"
+            "scripts": {
+                "phpcs-i": [
+                    "@php ./vendor/bin/phpcs -i"
+                ],
+                "check-cs": [
+                    "@php ./vendor/bin/phpcs"
+                ],
+                "fix-cs": [
+                    "@php ./vendor/bin/phpcbf"
+                ]
             },
+            "description": "Query gutenberg blocks with wp-graphql",
             "time": "2021-08-16T13:38:20+00:00"
         },
         {
+            "name": "pristas-peter/wp-graphql-gutenberg-acf",
+            "version": "v0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pristas-peter/wp-graphql-gutenberg-acf.git",
+                "reference": "b9d7855cad2dbf1656a1163728840bb35808a698"
+            },
+            "require": {
+                "pristas-peter/wp-graphql-gutenberg": "^0.3.0",
+                "wp-graphql/wp-graphql-acf": "^0.3.3"
+            },
+            "type": "wordpress-plugin",
+            "description": "Expose acf blocks through graphql",
+            "time": "2020-05-28T21:45:58+00:00"
+        },
+        {
+            "name": "sybrew/the-seo-framework",
+            "version": "4.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sybrew/the-seo-framework.git",
+                "reference": "b8ff9f8db4b1a0455128adcd521d2354636b4651"
+            },
+            "require": {
+                "composer/installers": "^1.0",
+                "php": "~7.2 || ^8.0 || ^8.1"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "0.5.0",
+                "phpcompatibility/phpcompatibility-wp": "2.0.0",
+                "sirbrillig/phpcs-variable-analysis": "2.6.4",
+                "theseoframework/wpcs-tsf": "1.0.0"
+            },
+            "type": "wordpress-plugin",
+            "scripts": {
+                "php:compatibility": [
+                    "composer install && vendor/bin/phpcs -p -s --runtime-set testVersion '5.2-' --standard=PHPCompatibilityWP --ignore=docker,tools,tests,node_modules,vendor --extensions=php"
+                ],
+                "php:lint": [
+                    "composer install && vendor/bin/phpcs -p -s"
+                ],
+                "php:autofix": [
+                    "composer install && vendor/bin/phpcbf"
+                ],
+                "php:lint:errors": [
+                    "composer install && vendor/bin/phpcs -p -s --runtime-set ignore_warnings_on_exit 1"
+                ]
+            },
+            "license": [
+                "GPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Sybre Waaijer",
+                    "email": "sybrew@users.noreply.github.com",
+                    "homepage": "https://cyberwire.nl/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "An automated, advanced, accessible, unbranded and extremely fast SEO solution for any WordPress website.",
+            "homepage": "https://theseoframework.com/",
+            "keywords": [
+                "plugin",
+                "seo",
+                "wordpress"
+            ],
+            "support": {
+                "docs": "https://theseoframework.com/docs/",
+                "forum": "https://wordpress.org/support/plugin/autodescription/",
+                "wiki": "https://github.com/sybrew/the-seo-framework/wiki"
+            },
+            "time": "2021-12-06T21:52:42+00:00"
+        },
+        {
             "name": "symfony/css-selector",
-            "version": "v5.3.4",
+            "version": "v5.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
-                "reference": "7fb120adc7f600a59027775b224c13a33530dd90"
+                "reference": "44b933f98bb4b5220d10bed9ce5662f8c2d13dcc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/css-selector/zipball/7fb120adc7f600a59027775b224c13a33530dd90",
-                "reference": "7fb120adc7f600a59027775b224c13a33530dd90",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/44b933f98bb4b5220d10bed9ce5662f8c2d13dcc",
+                "reference": "44b933f98bb4b5220d10bed9ce5662f8c2d13dcc",
                 "shasum": ""
             },
             "require": {
@@ -341,7 +431,7 @@
             "description": "Converts CSS selectors to XPath expressions",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/css-selector/tree/v5.3.4"
+                "source": "https://github.com/symfony/css-selector/tree/v5.4.0"
             },
             "funding": [
                 {
@@ -357,7 +447,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-07-21T12:38:00+00:00"
+            "time": "2021-09-09T08:06:01+00:00"
         },
         {
             "name": "symfony/polyfill-php80",
@@ -524,37 +614,83 @@
             "time": "2020-04-09T21:20:43+00:00"
         },
         {
-            "name": "wpackagist-plugin/advanced-custom-fields",
-            "version": "5.11",
+            "name": "wp-graphql/wp-graphql-acf",
+            "version": "v0.3.5",
             "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/advanced-custom-fields/",
-                "reference": "tags/5.11"
+                "type": "git",
+                "url": "https://github.com/wp-graphql/wp-graphql-acf.git",
+                "reference": "11a2a10a4abb51c541fd7b0ba0b81d1491525136"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/advanced-custom-fields.5.11.zip"
+                "url": "https://api.github.com/repos/wp-graphql/wp-graphql-acf/zipball/11a2a10a4abb51c541fd7b0ba0b81d1491525136",
+                "reference": "11a2a10a4abb51c541fd7b0ba0b81d1491525136",
+                "shasum": ""
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
+                "lucatume/wp-browser": "^2.2.",
+                "phpcompatibility/phpcompatibility-wp": "^2.0",
+                "wp-coding-standards/wpcs": "^2.1"
+            },
+            "type": "wordpress-plugin",
+            "autoload": {
+                "psr-4": {
+                    "WPGraphQL\\ACF\\": "src/"
+                },
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0+"
+            ],
+            "authors": [
+                {
+                    "name": "jasonbahl",
+                    "email": "jasonbahl@mac.com"
+                }
+            ],
+            "description": "Advanced Custom Fields bindings for wp-graphql",
+            "support": {
+                "issues": "https://github.com/wp-graphql/wp-graphql-acf/issues",
+                "source": "https://github.com/wp-graphql/wp-graphql-acf/tree/master"
+            },
+            "time": "2020-07-27T13:32:21+00:00"
+        },
+        {
+            "name": "wpackagist-plugin/advanced-custom-fields",
+            "version": "5.11.4",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/advanced-custom-fields/",
+                "reference": "tags/5.11.4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/advanced-custom-fields.5.11.4.zip"
             },
             "require": {
-                "composer/installers": "~1.0 || ~2.0"
+                "composer/installers": "^1.0 || ^2.0"
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/advanced-custom-fields/"
         },
         {
             "name": "wpackagist-plugin/wp-graphql",
-            "version": "1.6.7",
+            "version": "1.6.10",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wp-graphql/",
-                "reference": "tags/1.6.7"
+                "reference": "tags/1.6.10"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-graphql.1.6.7.zip"
+                "url": "https://downloads.wordpress.org/plugin/wp-graphql.1.6.10.zip"
             },
             "require": {
-                "composer/installers": "~1.0 || ~2.0"
+                "composer/installers": "^1.0 || ^2.0"
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/wp-graphql/"
