@@ -15,10 +15,10 @@
 
 .title {
   @apply mb-4 text-6xl font-extrabold;
-  
+
   & a {
     @apply text-blue-700 no-underline;
-  
+
     &:hover,
     &:focus,
     &:active {

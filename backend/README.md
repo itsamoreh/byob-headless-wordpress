@@ -17,9 +17,9 @@ docker-compose -f docker-compose.yml up -d
 
 This will start the docker containers in [detached mode](https://docs.docker.com/engine/reference/run/#detached--d).
 
-*WordPress* will be available at [http://localhost:8080](http://localhost:8080).
+_WordPress_ will be available at [http://localhost:8080](http://localhost:8080).
 
-*phpMyAdmin* will be available at [http://localhost:8183](http://localhost:8183).
+_phpMyAdmin_ will be available at [http://localhost:8183](http://localhost:8183).
 
 ```shell script
 port: mysql:3306
@@ -33,7 +33,7 @@ password: root
 
 ```shell script
 docker-compose -f docker-compose.yml down && \
-docker-compose -f docker-compose.yml up -d 
+docker-compose -f docker-compose.yml up -d
 ```
 
 This will stop all docker containers related to this project, then start them in [detached mode](https://docs.docker.com/engine/reference/run/#detached--d).

@@ -4,8 +4,8 @@
 
 ### Requirements
 
-* [WordPress](https://wordpress.org/)
-* [WPGraphQL](https://www.wpgraphql.com/)
+- [WordPress](https://wordpress.org/)
+- [WPGraphQL](https://www.wpgraphql.com/)
 
 ```bash
 npm run dev
