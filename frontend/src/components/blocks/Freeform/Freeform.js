@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types'
+import parseHtml from '@/lib/html-parser'
 
 /**
  * Freeform Block
@@ -11,8 +12,9 @@ export default function Freeform({ content }) {
       // tailwindcss-typography (prose) can be customized using the low-level customization API
       // @see https://github.com/tailwindlabs/tailwindcss-typography#customization
       className="container mb-8 prose prose-indigo"
-      dangerouslySetInnerHTML={{ __html: content }}
-    />
+    >
+      {parseHtml(content)}
+    </div>
   )
 }
 
