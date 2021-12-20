@@ -14,6 +14,10 @@
     },
     {
       "type": "git",
+      "url": "https://github.com/itsamoreh/byob-headless-block-parser"
+    },
+    {
+      "type": "git",
       "url": "https://github.com/itsamoreh/byob-headless-wordpress-theme"
     },
     {
@@ -36,6 +40,7 @@
   "require": {
     "findcanary/wp-graphql-the-seo-framework": "master",
     "itsamoreh/byob-headless-wordpress-theme": "^0.1.3",
+    "itsamoreh/byob-headless-block-parser": "^0.1.1",
     "sybrew/the-seo-framework": "^4.2.0",
     "pristas-peter/wp-graphql-gutenberg": "^0.3.0",
     "pristas-peter/wp-graphql-gutenberg-acf": "^0.3.0",

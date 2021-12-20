@@ -15,6 +15,11 @@
  */
 
 /**
+ * This const is used to fix "Preview", "View Post" and internal links inside blocks.
+ */
+define( 'FRONTEND_APP_URL', 'http://localhost:3000' );
+
+/**
  * Block allowlist.
  * Add new blocks to the array or they will not show in the editor.
  *

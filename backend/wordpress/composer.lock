@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "45025a1804559479c9b8598e007e4328",
+    "content-hash": "60fbe9b88031c63ab74bdad9e4b6c624",
     "packages": [
         {
             "name": "composer/installers",
@@ -182,6 +182,24 @@
             ],
             "description": "Adds The SEO framework support to the WPGraphQL Plugin for posts, pages and custom post types.",
             "time": "2021-08-15T21:33:50+00:00"
+        },
+        {
+            "name": "itsamoreh/byob-headless-block-parser",
+            "version": "v0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/itsamoreh/byob-headless-block-parser",
+                "reference": "33314ebd182f3076d052a101dd788dc4065892b6"
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "description": "BYOB Headless Block Parser Plugin",
+            "time": "2021-12-20T02:21:23+00:00"
         },
         {
             "name": "itsamoreh/byob-headless-wordpress-theme",
