@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ef781d4325e0d483bcb0c47c531418d8",
+    "content-hash": "a05017d9bddfefe736f05fe5ae852ba8",
     "packages": [
         {
             "name": "composer/installers",
@@ -200,24 +200,6 @@
             ],
             "description": "BYOB Headless Block Parser Plugin",
             "time": "2021-12-21T06:36:22+00:00"
-        },
-        {
-            "name": "itsamoreh/byob-headless-wordpress-theme",
-            "version": "v0.1.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/itsamoreh/byob-headless-wordpress-theme",
-                "reference": "e63ec309515ea2b3d572a24f145844ea12a91d28"
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-theme",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "description": "BYOB Headless WordPress Theme",
-            "time": "2021-12-15T02:34:22+00:00"
         },
         {
             "name": "opis/json-schema",
