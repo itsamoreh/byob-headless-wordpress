@@ -1,0 +1,48 @@
+/*--------------------------------------------------------------
+# Editor Styles
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+## Add more margin around the blocks.
+--------------------------------------------------------------*/
+.wp-block {
+	margin-top: 48px;
+	margin-bottom: 48px;
+}
+
+.wp-block:last-child {
+	margin-bottom: 28px;
+}
+
+/*--------------------------------------------------------------
+## Fix misaligned block inserter after disabling core bocks.
+--------------------------------------------------------------*/
+.block-list-appender>.block-editor-inserter {
+	display: flex;
+	justify-content: center;
+}
+
+/*--------------------------------------------------------------
+## Outline each block.
+--------------------------------------------------------------*/
+.wp-block:not(.editor-post-title) {
+	padding: 6px;
+	outline: 1px solid #e0e0e0;
+}
+
+.wp-block:not(.editor-post-title).is-selected {
+	padding: 6px;
+	outline: 1px solid #000;
+}
+
+/*--------------------------------------------------------------
+## Fix core/freeform TinyMCE padding and outline issues.
+--------------------------------------------------------------*/
+div[data-type="core/freeform"] .block-library-classic__toolbar .mce-toolbar-grp>div {
+	padding: 0;
+}
+
+div[data-type="core/freeform"].is-selected .block-library-classic__toolbar {
+	border: 0;
+	outline: 1px solid #000;
+}

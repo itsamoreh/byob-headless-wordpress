@@ -10,3 +10,9 @@
 # Track the BYOB plugin
 !/wp-content/plugins/byob
 !/wp-content/plugins/byob/**/*
+
+# Track the BYOB theme
+!/wp-content/
+!/wp-content/themes/
+!/wp-content/themes/byob
+!/wp-content/themes/byob/**/*
