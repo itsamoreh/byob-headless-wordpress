@@ -1,38 +1,28 @@
 <?php
 /**
- * The main template file
- *
- * This is the most generic template file in a WordPress theme
- * and one of the two required files for a theme (the other being style.css).
- * It is used to display a page when nothing more specific matches a query.
- * E.g., it puts together the home page when no home.php file exists.
+ * The main template file.
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package bring-your-own-blocks
+ * @package byob
  */
+
+/**
+ * Redirect editors to the headless frontend.
+ */
+if ( defined('FRONTEND_APP_URL') ) {
+	header( 'X-Redirect-By: BYOB Headless WordPress Theme' );
+	header( 'Location: ' . FRONTEND_APP_URL . $_SERVER[REQUEST_URI], true, $statusCode );
+	die();
+}
 
 ?>
 
-	<style>
-		body {
-			font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
-		}
-
-		.site-main {
-			height: 100%;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-		}
-	</style>
-
-	<main id="primary" class="site-main">
-
-	<?php if ( is_customize_preview() ) : ?>
-		<p>Please navigate to the headless frontend to see your changes.</p>
-	<?php else : ?>
-		<p>Please navigate to the headless frontend or the <a href="/wp-admin">WordPress Admin Panel</a>.</p>
-	<?php endif; ?>
-
-	</main><!-- #primary -->
+<!-- Show *something* if the redirect didn't work. -->
+<main id="primary" class="site-main">
+	<div>
+		<h1>Redirection Error</h1>
+		<p>There was a problem redirecting you to the headless frontend. Please manually navigate there to see your changes.</p>
+		<p><small>Make sure to define <code>FRONTEND_APP_URL</code> in the BYOB plugin.</small></p>
+	</div>
+</main><!-- #primary -->
