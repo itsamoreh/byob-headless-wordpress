@@ -43,6 +43,16 @@ function byob_enable_editor_styles() {
 add_action( 'after_setup_theme', 'byob_enable_editor_styles' );
 
 /**
+ * Add Favicon.
+ * Add a custom favicon to the WordPress admin panel.
+ */
+function byob_admin_favicon() {
+	echo '<link rel="icon" href="' . get_template_directory_uri() . '/favicon.ico" />';
+}
+add_action( 'login_head', 'byob_admin_favicon' );
+add_action( 'admin_head', 'byob_admin_favicon' );
+
+/**
  * Remove customizer options.
  */
 function byob_remove_customizer_options() {

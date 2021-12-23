@@ -31,13 +31,3 @@ function byob_allowed_block_types( $allowed_blocks ) {
 	);
 }
 add_filter( 'allowed_block_types', 'byob_allowed_block_types' );
-
-/**
- * Admin Favicon.
- * Add a custom favicon to the WordPress admin panel.
- */
-function byob_admin_favicon() {
-	echo '<link rel="icon" href="' . esc_url( plugin_dir_url( __FILE__ ) ) . 'public/favicon.ico" />';
-}
-add_action( 'login_head', 'byob_admin_favicon' );
-add_action( 'admin_head', 'byob_admin_favicon' );
