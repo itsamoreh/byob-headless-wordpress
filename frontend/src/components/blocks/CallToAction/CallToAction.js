@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
 
 /**
- * Call To Action Block
+ * Call to Action Block
  *
- * Call the user to action!
+ * The ACF Call to Action Gutenberg block.
  */
 export default function CallToAction({
   headingCall,
