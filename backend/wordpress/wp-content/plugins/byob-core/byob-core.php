@@ -1,14 +1,14 @@
 <?php
 /**
- * Plugin Name:       BYOB Headless WordPress
+ * Plugin Name:       BYOB Core
  * Plugin URI:        https://github.com/itsamoreh/byob-headless-wordpress
- * Description:       Customize WordPress for BYOB Headless WordPress.
+ * Description:       BYOB Headless WordPress Core Plugin.
  * Author:            Amor Kumar
  * Author URI:        https://amorkumar.com
  * Requires at least: 5.8
  * Requires PHP:      7.4
  *
- * @package byob
+ * @package byob-core
  */
 
 /**
@@ -25,6 +25,8 @@ define( 'FRONTEND_APP_URL', 'http://localhost:3000' );
 function byob_allowed_block_types( $allowed_blocks ) {
 	return array(
 		'core/freeform',
+		'acf/byob-call-to-action',
+		'acf/byob-content',
 	);
 }
 add_filter( 'allowed_block_types', 'byob_allowed_block_types' );

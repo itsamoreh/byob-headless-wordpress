@@ -7,9 +7,13 @@
 !/wp-content/
 !/wp-content/plugins/
 
-# Track the BYOB plugin
-!/wp-content/plugins/byob
-!/wp-content/plugins/byob/**/*
+# Track the BYOB core plugin
+!/wp-content/plugins/byob-core
+!/wp-content/plugins/byob-core/**/*
+
+# Track the BYOB acf plugin
+!/wp-content/plugins/byob-acf
+!/wp-content/plugins/byob-acf/**/*
 
 # Track the BYOB theme
 !/wp-content/
