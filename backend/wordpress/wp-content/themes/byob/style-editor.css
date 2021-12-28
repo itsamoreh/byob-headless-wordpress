@@ -1,48 +1,90 @@
 /*--------------------------------------------------------------
 # Editor Styles
 --------------------------------------------------------------*/
+/*--------------------------------------------------------------
+Block Max Widths.
+Match these to the frontend container widths.
+--------------------------------------------------------------*/
+
+/* Main column width */
+.wp-block {
+  max-width: 1024px;
+}
+
+/* Width of "wide" blocks */
+.wp-block[data-align="wide"] {
+  max-width: 1024px;
+}
+
+/* Width of "full-wide" blocks */
+.wp-block[data-align="full"] {
+  max-width: 1024px;
+}
 
 /*--------------------------------------------------------------
-## Add more margin around the blocks.
+Add more margin around the blocks.
 --------------------------------------------------------------*/
 .wp-block {
-	margin-top: 48px;
-	margin-bottom: 48px;
+  margin-top: 0;
+  margin-bottom: 3px;
 }
 
 .wp-block:last-child {
-	margin-bottom: 28px;
+  margin-bottom: 28px;
 }
 
 /*--------------------------------------------------------------
-## Fix misaligned block inserter after disabling core bocks.
+Fix misaligned block inserter after disabling core bocks.
 --------------------------------------------------------------*/
-.block-list-appender>.block-editor-inserter {
-	display: flex;
-	justify-content: center;
+.block-list-appender > .block-editor-inserter {
+  display: flex;
+  justify-content: center;
 }
 
 /*--------------------------------------------------------------
-## Outline each block.
+Outline each block and disable Gutenberg and ACF's default
+focus / outlines and box shadows.
 --------------------------------------------------------------*/
-.wp-block:not(.editor-post-title) {
-	padding: 6px;
-	outline: 1px solid #e0e0e0;
-}
-
 .wp-block:not(.editor-post-title).is-selected {
-	padding: 6px;
-	outline: 1px solid #000;
+  outline: 1px solid #000;
+}
+
+.block-editor-block-list__layout
+  .block-editor-block-list__block:not([contenteditable]):focus:after,
+.block-editor-block-list__layout
+  .block-editor-block-list__block.is-highlighted:after,
+.block-editor-block-list__layout
+  .block-editor-block-list__block.is-multi-selected:after,
+.block-editor-block-list__layout
+  .is-block-moving-mode.block-editor-block-list__block.has-child-selected,
+.block-editor-block-list__layout.is-navigate-mode
+  .block-editor-block-list__block.is-selected:after {
+  box-shadow: none;
+}
+
+.acf-block-body .acf-block-fields {
+  border: none;
+  outline: 1px solid #000;
 }
 
 /*--------------------------------------------------------------
 ## Fix core/freeform TinyMCE padding and outline issues.
 --------------------------------------------------------------*/
-div[data-type="core/freeform"] .block-library-classic__toolbar .mce-toolbar-grp>div {
-	padding: 0;
+div[data-type="core/freeform"]
+  .block-library-classic__toolbar
+  .mce-toolbar-grp
+  > div {
+  padding: 0;
 }
 
-div[data-type="core/freeform"].is-selected .block-library-classic__toolbar {
-	border: 0;
-	outline: 1px solid #000;
+div[data-type="core/freeform"] .block-library-classic__toolbar {
+  border: 0;
+}
+
+.block-library-classic__toolbar:empty {
+  display: none;
+}
+
+.wp-block-freeform.block-library-rich-text__tinymce > :last-child {
+  margin-bottom: revert;
 }
