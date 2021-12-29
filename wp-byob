@@ -101,10 +101,10 @@ function command_help() {
     echo "Arguments: [ configure | start-all | start-backend | start-frontend | stop ]"
     echo ""
     echo "configure       Run the configuration wizard to set up the backend, frontend and create an .env file."
-    echo "start-all       Create and start the docker environment for WordPress and run the Next.js development server."
-    echo "start-backend   Create and start the docker environment for WordPress."
+    echo "start-all       Create and start the WordPress docker environment and run the Next.js development server."
+    echo "start-backend   Start the WordPress docker environment."
     echo "start-frontend  Run Next.js development server."
-    echo "stop            Stop the docker environment for WordPress."
+    echo "stop            Stop the WordPress docker environment and the Next.js development server."
 }
 
 # Main function
