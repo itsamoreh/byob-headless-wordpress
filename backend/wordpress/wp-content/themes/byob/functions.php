@@ -43,6 +43,27 @@ function byob_enable_editor_styles() {
 add_action( 'after_setup_theme', 'byob_enable_editor_styles' );
 
 /**
+ * Add custom admin theme.
+ */
+function byob_admin_color_scheme() {
+	wp_admin_css_color( 'byob', __( 'BYOB' ),
+		get_stylesheet_directory_uri() . '/byob.css',
+		array( '#1e293b', '#f8fafc', '#d54e21' , '#4f46e5')
+	);
+}
+add_action('admin_init', 'byob_admin_color_scheme');
+
+/**
+ * Disable admin color scheme picker and set default color scheme.
+ */
+function byob_set_admin_color() {
+		remove_action( 'admin_color_scheme_picker', 'admin_color_scheme_picker' );
+
+		return 'byob';
+}
+add_filter( 'get_user_option_admin_color', 'byob_set_admin_color' );
+
+/**
  * Add Favicon.
  * Add a custom favicon to the WordPress admin panel.
  */
