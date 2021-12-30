@@ -104,7 +104,7 @@ function command_help() {
     echo "start-all       Create and start the WordPress docker environment and run the Next.js development server."
     echo "start-backend   Start the WordPress docker environment."
     echo "start-frontend  Run Next.js development server."
-    echo "stop            Stop the WordPress docker environment and the Next.js development server."
+    echo "stop            Stop the WordPress docker environment."
 }
 
 # Main function
