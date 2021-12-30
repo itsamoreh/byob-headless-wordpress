@@ -24,16 +24,6 @@ endif;
 add_action( 'after_setup_theme', 'byob_setup' );
 
 /**
- * Set the content width in pixels, based on the theme's design and stylesheet.
- *
- * Priority 0 to make it available to lower priority callbacks.
- */
-function byob_content_width() {
-	$GLOBALS['content_width'] = apply_filters( 'byob_content_width', 640 );
-}
-add_action( 'after_setup_theme', 'byob_content_width', 0 );
-
-/**
  * Add custom editor styles.
  */
 function byob_enable_editor_styles() {
@@ -47,7 +37,7 @@ add_action( 'after_setup_theme', 'byob_enable_editor_styles' );
  */
 function byob_admin_color_scheme() {
 	wp_admin_css_color( 'byob', __( 'BYOB' ),
-		get_stylesheet_directory_uri() . '/byob.css',
+		get_stylesheet_directory_uri() . '/style-admin.css',
 		array( '#1e293b', '#f8fafc', '#d54e21' , '#4f46e5')
 	);
 }

@@ -1,5 +1,7 @@
 :root {
   --wp-admin-theme-color: #4f46e5;
+  --wp-admin-theme-color-darker-10: #3f38b7;
+  --wp-admin-theme-color-darker-20: #2f2a89;
 }
 
 body {
@@ -57,7 +59,15 @@ input[type="week"]:focus,
 input[type="checkbox"]:focus,
 input[type="radio"]:focus,
 select:focus,
-textarea:focus {
+textarea:focus,
+.media-frame input[type="email"]:focus,
+.media-frame input[type="number"]:focus,
+.media-frame input[type="password"]:focus,
+.media-frame input[type="search"]:focus,
+.media-frame input[type="text"]:focus,
+.media-frame input[type="url"]:focus,
+.media-frame select:focus,
+.media-frame textarea:focus {
   border-color: #4f46e5;
   box-shadow: 0 0 0 1px #4f46e5;
 }
@@ -346,7 +356,7 @@ ul#adminmenu > li.current > a.current:after {
 
 #collapse-button:hover,
 #collapse-button:focus {
-  color: #4f46e5;
+  color: #7a73eb;
 }
 
 /* Admin Bar */
@@ -510,6 +520,13 @@ ul#adminmenu > li.current > a.current:after {
   color: #e5e7eb;
 }
 
+/* Post Sidebar */
+@media (min-width: 782px) {
+  .interface-complementary-area {
+    width: 500px;
+  }
+}
+
 /* Pointers */
 .wp-pointer .wp-pointer-content h3 {
   background-color: #4f46e5;
@@ -581,6 +598,17 @@ body.more-filters-opened .more-filters:focus {
 body.more-filters-opened .more-filters:hover:before,
 body.more-filters-opened .more-filters:focus:before {
   color: #f8fafc;
+}
+
+/* Plugins */
+.plugin-update-tr.active td,
+.plugins .active th.check-column {
+  border-left-color: #4f46e5;
+}
+
+.plugins .active td,
+.plugins .active th {
+  background-color: #eef2ff;
 }
 
 /* Widgets */
