@@ -30,3 +30,6 @@ function byob_allowed_block_types( $allowed_blocks ) {
 	);
 }
 add_filter( 'allowed_block_types', 'byob_allowed_block_types' );
+
+// Disable Comments
+require_once dirname( __FILE__ ) . '/inc/byob-disable-comments.php';
