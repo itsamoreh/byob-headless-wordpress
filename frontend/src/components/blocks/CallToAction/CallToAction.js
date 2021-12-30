@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types'
 
+import { gql } from '@apollo/client'
+
 /**
  * Call to Action Block
  *
@@ -47,13 +49,33 @@ CallToAction.propTypes = {
   headingCall: PropTypes.string,
   headingQuestion: PropTypes.string,
   primaryCta: PropTypes.shape({
+    target: PropTypes.string,
     title: PropTypes.string,
     url: PropTypes.string,
-    target: PropTypes.string,
   }),
   secondaryCta: PropTypes.shape({
+    target: PropTypes.string,
     title: PropTypes.string,
     url: PropTypes.string,
-    target: PropTypes.string,
   }),
 }
+
+export const CALL_TO_ACTION_FIELDS = gql`
+  fragment CallToActionFields on AcfByobCallToActionBlock {
+    name
+    acfAttributes {
+      headingCall
+      headingQuestion
+      primaryCta {
+        target
+        title
+        url
+      }
+      secondaryCta {
+        target
+        title
+        url
+      }
+    }
+  }
+`

@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types'
+
 import parseHtml from '@/lib/html-parser'
+import { gql } from '@apollo/client'
 
 /**
  * Freeform Block
@@ -25,3 +27,12 @@ Freeform.propTypes = {
 Freeform.defaultProps = {
   content: '',
 }
+
+export const FREEFORM_FIELDS = gql`
+  fragment FreeformFields on CoreFreeformBlock {
+    name
+    attributes {
+      content
+    }
+  }
+`

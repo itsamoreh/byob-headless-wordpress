@@ -1,9 +1,11 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import Blocks from '@/components/blocks/Blocks'
-import { gql } from '@apollo/client'
 
+import Blocks from '@/components/blocks/Blocks'
+import { CALL_TO_ACTION_FIELDS } from '@/components/blocks/CallToAction/CallToAction'
+import { FREEFORM_FIELDS } from '@/components/blocks/Freeform/Freeform'
 import { getApolloClient } from '@/lib/apollo-client'
+import { gql } from '@apollo/client'
 
 import styles from '../../styles/Home.module.css'
 
@@ -19,18 +21,21 @@ export default function Post({ post, site }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>{post.title}</h1>
+      <main>
+        <h1 className="container max-w-4xl mx-auto my-16 text-6xl font-extrabold text-center break-words">
+          {post.title}
+        </h1>
 
-        <div className={styles.grid}>
-          <Blocks blocks={JSON.parse(post.blocksJSON)} />
+        <Blocks blocks={post.blocks} />
+
+        <div className="container pb-16">
+          <div className="mx-auto prose prose-indigo">
+            <hr />
+            <Link href="/">
+              <a>← Back to home</a>
+            </Link>
+          </div>
         </div>
-
-        <p className={styles.backToHome}>
-          <Link href="/">
-            <a>← Back to home</a>
-          </Link>
-        </p>
       </main>
     </div>
   )
@@ -43,6 +48,8 @@ export async function getStaticProps({ params = {} } = {}) {
 
   const data = await apolloClient.query({
     query: gql`
+      ${CALL_TO_ACTION_FIELDS}
+      ${FREEFORM_FIELDS}
       query PostBySlug($slug: String!) {
         generalSettings {
           title
@@ -51,6 +58,14 @@ export async function getStaticProps({ params = {} } = {}) {
           id
           content
           blocksJSON
+          blocks {
+            ... on CoreFreeformBlock {
+              ...FreeformFields
+            }
+            ... on AcfByobCallToActionBlock {
+              ...CallToActionFields
+            }
+          }
           title
           slug
         }
