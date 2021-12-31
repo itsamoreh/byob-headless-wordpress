@@ -36,12 +36,14 @@ add_action( 'after_setup_theme', 'byob_enable_editor_styles' );
  * Add custom admin theme.
  */
 function byob_admin_color_scheme() {
-	wp_admin_css_color( 'byob', __( 'BYOB' ),
+	wp_admin_css_color(
+		'byob',
+		__( 'BYOB' ),
 		get_stylesheet_directory_uri() . '/style-admin.css',
-		array( '#1e293b', '#f8fafc', '#d54e21' , '#4f46e5')
+		array( '#1e293b', '#f8fafc', '#d54e21', '#4f46e5' )
 	);
 }
-add_action('admin_init', 'byob_admin_color_scheme');
+add_action( 'admin_init', 'byob_admin_color_scheme' );
 
 /**
  * Disable admin color scheme picker and set default color scheme.
@@ -58,7 +60,7 @@ add_filter( 'get_user_option_admin_color', 'byob_set_admin_color' );
  * Add a custom favicon to the WordPress admin panel.
  */
 function byob_admin_favicon() {
-	echo '<link rel="icon" href="' . get_template_directory_uri() . '/favicon.ico" />';
+	echo '<link rel="icon" href="' . esc_url( get_template_directory_uri() ) . '/favicon.ico" />';
 }
 add_action( 'login_head', 'byob_admin_favicon' );
 add_action( 'admin_head', 'byob_admin_favicon' );
@@ -85,3 +87,12 @@ function byob_disable_editor_fullscreen_mode() {
 	wp_add_inline_script( 'wp-blocks', $script );
 }
 add_action( 'enqueue_block_editor_assets', 'byob_disable_editor_fullscreen_mode' );
+
+/**
+ * Enable Gutenberg top toolbar.
+ */
+function byob_enable_editor_top_toolbar() {
+	$script = "window.onload = function() { const isfixedToolbar = wp.data.select( 'core/edit-post' ).isFeatureActive( 'fixedToolbar' ); if ( !isfixedToolbar ) { wp.data.dispatch( 'core/edit-post' ).toggleFeature( 'fixedToolbar' ); } }";
+	wp_add_inline_script( 'wp-blocks', $script );
+}
+add_action( 'enqueue_block_editor_assets', 'byob_enable_editor_top_toolbar' );
