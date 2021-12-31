@@ -43,6 +43,9 @@ services:
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: wordpress
       WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_CONFIG_EXTRA: |
+        /* Headless Frontend URL */
+        define( 'FRONTEND_APP_URL', 'http://localhost:3000' );
     volumes:
       - ./wordpress:/var/www/html
 

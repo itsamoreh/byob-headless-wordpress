@@ -1,4 +1,4 @@
-version: '3.3'
+version: "3.3"
 
 services:
   composer:
@@ -9,8 +9,6 @@ services:
 
   mysql:
     image: mariadb:10.6.5
-    volumes:
-      - mysql_data:/var/lib/mysql
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -18,25 +16,25 @@ services:
       MYSQL_USER: wordpress
       MYSQL_PASSWORD: wordpress
     volumes:
-      -  ./mysql:/var/lib/mysql
+      - ./mysql:/var/lib/mysql
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     depends_on:
       - mysql
+    ports:
+      - 8183:80
+    restart: always
     environment:
       PMA_HOST: mysql
       PMA_PORT: 3306
       PMA_ARBITRARY: 1
-    restart: always
-    ports:
-      - 8183:80
 
   wordpress:
+    image: wordpress:latest
     depends_on:
       - mysql
       - composer
-    image: wordpress:latest
     ports:
       - "8080:80"
     restart: always
@@ -45,6 +43,9 @@ services:
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: wordpress
       WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_CONFIG_EXTRA: |
+        /* Headless Frontend URL */
+        define( 'FRONTEND_APP_URL', 'http://localhost:8080' );
     volumes:
       - ./wordpress:/var/www/html
 

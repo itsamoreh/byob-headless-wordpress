@@ -35,6 +35,11 @@ function proceed_with_WP_environment() {
     check_url_input $NextJS_frontend_url
     echo "NEXT_PUBLIC_NEXTJS_SITE_URL=$NextJS_frontend_url" >> frontend/.env
 
+    if [[ $NextJS_frontend_url ]]
+    then
+        sed -i -e "/FRONTEND_APP_URL/s,'[^']*','$NextJS_frontend_url',2" backend/docker-compose.yml
+    fi
+
     echo ""
     echo -e $GREEN$BOLD"✅ Successfully created frontend/.env file"$NOCOLOR
 }
@@ -58,13 +63,13 @@ function start_env_frontend() {
 
 # Check URL
 function check_url_input() {
-    regex='(http?)://[-A-Za-z0-9:0-9]'
+    regex='(https?)://[-A-Za-z0-9:0-9]'
     user_input=$1
 
     if ! [[ $user_input =~ $regex ]]
     then
         echo -e $RED"🛑 URL is not valid."$NOCOLOR
-        echo -e $RED"Please provide a url in the format: http://example.com:8080"$NOCOLOR
+        echo -e $RED"Please provide a url in the format: https://example.com:8080"$NOCOLOR
         exit
     fi
 }
