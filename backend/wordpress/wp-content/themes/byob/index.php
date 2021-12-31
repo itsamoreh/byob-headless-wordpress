@@ -10,9 +10,9 @@
 /**
  * Redirect editors to the headless frontend.
  */
-if ( defined('FRONTEND_APP_URL') ) { // Defined in byob-core plugin
+if ( defined( 'FRONTEND_APP_URL' ) ) { // Defined in byob-core plugin.
 	header( 'X-Redirect-By: BYOB Headless WordPress Theme' );
-	header( 'Location: ' . FRONTEND_APP_URL . $_SERVER[REQUEST_URI], true, $statusCode );
+	header( 'Location: ' . FRONTEND_APP_URL . $_SERVER[ REQUEST_URI ], true, $statusCode );
 	die();
 }
 
