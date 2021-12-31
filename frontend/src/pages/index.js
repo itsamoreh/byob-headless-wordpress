@@ -1,6 +1,8 @@
 import { getApolloClient } from 'lib/apollo-client'
 import Head from 'next/head'
 import Link from 'next/link'
+import { POST_CARD_FIELDS } from '@/components/global/PostCard/PostCard'
+import PostCard from '@/components/global/PostCard'
 
 import { gql } from '@apollo/client'
 
@@ -21,37 +23,8 @@ export default function Home({ page, posts }) {
           {posts &&
             posts.length > 0 &&
             posts.map((post) => {
-              return (
-                <li key={post.slug}>
-                  <div className="max-w-2xl mx-auto mb-8 overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
-                    <Link href={post.path}>
-                      <a>
-                        {post.featuredImage?.node?.sourceUrl && (
-                          <img
-                            className="object-cover w-full h-64"
-                            src={post.featuredImage?.node?.sourceUrl}
-                            alt="Article"
-                          />
-                        )}
-
-                        <div className="p-6">
-                          <h3 className="block text-2xl font-black text-gray-800 dark:text-white hover:text-gray-600 hover:underline">
-                            {post.title}
-                          </h3>
-                          {post.excerpt && (
-                            <p
-                              className="mt-2 text-sm text-gray-600 dark:text-gray-400"
-                              dangerouslySetInnerHTML={{
-                                __html: post.excerpt,
-                              }}
-                            />
-                          )}
-                        </div>
-                      </a>
-                    </Link>
-                  </div>
-                </li>
-              )
+              console.log(post)
+              return <PostCard key={post.id} {...post} />
             })}
 
           {!posts ||
@@ -69,25 +42,18 @@ export default function Home({ page, posts }) {
 export async function getStaticProps() {
   const apolloClient = getApolloClient()
 
-  const data = await apolloClient.query({
+  const response = await apolloClient.query({
     query: gql`
-      {
+      ${POST_CARD_FIELDS}
+      query PostList {
         generalSettings {
           title
           description
         }
-        posts(first: 10000) {
+        posts(first: 10) {
           edges {
             node {
-              id
-              featuredImage {
-                node {
-                  sourceUrl(size: LARGE)
-                }
-              }
-              excerpt
-              title
-              slug
+              ...PostCardFields
             }
           }
         }
@@ -95,17 +61,16 @@ export async function getStaticProps() {
     `,
   })
 
-  const posts = data?.data.posts.edges
+  const posts = response?.data.posts.edges
     .map(({ node }) => node)
     .map((post) => {
       return {
         ...post,
-        path: `/posts/${post.slug}`,
       }
     })
 
   const page = {
-    ...data?.data.generalSettings,
+    ...response?.data.generalSettings,
   }
 
   return {
