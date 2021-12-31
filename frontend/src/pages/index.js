@@ -23,7 +23,6 @@ export default function Home({ page, posts }) {
           {posts &&
             posts.length > 0 &&
             posts.map((post) => {
-              console.log(post)
               return <PostCard key={post.id} {...post} />
             })}
 
