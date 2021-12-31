@@ -1,6 +1,7 @@
-import displayBlock from '@/functions/wordpress/display-block'
 import PropTypes from 'prop-types'
 import React from 'react'
+
+import displayBlock from '@/functions/wordpress/display-block'
 
 /**
  * Blocks Block
