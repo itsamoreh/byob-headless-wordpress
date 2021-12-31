@@ -1,8 +1,8 @@
+import { getApolloClient } from 'lib/apollo-client'
 import Head from 'next/head'
 import Link from 'next/link'
-import { gql } from '@apollo/client'
 
-import { getApolloClient } from 'lib/apollo-client'
+import { gql } from '@apollo/client'
 
 import styles from '../styles/Home.module.css'
 
@@ -16,31 +16,40 @@ export default function Home({ page, posts }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>{title}</h1>
-
-        <p className={styles.description}>{description}</p>
-
-        <ul className={styles.grid}>
+      <main className="container mb-16">
+        <ul>
           {posts &&
             posts.length > 0 &&
             posts.map((post) => {
               return (
-                <li key={post.slug} className={styles.card}>
-                  <Link href={post.path}>
-                    <a>
-                      <h3
-                        dangerouslySetInnerHTML={{
-                          __html: post.title,
-                        }}
-                      />
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: post.excerpt,
-                        }}
-                      />
-                    </a>
-                  </Link>
+                <li key={post.slug}>
+                  <div className="max-w-2xl mx-auto mb-8 overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
+                    <Link href={post.path}>
+                      <a>
+                        {post.featuredImage?.node?.sourceUrl && (
+                          <img
+                            className="object-cover w-full h-64"
+                            src={post.featuredImage?.node?.sourceUrl}
+                            alt="Article"
+                          />
+                        )}
+
+                        <div className="p-6">
+                          <h3 className="block text-2xl font-black text-gray-800 dark:text-white hover:text-gray-600 hover:underline">
+                            {post.title}
+                          </h3>
+                          {post.excerpt && (
+                            <p
+                              className="mt-2 text-sm text-gray-600 dark:text-gray-400"
+                              dangerouslySetInnerHTML={{
+                                __html: post.excerpt,
+                              }}
+                            />
+                          )}
+                        </div>
+                      </a>
+                    </Link>
+                  </div>
                 </li>
               )
             })}
@@ -71,6 +80,11 @@ export async function getStaticProps() {
           edges {
             node {
               id
+              featuredImage {
+                node {
+                  sourceUrl(size: LARGE)
+                }
+              }
               excerpt
               title
               slug
