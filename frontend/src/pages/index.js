@@ -4,35 +4,40 @@ import Head from 'next/head'
 import { getApolloClient } from '@/api/apollo-client'
 import PostCard from '@/components/global/PostCard'
 import { POST_CARD_FIELDS } from '@/components/global/PostCard/PostCard'
+import { WpSettingsContext } from '@/contexts/WpSettingsContext'
 import { gql } from '@apollo/client'
 
-export default function Home({ page, posts }) {
-  const { title, description } = page
+export default function Home({ posts, wpSettings }) {
   return (
-    <div>
-      <Head>
-        <title>{title}</title>
-        <meta name="description" content={description} />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <WpSettingsContext.Provider value={wpSettings}>
+      <div>
+        <Head>
+          <title>{wpSettings.generalSettingsTitle}</title>
+          <meta
+            name="description"
+            content={wpSettings.generalSettingsDescription}
+          />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
 
-      <main className="mb-16">
-        <ul>
-          {posts &&
-            posts.length > 0 &&
-            posts.map((post) => {
-              return <PostCard key={post.id} {...post} />
-            })}
+        <main className="mb-16">
+          <ul>
+            {posts &&
+              posts.length > 0 &&
+              posts.map((post) => {
+                return <PostCard key={post.id} {...post} />
+              })}
 
-          {!posts ||
-            (posts.length === 0 && (
-              <li>
-                <p>Oops, no posts found!</p>
-              </li>
-            ))}
-        </ul>
-      </main>
-    </div>
+            {!posts ||
+              (posts.length === 0 && (
+                <li>
+                  <p>Oops, no posts found!</p>
+                </li>
+              ))}
+          </ul>
+        </main>
+      </div>
+    </WpSettingsContext.Provider>
   )
 }
 
@@ -43,9 +48,17 @@ export async function getStaticProps() {
     query: gql`
       ${POST_CARD_FIELDS}
       query PostList {
-        generalSettings {
-          title
-          description
+        allSettings {
+          generalSettingsDateFormat
+          generalSettingsDescription
+          generalSettingsLanguage
+          generalSettingsStartOfWeek
+          generalSettingsTimeFormat
+          generalSettingsTimezone
+          generalSettingsTitle
+          readingSettingsPostsPerPage
+          writingSettingsDefaultCategory
+          writingSettingsDefaultPostFormat
         }
         posts(first: 10) {
           edges {
@@ -84,13 +97,13 @@ export async function getStaticProps() {
     posts = uniqBy(posts, 'id')
   }
 
-  const page = {
-    ...response?.data.generalSettings,
+  const wpSettings = {
+    ...response?.data.allSettings,
   }
 
   return {
     props: {
-      page,
+      wpSettings,
       posts,
     },
   }

@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import PropTypes from 'prop-types'
 
+import { WpSettingsContext } from '@/contexts/WpSettingsContext'
 import { gql } from '@apollo/client'
 
 /**
@@ -20,79 +21,85 @@ export default function PostCard({
   categories,
 }) {
   return (
-    <div className="container">
-      <div className="relative max-w-2xl mx-auto mb-8 overflow-hidden transition-shadow bg-white rounded-lg shadow-md hover:shadow-lg group">
-        {featuredImage?.node?.sourceUrl && (
-          <img
-            className="object-cover w-full h-64"
-            src={featuredImage?.node?.sourceUrl}
-            alt={featuredImage?.node?.altText || `Featured Image for ${title}`}
-          />
-        )}
+    <WpSettingsContext.Consumer>
+      {(wpSettings) => (
+        <div className="container">
+          <div className="relative max-w-2xl mx-auto mb-8 overflow-hidden transition-shadow bg-white rounded-lg shadow-md hover:shadow-lg group">
+            {featuredImage?.node?.sourceUrl && (
+              <img
+                className="object-cover w-full h-64"
+                src={featuredImage?.node?.sourceUrl}
+                alt={
+                  featuredImage?.node?.altText || `Featured Image for ${title}`
+                }
+              />
+            )}
 
-        <div className="p-6">
-          <Link href={uri}>
-            <a className="before:absolute before:inset-0">
-              <h3 className="block mb-3 text-2xl font-black transition-colors text-zinc-800 group-hover:text-indigo-600">
-                {title}
-              </h3>
-            </a>
-          </Link>
-          <div className="flex mb-5 space-x-2 basis-full">
-            {categories?.edges?.length > 0 &&
-              categories.edges.map((tag) => {
-                return (
-                  <Link href={tag?.node?.uri} key={tag?.node?.id}>
-                    <a className="relative text-xs hover:underline text-zinc-600 decoration-indigo-600">
-                      /{tag?.node?.name}
-                    </a>
-                  </Link>
-                )
-              })}
-            {tags?.edges?.length > 0 &&
-              tags.edges.map((tag) => {
-                return (
-                  <Link href={tag?.node?.uri} key={tag?.node?.id}>
-                    <a className="relative text-xs hover:underline text-zinc-600 decoration-indigo-600">
-                      #{tag?.node?.name}
-                    </a>
-                  </Link>
-                )
-              })}
-          </div>
-          {excerpt && (
-            <div
-              className="mb-6 text-sm text-zinc-600"
-              dangerouslySetInnerHTML={{ __html: excerpt }}
-            />
-          )}
-          {/* Footer */}
-          <div className="flex flex-wrap items-center">
-            <Link href={author?.node.uri}>
-              <a className="relative flex items-center">
-                <div className="mr-2 shrink-0">
-                  {author?.node?.avatar?.url && (
-                    <img
-                      className="w-8 h-8 rounded-full"
-                      src={author.node.avatar.url}
-                      alt={`Avatar for ${author?.node?.name}`}
-                    />
-                  )}
-                </div>
-                <div className="flex-1 min-w-0 mr-4">
-                  <p className="text-sm font-medium truncate transition-colors text-zinc-600 hover:underline decoration-indigo-600">
-                    {author?.node?.name}
-                  </p>
-                </div>
-              </a>
-            </Link>
-            <p className="ml-auto text-xs text-right truncate text-zinc-600">
-              {date}
-            </p>
+            <div className="p-6">
+              <Link href={uri}>
+                <a className="before:absolute before:inset-0">
+                  <h3 className="block mb-3 text-2xl font-black transition-colors text-zinc-800 group-hover:text-indigo-600">
+                    {title}
+                  </h3>
+                </a>
+              </Link>
+              <div className="flex mb-5 space-x-2 basis-full">
+                {categories?.edges?.length > 0 &&
+                  categories.edges.map((tag) => {
+                    return (
+                      <Link href={tag?.node?.uri} key={tag?.node?.id}>
+                        <a className="relative text-xs hover:underline text-zinc-600 decoration-indigo-600">
+                          /{tag?.node?.name}
+                        </a>
+                      </Link>
+                    )
+                  })}
+                {tags?.edges?.length > 0 &&
+                  tags.edges.map((tag) => {
+                    return (
+                      <Link href={tag?.node?.uri} key={tag?.node?.id}>
+                        <a className="relative text-xs hover:underline text-zinc-600 decoration-indigo-600">
+                          #{tag?.node?.name}
+                        </a>
+                      </Link>
+                    )
+                  })}
+              </div>
+              {excerpt && (
+                <div
+                  className="mb-6 text-sm text-zinc-600"
+                  dangerouslySetInnerHTML={{ __html: excerpt }}
+                />
+              )}
+              {/* Footer */}
+              <div className="flex flex-wrap items-center">
+                <Link href={author?.node.uri}>
+                  <a className="relative flex items-center">
+                    <div className="mr-2 shrink-0">
+                      {author?.node?.avatar?.url && (
+                        <img
+                          className="w-8 h-8 rounded-full"
+                          src={author.node.avatar.url}
+                          alt={`Avatar for ${author?.node?.name}`}
+                        />
+                      )}
+                    </div>
+                    <div className="flex-1 min-w-0 mr-4">
+                      <p className="text-sm font-medium truncate transition-colors text-zinc-600 hover:underline decoration-indigo-600">
+                        {author?.node?.name}
+                      </p>
+                    </div>
+                  </a>
+                </Link>
+                <p className="ml-auto text-xs text-right truncate text-zinc-600">
+                  {date} {wpSettings?.generalSettingsDateFormat}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      )}
+    </WpSettingsContext.Consumer>
   )
 }
 
