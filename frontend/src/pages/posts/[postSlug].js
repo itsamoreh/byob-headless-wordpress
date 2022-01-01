@@ -1,10 +1,10 @@
 import Head from 'next/head'
 import Link from 'next/link'
 
-import Blocks from '@/components/blocks/Blocks'
+import { getApolloClient } from '@/api/apollo-client'
+import BlockRenderer from '@/components/blocks/BlockRenderer'
 import { CALL_TO_ACTION_FIELDS } from '@/components/blocks/CallToAction/CallToAction'
 import { FREEFORM_FIELDS } from '@/components/blocks/Freeform/Freeform'
-import { getApolloClient } from '@/lib/apollo-client'
 import { gql } from '@apollo/client'
 
 export default function Post({ post, site }) {
@@ -24,7 +24,7 @@ export default function Post({ post, site }) {
           {post.title}
         </h1>
 
-        <Blocks blocks={post.blocks} />
+        <BlockRenderer blocks={post.blocks} />
 
         <div className="container pb-16">
           <div className="mx-auto prose prose-indigo">

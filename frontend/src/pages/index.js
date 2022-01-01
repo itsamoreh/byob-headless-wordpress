@@ -1,7 +1,7 @@
-import { getApolloClient } from 'lib/apollo-client'
 import { uniqBy } from 'lodash'
 import Head from 'next/head'
 
+import { getApolloClient } from '@/api/apollo-client'
 import PostCard from '@/components/global/PostCard'
 import { POST_CARD_FIELDS } from '@/components/global/PostCard/PostCard'
 import { gql } from '@apollo/client'
