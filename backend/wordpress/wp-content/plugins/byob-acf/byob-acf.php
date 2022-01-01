@@ -15,6 +15,20 @@
  */
 
 /**
+ * ACF block types.
+ */
+foreach ( glob( dirname( __FILE__ ) . '/blocks/*.php' ) as $block ) {
+	require $block;
+}
+
+/**
+ * ACF field groups.
+ */
+foreach ( glob( dirname( __FILE__ ) . '/fields/*.php' ) as $fields ) {
+	require $fields;
+}
+
+/**
  * Render the block preview iframe.
  *
  * The url will update as the editor fills in fields. The inline
@@ -53,27 +67,15 @@ function byob_block_render_callback( $block ) {
  *
  * @see https://github.com/davidjbradshaw/iframe-resizer
  */
-function byob_enqueue_iframe_resizer() {
-	wp_enqueue_script(
-		'byob-iframe-resizer',
-		plugins_url( 'lib/iframe-resizer.js', __FILE__ ),
-		array(),
-		'1.0.0',
-		true
-	);
-}
-add_action( 'enqueue_block_editor_assets', 'byob_enqueue_iframe_resizer' );
-
-/**
- * Include custom ACF block types.
- */
-foreach ( glob( dirname( __FILE__ ) . '/blocks/*.php' ) as $block ) {
-	require $block;
-}
-
-/**
- * Include ACF field groups.
- */
-foreach ( glob( dirname( __FILE__ ) . '/fields/*.php' ) as $fields ) {
-	require $fields;
-}
+add_action(
+	'enqueue_block_editor_assets',
+	function() {
+		wp_enqueue_script(
+			'byob-iframe-resizer',
+			plugins_url( 'lib/iframe-resizer.js', __FILE__ ),
+			array(),
+			'1.0.0',
+			true
+		);
+	}
+);

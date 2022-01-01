@@ -7,10 +7,10 @@
 
 /**
  * Replace the excerpt ellipsis.
- *
- * @param string $more The more ellipsis.
  */
-function byob_replace_excerpt_ellipsis( $more ) {
-	return '...';
-}
-add_filter( 'excerpt_more', 'byob_replace_excerpt_ellipsis' );
+add_filter(
+	'excerpt_more',
+	function( $more ) {
+		return '...';
+	}
+);

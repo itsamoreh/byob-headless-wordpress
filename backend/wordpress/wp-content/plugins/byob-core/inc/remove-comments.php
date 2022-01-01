@@ -7,7 +7,7 @@
 
 add_action(
 	'admin_init',
-	function () {
+	function() {
 		global $pagenow;
 
 		// Redirect any user trying to access comments page.
@@ -39,7 +39,7 @@ add_filter( 'comments_array', '__return_empty_array', 10, 2 );
 // Remove comments page and option page in menu.
 add_action(
 	'admin_menu',
-	function () {
+	function() {
 		remove_menu_page( 'edit-comments.php' );
 		remove_submenu_page( 'options-general.php', 'options-discussion.php' );
 	}
@@ -48,7 +48,7 @@ add_action(
 // Remove comments links from admin bar.
 add_action(
 	'init',
-	function () {
+	function() {
 		if ( is_admin_bar_showing() ) {
 			remove_action( 'admin_bar_menu', 'wp_admin_bar_comments_menu', 60 );
 		}

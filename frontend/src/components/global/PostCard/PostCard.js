@@ -17,59 +17,71 @@ export default function PostCard({
   excerpt,
   featuredImage,
   author,
+  tags,
 }) {
   return (
     <div className="container">
-      <div className="max-w-2xl mx-auto mb-8 overflow-hidden bg-white rounded-lg shadow-md dark:bg-zinc-800">
-        <Link href={uri}>
-          <a>
-            {featuredImage?.node?.sourceUrl && (
-              <img
-                className="object-cover w-full h-64"
-                src={featuredImage?.node?.sourceUrl}
-                alt={
-                  featuredImage?.node?.altText || `Featured Image for ${title}`
-                }
-              />
-            )}
+      <div className="relative max-w-2xl mx-auto mb-8 overflow-hidden transition-shadow bg-white rounded-lg shadow-md hover:shadow-lg group">
+        {featuredImage?.node?.sourceUrl && (
+          <img
+            className="object-cover w-full h-64"
+            src={featuredImage?.node?.sourceUrl}
+            alt={featuredImage?.node?.altText || `Featured Image for ${title}`}
+          />
+        )}
 
-            <div className="p-6">
-              <h3 className="block text-2xl font-black text-zinc-800 dark:text-white hover:underline decoration-indigo-500">
+        <div className="p-6">
+          <Link href={uri}>
+            <a className="before:absolute before:inset-0">
+              <h3 className="block text-2xl font-black transition-colors text-zinc-800 group-hover:text-indigo-600">
                 {title}
               </h3>
-              {excerpt && (
-                <div
-                  className="mt-2 text-sm text-zinc-600 dark:text-zinc-400"
-                  dangerouslySetInnerHTML={{ __html: excerpt }}
-                />
-              )}
-              {/* Footer */}
-              <div className="flex items-center mt-4 space-x-2">
-                <Link href={author.node.uri}>
-                  <a className="flex items-center space-x-2">
-                    <div className="shrink-0">
-                      {author?.node?.avatar?.url && (
-                        <img
-                          className="w-8 h-8 rounded-full"
-                          src={author.node.avatar.url}
-                          alt={`Avatar for ${author?.node?.name}`}
-                        />
-                      )}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium truncate text-zinc-600 dark:text-white">
-                        {author?.node?.name}
-                      </p>
-                    </div>
-                  </a>
-                </Link>
-                <p className="flex-1 min-w-0 text-xs text-right truncate text-zinc-600 dark:text-zinc-400">
-                  {date}
-                </p>
+            </a>
+          </Link>
+          {excerpt && (
+            <div
+              className="mt-2 text-sm text-zinc-600"
+              dangerouslySetInnerHTML={{ __html: excerpt }}
+            />
+          )}
+          {/* Footer */}
+          <div className="flex flex-wrap items-center mt-4">
+            {tags?.edges?.length > 0 && (
+              <div className="flex justify-end mb-2 space-x-2 basis-full">
+                {tags.edges.map((tag) => {
+                  return (
+                    <Link href={tag?.node?.uri} key={tag?.node?.id}>
+                      <a className="relative text-xs hover:underline text-zinc-600 decoration-indigo-600">
+                        #{tag?.node?.name}
+                      </a>
+                    </Link>
+                  )
+                })}
               </div>
-            </div>
-          </a>
-        </Link>
+            )}
+            <Link href={author.node.uri}>
+              <a className="relative flex items-center">
+                <div className="mr-2 shrink-0">
+                  {author?.node?.avatar?.url && (
+                    <img
+                      className="w-8 h-8 rounded-full"
+                      src={author.node.avatar.url}
+                      alt={`Avatar for ${author?.node?.name}`}
+                    />
+                  )}
+                </div>
+                <div className="flex-1 min-w-0 mr-4">
+                  <p className="text-sm font-medium truncate transition-colors text-zinc-600 hover:underline decoration-indigo-600">
+                    {author?.node?.name}
+                  </p>
+                </div>
+              </a>
+            </Link>
+            <p className="ml-auto text-xs text-right truncate text-zinc-600">
+              {date}
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   )
@@ -96,6 +108,17 @@ PostCard.propTypes = {
         url: PropTypes.string,
       }),
     }),
+  }),
+  tags: PropTypes.shape({
+    edges: PropTypes.arrayOf(
+      PropTypes.shape({
+        node: PropTypes.shape({
+          id: PropTypes.string,
+          uri: PropTypes.string,
+          name: PropTypes.string,
+        }),
+      })
+    ),
   }),
 }
 
