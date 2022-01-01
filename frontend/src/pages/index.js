@@ -6,19 +6,17 @@ import PostCard from '@/components/global/PostCard'
 
 import { gql } from '@apollo/client'
 
-import styles from '../styles/Home.module.css'
-
 export default function Home({ page, posts }) {
   const { title, description } = page
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>{title}</title>
         <meta name="description" content={description} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="container mb-16">
+      <main className="mb-16">
         <ul>
           {posts &&
             posts.length > 0 &&

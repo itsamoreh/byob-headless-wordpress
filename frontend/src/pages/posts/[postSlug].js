@@ -7,11 +7,9 @@ import { FREEFORM_FIELDS } from '@/components/blocks/Freeform/Freeform'
 import { getApolloClient } from '@/lib/apollo-client'
 import { gql } from '@apollo/client'
 
-import styles from '../../styles/Home.module.css'
-
 export default function Post({ post, site }) {
   return (
-    <div className={styles.container}>
+    <div className="container">
       <Head>
         <title>{post.title}</title>
         <meta

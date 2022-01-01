@@ -14,9 +14,9 @@ export default function CallToAction({
   secondaryCta,
 }) {
   return (
-    <div className="mb-8 bg-gray-50">
+    <div className="mb-8 bg-zinc-50">
       <div className="max-w-5xl px-4 py-12 mx-auto sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
-        <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+        <h2 className="text-3xl font-extrabold tracking-tight text-zinc-900 sm:text-4xl">
           <span className="block">{headingQuestion ?? ''}</span>
           <span className="block text-indigo-600">{headingCall ?? ''}</span>
         </h2>
