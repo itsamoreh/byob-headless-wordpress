@@ -1,9 +1,9 @@
 import { getApolloClient } from 'lib/apollo-client'
+import { uniqBy } from 'lodash'
 import Head from 'next/head'
-import Link from 'next/link'
-import { POST_CARD_FIELDS } from '@/components/global/PostCard/PostCard'
-import PostCard from '@/components/global/PostCard'
 
+import PostCard from '@/components/global/PostCard'
+import { POST_CARD_FIELDS } from '@/components/global/PostCard/PostCard'
 import { gql } from '@apollo/client'
 
 export default function Home({ page, posts }) {
@@ -54,17 +54,35 @@ export async function getStaticProps() {
             }
           }
         }
+        stickyPost: posts(
+          where: { onlySticky: true, orderby: { field: MODIFIED, order: DESC } }
+          first: 1
+        ) {
+          nodes {
+            ...PostCardFields
+          }
+        }
       }
     `,
   })
 
-  const posts = response?.data.posts.edges
+  const stickyPost = response?.data.stickyPost.nodes[0]
+
+  let posts = response?.data.posts.edges
     .map(({ node }) => node)
     .map((post) => {
       return {
         ...post,
       }
     })
+
+  // Push sticky post to the top of the list.
+  if (stickyPost) {
+    posts.unshift(stickyPost)
+
+    // Make sure there are no duplicates.
+    posts = uniqBy(posts, 'id')
+  }
 
   const page = {
     ...response?.data.generalSettings,
