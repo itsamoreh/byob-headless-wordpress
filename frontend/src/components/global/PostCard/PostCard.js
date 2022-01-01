@@ -1,6 +1,6 @@
+import Link from 'next/link'
 import PropTypes from 'prop-types'
 import React from 'react'
-import Link from 'next/link'
 
 import { gql } from '@apollo/client'
 
@@ -18,6 +18,7 @@ export default function PostCard({
   featuredImage,
   author,
   tags,
+  categories,
 }) {
   return (
     <div className="container">
@@ -33,33 +34,42 @@ export default function PostCard({
         <div className="p-6">
           <Link href={uri}>
             <a className="before:absolute before:inset-0">
-              <h3 className="block text-2xl font-black transition-colors text-zinc-800 group-hover:text-indigo-600">
+              <h3 className="block mb-3 text-2xl font-black transition-colors text-zinc-800 group-hover:text-indigo-600">
                 {title}
               </h3>
             </a>
           </Link>
+          <div className="flex mb-5 space-x-2 basis-full">
+            {categories?.edges?.length > 0 &&
+              categories.edges.map((tag) => {
+                return (
+                  <Link href={tag?.node?.uri} key={tag?.node?.id}>
+                    <a className="relative text-xs hover:underline text-zinc-600 decoration-indigo-600">
+                      /{tag?.node?.name}
+                    </a>
+                  </Link>
+                )
+              })}
+            {tags?.edges?.length > 0 &&
+              tags.edges.map((tag) => {
+                return (
+                  <Link href={tag?.node?.uri} key={tag?.node?.id}>
+                    <a className="relative text-xs hover:underline text-zinc-600 decoration-indigo-600">
+                      #{tag?.node?.name}
+                    </a>
+                  </Link>
+                )
+              })}
+          </div>
           {excerpt && (
             <div
-              className="mt-2 text-sm text-zinc-600"
+              className="mb-6 text-sm text-zinc-600"
               dangerouslySetInnerHTML={{ __html: excerpt }}
             />
           )}
           {/* Footer */}
-          <div className="flex flex-wrap items-center mt-4">
-            {tags?.edges?.length > 0 && (
-              <div className="flex justify-end mb-2 space-x-2 basis-full">
-                {tags.edges.map((tag) => {
-                  return (
-                    <Link href={tag?.node?.uri} key={tag?.node?.id}>
-                      <a className="relative text-xs hover:underline text-zinc-600 decoration-indigo-600">
-                        #{tag?.node?.name}
-                      </a>
-                    </Link>
-                  )
-                })}
-              </div>
-            )}
-            <Link href={author.node.uri}>
+          <div className="flex flex-wrap items-center">
+            <Link href={author?.node.uri}>
               <a className="relative flex items-center">
                 <div className="mr-2 shrink-0">
                   {author?.node?.avatar?.url && (
@@ -120,6 +130,17 @@ PostCard.propTypes = {
       })
     ),
   }),
+  categories: PropTypes.shape({
+    edges: PropTypes.arrayOf(
+      PropTypes.shape({
+        node: PropTypes.shape({
+          id: PropTypes.string,
+          uri: PropTypes.string,
+          name: PropTypes.string,
+        }),
+      })
+    ),
+  }),
 }
 
 export const POST_CARD_FIELDS = gql`
@@ -146,6 +167,15 @@ export const POST_CARD_FIELDS = gql`
       }
     }
     tags(first: 3) {
+      edges {
+        node {
+          id
+          uri
+          name
+        }
+      }
+    }
+    categories(first: 3) {
       edges {
         node {
           id
