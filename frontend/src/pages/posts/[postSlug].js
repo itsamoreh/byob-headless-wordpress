@@ -9,7 +9,7 @@ import { gql } from '@apollo/client'
 
 export default function Post({ post, site }) {
   return (
-    <div className="container">
+    <div>
       <Head>
         <title>{post.title}</title>
         <meta

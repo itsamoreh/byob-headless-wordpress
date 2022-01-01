@@ -10,7 +10,7 @@ const colors = resolveConfig(tailwindConfig).theme.colors
 function MyApp({ Component, pageProps = {} }) {
   return (
     <>
-      <NextNProgress color={colors.black} />
+      <NextNProgress color={colors.indigo[600]} />
       <Component {...pageProps} />
     </>
   )
