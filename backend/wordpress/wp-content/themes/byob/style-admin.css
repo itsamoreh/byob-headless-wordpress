@@ -104,6 +104,7 @@ textarea:focus,
 }
 
 .wp-core-ui .button:active {
+  color: #f8fafc;
   background: #7a73eb;
   border-color: #7a73eb;
 }
@@ -198,10 +199,21 @@ textarea:focus,
 }
 
 /* List tables */
+.wrap .add-new-h2,
+.wrap .page-title-action {
+  color: #4f46e5;
+}
+
 .wrap .add-new-h2:hover,
 .wrap .page-title-action:hover {
   color: #f8fafc;
-  background-color: #1e293b;
+  background-color: #4f46e5;
+}
+
+.wrap .add-new-h2,
+.wrap .add-new-h2:active,
+.wrap .page-title-action:active {
+  color: #f8fafc;
 }
 
 .view-switch a.current:before {
@@ -238,14 +250,6 @@ textarea:focus,
 #adminmenu li.menu-top:hover div.wp-menu-image:before,
 #adminmenu li.opensub > a.menu-top div.wp-menu-image:before {
   color: #f8fafc;
-}
-
-.wrap .add-new-h2,
-.wrap .add-new-h2:active,
-.wrap .page-title-action,
-.wrap .page-title-action:active {
-  color: #4f46e5;
-  border-color: #4f46e5;
 }
 
 /* Active tabs use a bottom border color that matches the page background color. */
@@ -550,11 +554,17 @@ ul#adminmenu > li.current > a.current:after {
   background-color: #4f46e5;
 }
 
-.details.attachment {
+.details.attachment,
+.media-frame.mode-grid .attachment.details,
+.media-frame.mode-grid .attachment.details:focus,
+.media-frame.mode-grid .attachment:focus,
+.media-frame.mode-grid .selected.attachment:focus {
   box-shadow: inset 0 0 0 3px #f8fafc, inset 0 0 0 7px #4f46e5;
 }
 
-.attachment.details .check {
+.wp-core-ui .attachment.details .check,
+.wp-core-ui .attachment.selected .check:focus,
+.wp-core-ui .media-frame.mode-grid .attachment.selected .check {
   background-color: #4f46e5;
   box-shadow: 0 0 0 1px #f8fafc, 0 0 0 2px #4f46e5;
 }
