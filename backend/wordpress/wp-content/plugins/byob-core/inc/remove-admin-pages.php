@@ -12,6 +12,8 @@ define( 'DISALLOW_FILE_EDIT', true );
  * Remove admin pages.
  */
 function byob_remove_submenu_pages() {
+	global $submenu;
+
 	// Themes.
 	remove_submenu_page( 'themes.php', 'theme-editor.php' );
 
@@ -19,8 +21,20 @@ function byob_remove_submenu_pages() {
 	remove_submenu_page( 'tools.php', 'export.php' );
 	remove_submenu_page( 'tools.php', 'tools.php' );
 	remove_submenu_page( 'tools.php', 'import.php' );
-}
 
+	// Customizer.
+	foreach ( $submenu as $name => $items ) {
+		if ( $name === 'themes.php' ) {
+			foreach ( $items as $i => $data ) {
+				if ( in_array( 'customize', $data, true ) ) {
+					unset( $submenu[ $name ][ $i ] );
+
+					return;
+				}
+			}
+		}
+	}
+}
 add_action( 'admin_menu', 'byob_remove_submenu_pages' );
 
 /**

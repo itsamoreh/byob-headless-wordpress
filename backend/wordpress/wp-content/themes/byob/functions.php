@@ -66,20 +66,6 @@ add_action( 'login_head', 'byob_admin_favicon' );
 add_action( 'admin_head', 'byob_admin_favicon' );
 
 /**
- * Remove customizer options.
- */
-function byob_remove_customizer_options() {
-	global $wp_customize;
-
-	$wp_customize->remove_section( 'static_front_page' );
-	$wp_customize->remove_section( 'title_tagline' );
-	$wp_customize->remove_section( 'nav' );
-	$wp_customize->remove_section( 'themes' );
-	$wp_customize->remove_section( 'custom_css' );
-}
-add_action( 'customize_register', 'byob_remove_customizer_options', 30 );
-
-/**
  * Disable Gutenberg's default fullscreen mode.
  */
 function byob_disable_editor_fullscreen_mode() {
