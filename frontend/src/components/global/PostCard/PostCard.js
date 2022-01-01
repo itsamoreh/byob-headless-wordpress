@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import PropTypes from 'prop-types'
-import React from 'react'
 
 import { gql } from '@apollo/client'
 
