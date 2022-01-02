@@ -1,7 +1,9 @@
+import parse from 'date-fns/format'
 import Link from 'next/link'
 import PropTypes from 'prop-types'
 
 import { WpSettingsContext } from '@/contexts/WpSettingsContext'
+import convertPhpDateTokens from '@/lib/convert-php-date-tokens'
 import { gql } from '@apollo/client'
 
 /**
@@ -92,7 +94,15 @@ export default function PostCard({
                   </a>
                 </Link>
                 <p className="ml-auto text-xs text-right truncate text-zinc-600">
-                  {date} {wpSettings?.generalSettingsDateFormat}
+                  {parse(
+                    new Date(date),
+                    `${convertPhpDateTokens(
+                      wpSettings?.generalSettingsDateFormat
+                    )} 'at' ${convertPhpDateTokens(
+                      wpSettings?.generalSettingsTimeFormat
+                    )}`,
+                    new Date()
+                  ).toString()}
                 </p>
               </div>
             </div>
