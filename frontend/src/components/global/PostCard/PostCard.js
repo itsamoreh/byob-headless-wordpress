@@ -25,86 +25,87 @@ export default function PostCard({
   return (
     <WpSettingsContext.Consumer>
       {(wpSettings) => (
-        <div className="container">
-          <div className="relative max-w-2xl mx-auto mb-8 overflow-hidden transition-shadow bg-white rounded-lg shadow-md hover:shadow-lg group">
-            {featuredImage?.node?.sourceUrl && (
-              <img
-                className="object-cover w-full h-64"
-                src={featuredImage?.node?.sourceUrl}
-                alt={
-                  featuredImage?.node?.altText || `Featured Image for ${title}`
-                }
+        <div className="relative mx-auto mb-8 overflow-hidden transition-shadow bg-white rounded-lg shadow-md group hover:shadow-lg">
+          {featuredImage?.node?.sourceUrl && (
+            <img
+              className="object-cover w-full h-64"
+              src={featuredImage?.node?.sourceUrl}
+              alt={
+                featuredImage?.node?.altText || `Featured Image for ${title}`
+              }
+            />
+          )}
+
+          <div className="p-6">
+            <Link href={uri}>
+              <a className="before:absolute before:inset-0">
+                <h3 className="mb-3 text-2xl font-black transition-colors text-zinc-800 group-hover:text-indigo-600">
+                  {title}
+                </h3>
+              </a>
+            </Link>
+            {excerpt && (
+              <div
+                className="mb-8 text-sm text-gray-600"
+                dangerouslySetInnerHTML={{ __html: excerpt }}
               />
             )}
-
-            <div className="p-6">
-              <Link href={uri}>
-                <a className="before:absolute before:inset-0">
-                  <h3 className="block mb-3 text-2xl font-black transition-colors text-zinc-800 group-hover:text-indigo-600">
-                    {title}
-                  </h3>
+            <div className="flex justify-end space-x-3">
+              {categories?.nodes.length > 0 &&
+                categories.nodes.map((category) => {
+                  if (
+                    category?.databaseId ===
+                    wpSettings.writingSettingsDefaultCategory
+                  )
+                    return
+                  return (
+                    <Link href={category?.uri} key={category?.id}>
+                      <a className="relative mb-2 text-xs font-medium text-indigo-600 uppercase hover:underline">
+                        /{category?.name}
+                      </a>
+                    </Link>
+                  )
+                })}
+              {tags?.nodes.length > 0 &&
+                tags.nodes.map((tag) => {
+                  return (
+                    <Link href={tag?.uri} key={tag?.id}>
+                      <a className="relative mb-2 text-xs font-medium text-indigo-600 uppercase hover:underline">
+                        #{tag?.name}
+                      </a>
+                    </Link>
+                  )
+                })}
+            </div>
+            <div className="flex items-center">
+              <Link href={author?.node.uri}>
+                <a className="relative flex items-center text-gray-600 transition-colors hover:text-indigo-600 hover:underline">
+                  <div className="mr-3 shrink-0">
+                    {author?.node?.avatar?.url && (
+                      <img
+                        className="object-cover h-8 rounded-full"
+                        src={author.node.avatar.url}
+                        alt={`Avatar for ${author?.node?.name}`}
+                      />
+                    )}
+                  </div>
+                  <div className="flex-1 min-w-0 mr-4">
+                    <p className="text-xs font-medium">{author?.node?.name}</p>
+                  </div>
                 </a>
               </Link>
-              <div className="flex mb-5 space-x-2 basis-full">
-                {categories?.edges?.length > 0 &&
-                  categories.edges.map((tag) => {
-                    return (
-                      <Link href={tag?.node?.uri} key={tag?.node?.id}>
-                        <a className="relative text-xs hover:underline text-zinc-600 decoration-indigo-600">
-                          /{tag?.node?.name}
-                        </a>
-                      </Link>
-                    )
-                  })}
-                {tags?.edges?.length > 0 &&
-                  tags.edges.map((tag) => {
-                    return (
-                      <Link href={tag?.node?.uri} key={tag?.node?.id}>
-                        <a className="relative text-xs hover:underline text-zinc-600 decoration-indigo-600">
-                          #{tag?.node?.name}
-                        </a>
-                      </Link>
-                    )
-                  })}
-              </div>
-              {excerpt && (
-                <div
-                  className="mb-6 text-sm text-zinc-600"
-                  dangerouslySetInnerHTML={{ __html: excerpt }}
-                />
-              )}
-              {/* Footer */}
-              <div className="flex flex-wrap items-center">
-                <Link href={author?.node.uri}>
-                  <a className="relative flex items-center">
-                    <div className="mr-2 shrink-0">
-                      {author?.node?.avatar?.url && (
-                        <img
-                          className="w-8 h-8 rounded-full"
-                          src={author.node.avatar.url}
-                          alt={`Avatar for ${author?.node?.name}`}
-                        />
-                      )}
-                    </div>
-                    <div className="flex-1 min-w-0 mr-4">
-                      <p className="text-sm font-medium truncate transition-colors text-zinc-600 hover:underline decoration-indigo-600">
-                        {author?.node?.name}
-                      </p>
-                    </div>
-                  </a>
-                </Link>
-                <p className="ml-auto text-xs text-right truncate text-zinc-600">
-                  {parse(
-                    new Date(date),
-                    `${phpDateTokensToUnicode(
-                      wpSettings?.generalSettingsDateFormat
-                    )} 'at' ${phpDateTokensToUnicode(
-                      wpSettings?.generalSettingsTimeFormat
-                    )}`,
-                    new Date()
-                  ).toString()}
-                </p>
-              </div>
+
+              <span className="ml-auto text-xs text-gray-600">
+                {parse(
+                  new Date(date),
+                  `${phpDateTokensToUnicode(
+                    wpSettings?.generalSettingsDateFormat
+                  )} 'at' ${phpDateTokensToUnicode(
+                    wpSettings?.generalSettingsTimeFormat
+                  )}`,
+                  new Date()
+                ).toString()}
+              </span>
             </div>
           </div>
         </div>
@@ -136,24 +137,21 @@ PostCard.propTypes = {
     }),
   }),
   tags: PropTypes.shape({
-    edges: PropTypes.arrayOf(
+    nodes: PropTypes.arrayOf(
       PropTypes.shape({
-        node: PropTypes.shape({
-          id: PropTypes.string,
-          uri: PropTypes.string,
-          name: PropTypes.string,
-        }),
+        id: PropTypes.string,
+        uri: PropTypes.string,
+        name: PropTypes.string,
       })
     ),
   }),
   categories: PropTypes.shape({
-    edges: PropTypes.arrayOf(
+    nodes: PropTypes.arrayOf(
       PropTypes.shape({
-        node: PropTypes.shape({
-          id: PropTypes.string,
-          uri: PropTypes.string,
-          name: PropTypes.string,
-        }),
+        id: PropTypes.string,
+        databaseId: PropTypes.number,
+        uri: PropTypes.string,
+        name: PropTypes.string,
       })
     ),
   }),
@@ -183,21 +181,18 @@ export const POST_CARD_FIELDS = gql`
       }
     }
     tags(first: 3) {
-      edges {
-        node {
-          id
-          uri
-          name
-        }
+      nodes {
+        id
+        uri
+        name
       }
     }
     categories(first: 3) {
-      edges {
-        node {
-          id
-          uri
-          name
-        }
+      nodes {
+        id
+        databaseId
+        uri
+        name
       }
     }
   }

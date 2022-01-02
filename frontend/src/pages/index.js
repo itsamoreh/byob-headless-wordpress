@@ -21,11 +21,15 @@ export default function Home({ posts, wpSettings }) {
         </Head>
 
         <main className="mb-16">
-          <ul>
+          <ul className="container max-w-2xl">
             {posts &&
               posts.length > 0 &&
               posts.map((post) => {
-                return <PostCard key={post.id} {...post} />
+                return (
+                  <li key={post.id}>
+                    <PostCard {...post} />
+                  </li>
+                )
               })}
 
             {!posts ||
