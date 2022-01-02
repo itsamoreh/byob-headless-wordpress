@@ -562,6 +562,15 @@ ul#adminmenu > li.current > a.current:after {
   .interface-complementary-area {
     width: 500px;
   }
+
+  .edit-post-layout .editor-post-publish-panel {
+    width: 501px;
+  }
+
+  .editor-post-publish-panel__header-cancel-button,
+  .editor-post-publish-panel__header-publish-button {
+    max-width: unset;
+  }
 }
 
 /* Pointers */
