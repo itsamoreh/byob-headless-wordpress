@@ -20,9 +20,22 @@ export default function Post({ post, site }) {
       </Head>
 
       <main>
-        <h1 className="container max-w-4xl mx-auto my-16 text-6xl font-extrabold text-center break-words">
-          {post.title}
-        </h1>
+        <div className="container max-w-4xl my-16">
+          {post?.featuredImage?.node?.sourceUrl && (
+            <img
+              className="mb-16 rounded-lg mx-auto object-cover w-full aspect-[5/2]"
+              srcSet={post?.featuredImage?.node?.srcSet}
+              src={post?.featuredImage?.node?.sourceUrl}
+              alt={
+                post?.featuredImage?.node?.altText ||
+                `Featured Image for ${post.title}`
+              }
+            />
+          )}
+          <h1 className="text-6xl font-extrabold text-center break-words">
+            {post.title}
+          </h1>
+        </div>
 
         <BlockRenderer blocks={post.blocks} />
 
@@ -54,8 +67,13 @@ export async function getStaticProps({ params = {} } = {}) {
         }
         postBy(slug: $slug) {
           id
-          content
-          blocksJSON
+          featuredImage {
+            node {
+              srcSet(size: MEDIUM)
+              sourceUrl(size: MEDIUM_LARGE)
+              altText
+            }
+          }
           blocks {
             ... on CoreFreeformBlock {
               ...FreeformFields
