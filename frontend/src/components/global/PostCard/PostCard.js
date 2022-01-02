@@ -26,7 +26,8 @@ export default function PostCard({
   return (
     <WpSettingsContext.Consumer>
       {(wpSettings) => (
-        <div className="relative mx-auto mb-8 overflow-hidden transition-shadow bg-white rounded-lg shadow-md group hover:shadow-lg">
+        <article className="relative mx-auto mb-8 overflow-hidden transition-shadow bg-white rounded-lg shadow-md group hover:shadow-lg">
+          {/* Image */}
           {featuredImage?.node?.sourceUrl && (
             <img
               className="object-cover w-full aspect-[5/2]"
@@ -38,6 +39,7 @@ export default function PostCard({
             />
           )}
 
+          {/* Content */}
           <div className="p-6">
             <Link href={uri}>
               <a className="before:absolute before:inset-0">
@@ -47,12 +49,14 @@ export default function PostCard({
                 </h3>
               </a>
             </Link>
+
             {excerpt && (
               <div
                 className="mb-8 text-sm text-gray-600"
                 dangerouslySetInnerHTML={{ __html: excerpt }}
               />
             )}
+
             <div className="flex justify-end space-x-3">
               {categories?.nodes.length > 0 &&
                 categories.nodes.map((category) => {
@@ -80,6 +84,8 @@ export default function PostCard({
                   )
                 })}
             </div>
+
+            {/* Footer */}
             <div className="flex items-center">
               <Link href={author?.node.uri}>
                 <a className="relative flex items-center text-gray-600 transition-colors hover:text-indigo-600 hover:underline">
@@ -99,19 +105,19 @@ export default function PostCard({
               </Link>
 
               <span className="ml-auto text-xs text-gray-600">
-                {parse(
-                  new Date(date),
-                  `${phpDateTokensToUnicode(
-                    wpSettings?.generalSettingsDateFormat
-                  )} 'at' ${phpDateTokensToUnicode(
-                    wpSettings?.generalSettingsTimeFormat
-                  )}`,
-                  new Date()
-                ).toString()}
+                <span>
+                  {parse(
+                    new Date(date),
+                    `${phpDateTokensToUnicode(
+                      wpSettings?.generalSettingsDateFormat
+                    )}`,
+                    new Date()
+                  ).toString()}
+                </span>
               </span>
             </div>
           </div>
-        </div>
+        </article>
       )}
     </WpSettingsContext.Consumer>
   )
