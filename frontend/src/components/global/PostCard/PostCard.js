@@ -3,7 +3,7 @@ import Link from 'next/link'
 import PropTypes from 'prop-types'
 
 import { WpSettingsContext } from '@/contexts/WpSettingsContext'
-import convertPhpDateTokens from '@/lib/convert-php-date-tokens'
+import phpDateTokensToUnicode from '@/lib/php-date-tokens-to-unicode'
 import { gql } from '@apollo/client'
 
 /**
@@ -96,9 +96,9 @@ export default function PostCard({
                 <p className="ml-auto text-xs text-right truncate text-zinc-600">
                   {parse(
                     new Date(date),
-                    `${convertPhpDateTokens(
+                    `${phpDateTokensToUnicode(
                       wpSettings?.generalSettingsDateFormat
-                    )} 'at' ${convertPhpDateTokens(
+                    )} 'at' ${phpDateTokensToUnicode(
                       wpSettings?.generalSettingsTimeFormat
                     )}`,
                     new Date()

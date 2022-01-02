@@ -1,4 +1,4 @@
-export default function convertPhpDateTokens(tokens) {
+export default function phpDateTokensToUnicode(tokens) {
   // Convert PHP date tokens to Unicode Locale Data Markup.
   // @see https://www.php.net/manual/en/datetime.format.php
   // @see https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table
