@@ -16,6 +16,7 @@ export default function PostCard({
   uri,
   title,
   date,
+  isSticky,
   excerpt,
   featuredImage,
   author,
@@ -28,7 +29,8 @@ export default function PostCard({
         <div className="relative mx-auto mb-8 overflow-hidden transition-shadow bg-white rounded-lg shadow-md group hover:shadow-lg">
           {featuredImage?.node?.sourceUrl && (
             <img
-              className="object-cover w-full h-64"
+              className="object-cover w-full aspect-[5/2]"
+              srcSet={featuredImage?.node?.srcSet}
               src={featuredImage?.node?.sourceUrl}
               alt={
                 featuredImage?.node?.altText || `Featured Image for ${title}`
@@ -39,8 +41,9 @@ export default function PostCard({
           <div className="p-6">
             <Link href={uri}>
               <a className="before:absolute before:inset-0">
-                <h3 className="mb-3 text-2xl font-black transition-colors text-zinc-800 group-hover:text-indigo-600">
+                <h3 className="block mb-3 text-2xl font-black truncate transition-colors text-zinc-800 group-hover:text-indigo-600">
                   {title}
+                  {isSticky && <span className="ml-2 text-indigo-600">★</span>}
                 </h3>
               </a>
             </Link>
@@ -119,6 +122,7 @@ PostCard.propTypes = {
   uri: PropTypes.string,
   title: PropTypes.string,
   date: PropTypes.string,
+  isSticky: PropTypes.bool,
   excerpt: PropTypes.string,
   featuredImage: PropTypes.shape({
     node: PropTypes.shape({
@@ -163,6 +167,7 @@ export const POST_CARD_FIELDS = gql`
     uri
     title
     date
+    isSticky
     excerpt(format: RENDERED)
     featuredImage {
       node {
