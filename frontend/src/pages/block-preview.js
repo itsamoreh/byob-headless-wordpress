@@ -1,7 +1,8 @@
-import displayBlock from '@/functions/wordpress/display-block'
-import camelizeKeys from '@/lib/camelize-keys'
-import Script from 'next/script'
 import Head from 'next/head'
+import Script from 'next/script'
+
+import BlockRenderer from '@/components/blocks/BlockRenderer'
+import camelizeKeys from '@/lib/camelize-keys'
 
 export default function Block({ block }) {
   return (
@@ -20,7 +21,8 @@ export default function Block({ block }) {
         src="iframe-resizer-content-window.js"
         // @see https://github.com/davidjbradshaw/iframe-resizer
       />
-      <div>{displayBlock(block)}</div>
+
+      <BlockRenderer blocks={[block]} />
     </>
   )
 }
