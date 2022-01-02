@@ -1,6 +1,7 @@
 import { camelCase } from 'lodash'
 
-const camelizeKeys = (obj) => {
+// Recursively convert object keys to camelCase.
+export default function camelizeKeys(obj) {
   if (Array.isArray(obj)) {
     return obj.map((v) => camelizeKeys(v))
   } else if (obj != null && obj.constructor === Object) {
@@ -14,5 +15,3 @@ const camelizeKeys = (obj) => {
   }
   return obj
 }
-
-export default camelizeKeys
