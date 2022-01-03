@@ -56,7 +56,7 @@ export default function AuthorSingle({ author, site }) {
 }
 
 export async function getStaticProps({ params = {} } = {}) {
-  const { authorSlug } = params
+  const { authorArchive } = params
 
   const apolloClient = getApolloClient()
 
@@ -73,7 +73,7 @@ export async function getStaticProps({ params = {} } = {}) {
       }
     `,
     variables: {
-      slug: authorSlug,
+      slug: authorArchive,
     },
   })
 
@@ -116,7 +116,7 @@ export async function getStaticPaths() {
     paths: authors.map(({ slug }) => {
       return {
         params: {
-          authorSlug: slug,
+          authorArchive: slug,
         },
       }
     }),

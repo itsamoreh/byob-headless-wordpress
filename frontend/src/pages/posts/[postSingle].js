@@ -89,7 +89,7 @@ export default function Post({ post, site }) {
 }
 
 export async function getStaticProps({ params = {} } = {}) {
-  const { postSlug } = params
+  const { postSingle } = params
 
   const apolloClient = getApolloClient()
 
@@ -116,7 +116,7 @@ export async function getStaticProps({ params = {} } = {}) {
       }
     `,
     variables: {
-      slug: postSlug,
+      slug: postSingle,
     },
   })
 
@@ -159,7 +159,7 @@ export async function getStaticPaths() {
     paths: posts.map(({ slug }) => {
       return {
         params: {
-          postSlug: slug,
+          postSingle: slug,
         },
       }
     }),
