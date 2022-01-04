@@ -1,12 +1,12 @@
 import React from 'react'
 
 export const WpSettingsContext = React.createContext({
-  generalSettingsDateFormat: 'F j, Y',
-  generalSettingsDescription: 'Just another WordPress site',
-  generalSettingsStartOfWeek: 1,
-  generalSettingsTimeFormat: 'g:i a',
-  generalSettingsTimezone: 'America/Toronto',
-  generalSettingsTitle: 'BYOB',
-  readingSettingsPostsPerPage: 10,
-  writingSettingsDefaultCategory: 1,
+  dateFormat: 'F j, Y',
+  description: 'Just another WordPress site',
+  startOfWeek: 1,
+  timeFormat: 'g:i a',
+  timezone: 'America/Toronto',
+  title: 'BYOB',
+  postsPerPage: 10,
+  defaultCategory: 1,
 })
