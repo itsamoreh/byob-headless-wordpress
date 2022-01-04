@@ -60,10 +60,7 @@ export default function PostCard({
             <div className="flex justify-end space-x-3">
               {categories?.nodes.length > 0 &&
                 categories.nodes.map((category) => {
-                  if (
-                    category?.databaseId ===
-                    wpSettings.writingSettingsDefaultCategory
-                  )
+                  if (category?.databaseId === wpSettings.defaultCategory)
                     return
                   return (
                     <Link href={category?.uri} key={category?.id}>
@@ -108,9 +105,7 @@ export default function PostCard({
                 <span>
                   {parse(
                     new Date(date),
-                    `${phpDateTokensToUnicode(
-                      wpSettings?.generalSettingsDateFormat
-                    )}`,
+                    `${phpDateTokensToUnicode(wpSettings?.dateFormat)}`,
                     new Date()
                   ).toString()}
                 </span>

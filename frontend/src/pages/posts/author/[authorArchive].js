@@ -1,7 +1,7 @@
-import Head from 'next/head'
 import Link from 'next/link'
 
 import { getApolloClient } from '@/api/apollo-client'
+import Head from '@/components/structure/Shell/Head'
 import { WpSettingsContext } from '@/contexts/WpSettingsContext'
 import { gql } from '@apollo/client'
 
@@ -9,14 +9,12 @@ export default function AuthorSingle({ author, wpSettings }) {
   return (
     <WpSettingsContext.Provider value={wpSettings}>
       <div>
-        <Head>
-          <title>Posts by {author.name}</title>
-          <meta
-            name="description"
-            content={`Read more about ${author.name} on ${wpSettings.title}`}
-          />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
+        <Head
+          manualSeo={{
+            title: `Posts by ${author.name} - ${wpSettings.title}`,
+            description: author.description,
+          }}
+        />
 
         <header className="bg-indigo-50">
           <div className="flex flex-col max-w-5xl px-6 py-8 mx-auto space-y-8 md:space-y-0 md:items-center md:justify-between md:flex-row">
@@ -68,14 +66,14 @@ export async function getStaticProps({ params = {} } = {}) {
       ${AUTHOR_FIELDS}
       query AuthorBySlug($slug: ID!) {
         wpSettings: allSettings {
-          generalSettingsDateFormat
-          generalSettingsDescription
-          generalSettingsStartOfWeek
-          generalSettingsTimeFormat
-          generalSettingsTimezone
-          generalSettingsTitle
-          readingSettingsPostsPerPage
-          writingSettingsDefaultCategory
+          dateFormat: generalSettingsDateFormat
+          description: generalSettingsDescription
+          startOfWeek: generalSettingsStartOfWeek
+          timeFormat: generalSettingsTimeFormat
+          timezone: generalSettingsTimezone
+          title: generalSettingsTitle
+          postsPerPage: readingSettingsPostsPerPage
+          defaultCategory: writingSettingsDefaultCategory
         }
         user(id: $slug, idType: SLUG) {
           ...AuthorFields

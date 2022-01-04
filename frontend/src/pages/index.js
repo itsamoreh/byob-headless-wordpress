@@ -1,24 +1,24 @@
 import { uniqBy } from 'lodash'
-import Head from 'next/head'
 
 import { getApolloClient } from '@/api/apollo-client'
 import PostCard from '@/components/global/PostCard'
 import { POST_CARD_FIELDS } from '@/components/global/PostCard/PostCard'
+import Head from '@/components/structure/Shell/Head'
 import { WpSettingsContext } from '@/contexts/WpSettingsContext'
 import { gql } from '@apollo/client'
+
+// import Head from 'next/head'
 
 export default function Home({ posts, wpSettings }) {
   return (
     <WpSettingsContext.Provider value={wpSettings}>
       <div>
-        <Head>
-          <title>{wpSettings.generalSettingsTitle}</title>
-          <meta
-            name="description"
-            content={wpSettings.generalSettingsDescription}
-          />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
+        <Head
+          manualSeo={{
+            title: `Blog - ${wpSettings.title}`,
+            description: 'Blog Description',
+          }}
+        />
 
         <main className="mb-16">
           <ul className="container max-w-2xl">
@@ -52,16 +52,6 @@ export async function getStaticProps() {
     query: gql`
       ${POST_CARD_FIELDS}
       query PostList {
-        wpSettings: allSettings {
-          generalSettingsDateFormat
-          generalSettingsDescription
-          generalSettingsStartOfWeek
-          generalSettingsTimeFormat
-          generalSettingsTimezone
-          generalSettingsTitle
-          readingSettingsPostsPerPage
-          writingSettingsDefaultCategory
-        }
         posts(first: 10) {
           edges {
             node {
@@ -76,6 +66,16 @@ export async function getStaticProps() {
           nodes {
             ...PostCardFields
           }
+        }
+        wpSettings: allSettings {
+          dateFormat: generalSettingsDateFormat
+          description: generalSettingsDescription
+          startOfWeek: generalSettingsStartOfWeek
+          timeFormat: generalSettingsTimeFormat
+          timezone: generalSettingsTimezone
+          title: generalSettingsTitle
+          postsPerPage: readingSettingsPostsPerPage
+          defaultCategory: writingSettingsDefaultCategory
         }
       }
     `,

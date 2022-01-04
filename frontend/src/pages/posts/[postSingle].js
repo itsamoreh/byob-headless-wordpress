@@ -1,11 +1,12 @@
 import parse from 'date-fns/format'
-import Head from 'next/head'
 import Link from 'next/link'
 
 import { getApolloClient } from '@/api/apollo-client'
 import BlockRenderer from '@/components/blocks/BlockRenderer'
 import { CALL_TO_ACTION_FIELDS } from '@/components/blocks/CallToAction/CallToAction'
 import { FREEFORM_FIELDS } from '@/components/blocks/Freeform/Freeform'
+import Head from '@/components/structure/Shell/Head'
+import { POST_SEO_FIELDS } from '@/components/structure/Shell/Head/Head'
 import { WpSettingsContext } from '@/contexts/WpSettingsContext'
 import phpDateTokensToUnicode from '@/lib/php-date-tokens-to-unicode'
 import { gql } from '@apollo/client'
@@ -14,14 +15,7 @@ export default function Post({ post, wpSettings }) {
   return (
     <WpSettingsContext.Provider value={wpSettings}>
       <div>
-        <Head>
-          <title>{post.title}</title>
-          <meta
-            name="description"
-            content={`Read more about ${post.title} on ${wpSettings.title}`}
-          />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
+        <Head seo={post.seo} />
 
         <main>
           <div className="container max-w-4xl my-16">
@@ -44,18 +38,14 @@ export default function Post({ post, wpSettings }) {
               <span>
                 {parse(
                   new Date(post.date),
-                  `${phpDateTokensToUnicode(
-                    wpSettings?.generalSettingsDateFormat
-                  )}`,
+                  `${phpDateTokensToUnicode(wpSettings?.dateFormat)}`,
                   new Date()
                 ).toString()}
               </span>
               <span>
                 {parse(
                   new Date(post.date),
-                  ` 'at' ${phpDateTokensToUnicode(
-                    wpSettings?.generalSettingsTimeFormat
-                  )}`,
+                  ` 'at' ${phpDateTokensToUnicode(wpSettings?.timeFormat)}`,
                   new Date()
                 ).toString()}
               </span>
@@ -94,21 +84,23 @@ export async function getStaticProps({ params = {} } = {}) {
   const response = await apolloClient.query({
     query: gql`
       ${POST_FIELDS}
+      ${POST_SEO_FIELDS}
       ${CALL_TO_ACTION_FIELDS}
       ${FREEFORM_FIELDS}
       query PostBySlug($slug: String!) {
         wpSettings: allSettings {
-          generalSettingsDateFormat
-          generalSettingsDescription
-          generalSettingsStartOfWeek
-          generalSettingsTimeFormat
-          generalSettingsTimezone
-          generalSettingsTitle
-          readingSettingsPostsPerPage
-          writingSettingsDefaultCategory
+          dateFormat: generalSettingsDateFormat
+          description: generalSettingsDescription
+          startOfWeek: generalSettingsStartOfWeek
+          timeFormat: generalSettingsTimeFormat
+          timezone: generalSettingsTimezone
+          title: generalSettingsTitle
+          postsPerPage: readingSettingsPostsPerPage
+          defaultCategory: writingSettingsDefaultCategory
         }
         postBy(slug: $slug) {
           ...PostFields
+          ...PostSeoFields
           blocks {
             ... on CoreFreeformBlock {
               ...FreeformFields
