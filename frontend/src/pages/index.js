@@ -3,45 +3,40 @@ import { uniqBy } from 'lodash'
 import { getApolloClient } from '@/api/apollo-client'
 import PostCard from '@/components/global/PostCard'
 import { POST_CARD_FIELDS } from '@/components/global/PostCard/PostCard'
-import Head from '@/components/structure/Shell/Head'
-import { WpSettingsContext } from '@/contexts/WpSettingsContext'
+import Shell from '@/components/structure/Shell'
+import { WP_SETTINGS_FIELDS } from '@/components/structure/Shell/Shell'
 import { gql } from '@apollo/client'
-
-// import Head from 'next/head'
 
 export default function Home({ posts, wpSettings }) {
   return (
-    <WpSettingsContext.Provider value={wpSettings}>
-      <div>
-        <Head
-          manualSeo={{
-            title: `Blog - ${wpSettings.title}`,
-            description: 'Blog Description',
-          }}
-        />
-
-        <main className="mb-16">
-          <ul className="container max-w-2xl">
-            {posts &&
-              posts.length > 0 &&
-              posts.map((post) => {
-                return (
-                  <li key={post.id}>
-                    <PostCard {...post} />
-                  </li>
-                )
-              })}
-
-            {!posts ||
-              (posts.length === 0 && (
-                <li>
-                  <p>Oops, no posts found!</p>
+    <Shell
+      wpSettings={wpSettings}
+      manualSeo={{
+        title: `Blog - ${wpSettings.title}`,
+        description: 'Blog Description',
+      }}
+    >
+      <main className="mb-16">
+        <ul className="container max-w-2xl">
+          {posts &&
+            posts.length > 0 &&
+            posts.map((post) => {
+              return (
+                <li key={post.id}>
+                  <PostCard {...post} />
                 </li>
-              ))}
-          </ul>
-        </main>
-      </div>
-    </WpSettingsContext.Provider>
+              )
+            })}
+
+          {!posts ||
+            (posts.length === 0 && (
+              <li>
+                <p>Oops, no posts found!</p>
+              </li>
+            ))}
+        </ul>
+      </main>
+    </Shell>
   )
 }
 
@@ -51,6 +46,7 @@ export async function getStaticProps() {
   const response = await apolloClient.query({
     query: gql`
       ${POST_CARD_FIELDS}
+      ${WP_SETTINGS_FIELDS}
       query PostList {
         posts(first: 10) {
           edges {
@@ -68,14 +64,7 @@ export async function getStaticProps() {
           }
         }
         wpSettings: allSettings {
-          dateFormat: generalSettingsDateFormat
-          description: generalSettingsDescription
-          startOfWeek: generalSettingsStartOfWeek
-          timeFormat: generalSettingsTimeFormat
-          timezone: generalSettingsTimezone
-          title: generalSettingsTitle
-          postsPerPage: readingSettingsPostsPerPage
-          defaultCategory: writingSettingsDefaultCategory
+          ...WpSettingsFields
         }
       }
     `,
