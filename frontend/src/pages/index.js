@@ -52,17 +52,15 @@ export async function getStaticProps() {
     query: gql`
       ${POST_CARD_FIELDS}
       query PostList {
-        allSettings {
+        wpSettings: allSettings {
           generalSettingsDateFormat
           generalSettingsDescription
-          generalSettingsLanguage
           generalSettingsStartOfWeek
           generalSettingsTimeFormat
           generalSettingsTimezone
           generalSettingsTitle
           readingSettingsPostsPerPage
           writingSettingsDefaultCategory
-          writingSettingsDefaultPostFormat
         }
         posts(first: 10) {
           edges {
@@ -102,13 +100,13 @@ export async function getStaticProps() {
   }
 
   const wpSettings = {
-    ...response?.data.allSettings,
+    ...response?.data.wpSettings,
   }
 
   return {
     props: {
-      wpSettings,
       posts,
+      wpSettings,
     },
   }
 }
