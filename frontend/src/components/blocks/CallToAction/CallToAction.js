@@ -14,7 +14,7 @@ export default function CallToAction({
   secondaryCta,
 }) {
   return (
-    <div className="mb-8 bg-zinc-50">
+    <div className="mb-8 bg-indigo-50">
       <div className="max-w-5xl px-4 py-12 mx-auto sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
         <h2 className="text-3xl font-extrabold tracking-tight text-zinc-900 sm:text-4xl">
           <span className="block">{headingQuestion ?? ''}</span>
@@ -34,7 +34,7 @@ export default function CallToAction({
             <a
               href={secondaryCta?.url ?? ''}
               target={secondaryCta?.target ?? ''}
-              className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-indigo-600 bg-white border border-transparent rounded-md hover:bg-indigo-50"
+              className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-indigo-600 bg-white border border-transparent rounded-md hover:bg-gray-50"
             >
               {secondaryCta?.title ?? ''}
             </a>
