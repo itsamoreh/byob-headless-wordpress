@@ -31,7 +31,7 @@ export default function Home({ posts, wpSettings }) {
           {!posts ||
             (posts.length === 0 && (
               <li>
-                <p>Oops, no posts found!</p>
+                <p className="text-center">Oops, no posts found!</p>
               </li>
             ))}
         </ul>
@@ -97,5 +97,6 @@ export async function getStaticProps() {
       posts,
       wpSettings,
     },
+    revalidate: 10,
   }
 }
