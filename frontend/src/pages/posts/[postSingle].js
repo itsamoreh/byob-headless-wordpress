@@ -12,6 +12,7 @@ import phpDateTokensToUnicode from '@/lib/php-date-tokens-to-unicode'
 import { gql } from '@apollo/client'
 
 export default function Post({ post, wpSettings }) {
+  if (!post) return '' // TODO: forward to 404 page
   return (
     <Shell wpSettings={wpSettings} seo={post.seo}>
       <main>
@@ -118,6 +119,7 @@ export async function getStaticProps({ params = {} } = {}) {
       wpSettings,
       post,
     },
+    revalidate: 10,
   }
 }
 
@@ -127,7 +129,7 @@ export async function getStaticPaths() {
   const data = await apolloClient.query({
     query: gql`
       {
-        posts(first: 10000) {
+        posts(first: 1000) {
           edges {
             node {
               id
@@ -150,7 +152,7 @@ export async function getStaticPaths() {
         },
       }
     }),
-    fallback: false,
+    fallback: 'blocking',
   }
 }
 
