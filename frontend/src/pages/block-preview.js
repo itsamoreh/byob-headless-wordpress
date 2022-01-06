@@ -18,7 +18,7 @@ export default function Block({ block }) {
       <Script
         strategy="beforeInteractive"
         type="text/javascript"
-        src="iframe-resizer-content-window.js"
+        src="js/iframe-resizer-content-window.js"
         // @see https://github.com/davidjbradshaw/iframe-resizer
       />
 
