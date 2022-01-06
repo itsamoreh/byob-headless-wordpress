@@ -46,6 +46,14 @@ function byob_admin_color_scheme() {
 add_action( 'admin_init', 'byob_admin_color_scheme' );
 
 /**
+ * Add custom login theme.
+ */
+function byob_login_styles() {
+	wp_enqueue_style('custom-login', get_stylesheet_directory_uri() . '/style-login.css');
+}
+add_action( 'login_enqueue_scripts', 'byob_login_styles' );
+
+/**
  * Disable admin color scheme picker and set default color scheme.
  */
 function byob_set_admin_color() {
