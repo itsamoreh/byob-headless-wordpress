@@ -70,21 +70,37 @@ Head.propTypes = {
   }),
 }
 
+const SEO_FIELDS = `
+  seo {
+    canonicalUrl
+    description
+    openGraphDescription
+    openGraphTitle
+    openGraphType
+    socialImage {
+      altText
+      sourceUrl
+    }
+    title
+    twitterDescription
+    twitterTitle
+  }
+`
+
 export const POST_SEO_FIELDS = gql`
   fragment PostSeoFields on Post {
-    seo {
-      canonicalUrl
-      description
-      openGraphDescription
-      openGraphTitle
-      openGraphType
-      socialImage {
-        altText
-        sourceUrl
-      }
-      title
-      twitterDescription
-      twitterTitle
-    }
+    ${SEO_FIELDS}
+  }
+`
+
+export const CATEGORY_SEO_FIELDS = gql`
+  fragment CategorySeoFields on Category {
+    ${SEO_FIELDS}
+  }
+`
+
+export const TAG_SEO_FIELDS = gql`
+  fragment TagSeoFields on Tag {
+    ${SEO_FIELDS}
   }
 `
