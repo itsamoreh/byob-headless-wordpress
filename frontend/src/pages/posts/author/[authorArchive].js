@@ -4,6 +4,7 @@ import { getApolloClient } from '@/api/apollo-client'
 import PostCard from '@/components/global/PostCard'
 import { POST_CARD_FIELDS } from '@/components/global/PostCard/PostCard'
 import Shell from '@/components/structure/Shell'
+import ArchiveHeader from '@/components/structure/Shell/ArchiveHeader'
 import { WP_SETTINGS_FIELDS } from '@/components/structure/Shell/Shell'
 import { gql } from '@apollo/client'
 
@@ -18,31 +19,13 @@ export default function AuthorSingle({ author, wpSettings }) {
         description: author.description || '',
       }}
     >
-      <header className="bg-indigo-50">
-        <div className="container flex flex-col mx-auto mb-10 md:mb-16">
-          <div className="max-w-md py-16 mx-auto text-center md:py-20 md:max-w-none md:text-left">
-            {author?.avatar?.url && (
-              <img
-                className="mb-4 md:mb-0 md:mr-10 rounded-full mx-auto object-cover w-48 h-48 aspect-[1/1] shadow-md md:float-left [shape-outside:circle()]"
-                src={author.avatar.url}
-                alt={`Picture of ${author?.name}`}
-              />
-            )}
-            <h1 className="text-3xl font-extrabold leading-tight break-words md:text-4xl">
-              by{' '}
-              <span className="text-4xl text-indigo-600 md:text-5xl">
-                {author?.name}
-              </span>
-            </h1>
-
-            {author.description && (
-              <p className="mt-2 md:mt-4 max-w-[75ch] text-sm text-gray-600 md:text-base">
-                {author?.description}
-              </p>
-            )}
-          </div>
-        </div>
-      </header>
+      <ArchiveHeader
+        imageUrl={author?.avatar?.url}
+        imageAlt={`Picture of ${author?.name}`}
+        preposition="by"
+        title={author?.name}
+        description={author?.description}
+      />
 
       <main className="mb-16">
         <ul className="container max-w-2xl">

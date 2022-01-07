@@ -1,10 +1,11 @@
-import { flatMap } from 'lodash'
 import Link from 'next/link'
 
 import { getApolloClient } from '@/api/apollo-client'
 import PostCard from '@/components/global/PostCard'
 import { POST_CARD_FIELDS } from '@/components/global/PostCard/PostCard'
 import Shell from '@/components/structure/Shell'
+import ArchiveHeader from '@/components/structure/Shell/ArchiveHeader'
+// import { CATEGORY_SEO_FIELDS } from '@/components/structure/Shell/Head/Head'
 import { WP_SETTINGS_FIELDS } from '@/components/structure/Shell/Shell'
 import { gql } from '@apollo/client'
 
@@ -14,29 +15,17 @@ export default function CategoryArchive({ category, wpSettings }) {
   return (
     <Shell
       wpSettings={wpSettings}
+      seo={category.seo}
       manualSeo={{
         title: `Posts categorized ${category.name} - ${wpSettings.title}`,
         description: category.description || '',
       }}
     >
-      <header className="mb-16 bg-indigo-50">
-        <div className="flex flex-col max-w-5xl px-6 py-20 mx-auto space-y-8 md:space-y-0 md:items-center md:justify-between md:flex-row">
-          <div className="max-w-md mx-auto md:max-w-none">
-            <h1 className="text-3xl font-extrabold leading-tight break-words md:text-4xl">
-              category{' '}
-              <span className="text-4xl text-indigo-600 md:text-5xl">
-                {category?.name}
-              </span>
-            </h1>
-
-            {category.description && (
-              <p className="mt-2 md:mt-4 max-w-[75ch] text-sm text-gray-600 md:text-base">
-                {category?.description}
-              </p>
-            )}
-          </div>
-        </div>
-      </header>
+      <ArchiveHeader
+        preposition="category"
+        title={category?.name}
+        description={category?.description}
+      />
 
       <main className="mb-16">
         <ul className="container max-w-2xl">
@@ -78,6 +67,7 @@ export async function getStaticProps({ params = {} } = {}) {
       ${POST_CARD_FIELDS}
       query CategoryById($slug: ID!) {
         category(id: $slug, idType: SLUG) {
+          # ...CategorySeoFields
           uri
           name
           description
