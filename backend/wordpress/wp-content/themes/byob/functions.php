@@ -77,7 +77,7 @@ add_action( 'admin_head', 'byob_admin_favicon' );
  * Disable Gutenberg's default fullscreen mode.
  */
 function byob_disable_editor_fullscreen_mode() {
-	$script = "window.onload = function() { const isFullscreenMode = wp.data.select( 'core/edit-post' ).isFeatureActive( 'fullscreenMode' ); if ( isFullscreenMode ) { wp.data.dispatch( 'core/edit-post' ).toggleFeature( 'fullscreenMode' ); } }";
+	$script = "jQuery( window ).load(function() { const isFullscreenMode = wp.data.select( 'core/edit-post' ).isFeatureActive( 'fullscreenMode' ); if ( isFullscreenMode ) { wp.data.dispatch( 'core/edit-post' ).toggleFeature( 'fullscreenMode' ); } });";
 	wp_add_inline_script( 'wp-blocks', $script );
 }
 add_action( 'enqueue_block_editor_assets', 'byob_disable_editor_fullscreen_mode' );
@@ -86,7 +86,7 @@ add_action( 'enqueue_block_editor_assets', 'byob_disable_editor_fullscreen_mode'
  * Enable Gutenberg top toolbar.
  */
 function byob_enable_editor_top_toolbar() {
-	$script = "window.onload = function() { const isfixedToolbar = wp.data.select( 'core/edit-post' ).isFeatureActive( 'fixedToolbar' ); if ( !isfixedToolbar ) { wp.data.dispatch( 'core/edit-post' ).toggleFeature( 'fixedToolbar' ); } }";
+	$script = "jQuery( window ).load(function() { const isfixedToolbar = wp.data.select( 'core/edit-post' ).isFeatureActive( 'fixedToolbar' ); if ( !isfixedToolbar ) { wp.data.dispatch( 'core/edit-post' ).toggleFeature( 'fixedToolbar' ); } });";
 	wp_add_inline_script( 'wp-blocks', $script );
 }
 add_action( 'enqueue_block_editor_assets', 'byob_enable_editor_top_toolbar' );
