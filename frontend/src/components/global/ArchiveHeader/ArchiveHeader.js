@@ -8,7 +8,7 @@ export default function ArchiveHeader({
   description,
 }) {
   return (
-    <header className="bg-indigo-50">
+    <header className="-mt-20 bg-indigo-50">
       <div className="container flex flex-col mx-auto mb-10 md:mb-16">
         <div className="max-w-md py-16 mx-auto text-center md:py-20 md:max-w-none md:text-left">
           {imageUrl && (

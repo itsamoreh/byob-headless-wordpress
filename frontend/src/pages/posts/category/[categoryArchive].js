@@ -1,10 +1,10 @@
 import Link from 'next/link'
 
 import { getApolloClient } from '@/api/apollo-client'
+import ArchiveHeader from '@/components/global/ArchiveHeader'
 import PostCard from '@/components/global/PostCard'
 import { POST_CARD_FIELDS } from '@/components/global/PostCard/PostCard'
 import Shell from '@/components/structure/Shell'
-import ArchiveHeader from '@/components/structure/Shell/ArchiveHeader'
 // import { CATEGORY_SEO_FIELDS } from '@/components/structure/Shell/Head/Head'
 import { WP_SETTINGS_FIELDS } from '@/components/structure/Shell/Shell'
 import { gql } from '@apollo/client'
