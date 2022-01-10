@@ -16,12 +16,66 @@ if ( ! function_exists( 'byob_setup' ) ) :
 
 		register_nav_menus(
 			array(
-				'menu-1' => esc_html__( 'Primary', 'bring-your-own-blocks' ),
+				'header' => esc_html__( 'Header', 'bring-your-own-blocks' ),
+				'footer' => esc_html__( 'Footer', 'bring-your-own-blocks' ),
 			)
 		);
 	}
 endif;
 add_action( 'after_setup_theme', 'byob_setup' );
+
+function byob_add_default_menus() {
+	$header_menu_name = 'Primary';
+	$header_menu_location = 'header';
+	$header_menu_exists = wp_get_nav_menu_object( $header_menu_name );
+
+	$footer_menu_name = 'Secondary';
+	$footer_menu_location = 'footer';
+	$footer_menu_exists = wp_get_nav_menu_object( $footer_menu_name );
+
+	// Create the Header menu if it doesn't exist.
+	if( !$header_menu_exists ){
+		$header_menu_id = wp_create_nav_menu( $header_menu_name );
+
+		wp_update_nav_menu_item(
+			$header_menu_id, 0,
+			array(
+				'menu-item-title' =>  __('Home'),
+				'menu-item-url' => '/',
+				'menu-item-status' => 'publish'
+			)
+		);
+
+		// Assign the Header menu to the header location.
+		if( !has_nav_menu( $header_menu_location ) ){
+			$locations = get_theme_mod( 'nav_menu_locations' );
+			$locations[$header_menu_location] = $header_menu_id;
+			set_theme_mod( 'nav_menu_locations', $locations );
+		}
+	}
+
+	// Create the Footer menu if it doesn't exist.
+	if( !$footer_menu_exists ){
+		$footer_menu_id = wp_create_nav_menu( $footer_menu_name );
+
+		wp_update_nav_menu_item(
+			$footer_menu_id, 0,
+			array(
+				'menu-item-title' =>  __('Home'),
+				'menu-item-url' => '/',
+				'menu-item-status' => 'publish'
+			)
+		);
+
+		// Assign the Footer menu to the footer location.
+		if( !has_nav_menu( $footer_menu_location ) ){
+			$locations = get_theme_mod( 'nav_menu_locations' );
+			$locations[$footer_menu_location] = $footer_menu_id;
+			set_theme_mod( 'nav_menu_locations', $locations );
+		}
+	}
+}
+add_action( 'admin_init', 'byob_add_default_menus' );
 
 /**
  * Add custom editor styles.
