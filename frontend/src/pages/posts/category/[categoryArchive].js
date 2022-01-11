@@ -8,13 +8,15 @@ import Shell from '@/components/structure/Shell'
 // import { CATEGORY_SEO_FIELDS } from '@/components/structure/Shell/Head/Head'
 import { WP_SETTINGS_FIELDS } from '@/components/structure/Shell/Shell'
 import { gql } from '@apollo/client'
+import { NAVIGATION_FIELDS } from '@/components/structure/Shell/Navigation/Navigation'
 
-export default function CategoryArchive({ category, wpSettings }) {
+export default function CategoryArchive({ category, headerMenu, wpSettings }) {
   const posts = category?.posts?.nodes || []
 
   return (
     <Shell
       wpSettings={wpSettings}
+      headerMenu={headerMenu}
       seo={category.seo}
       manualSeo={{
         title: `Posts categorized ${category.name} - ${wpSettings.title}`,
@@ -23,7 +25,7 @@ export default function CategoryArchive({ category, wpSettings }) {
     >
       <ArchiveHeader
         preposition="category"
-        title={category?.name}
+        title={`/${category?.name}`}
         description={category?.description}
       />
 
@@ -77,6 +79,7 @@ export async function getStaticProps({ params = {} } = {}) {
             }
           }
         }
+        ${NAVIGATION_FIELDS}
         wpSettings: allSettings {
           ...WpSettingsFields
         }
@@ -88,7 +91,8 @@ export async function getStaticProps({ params = {} } = {}) {
   })
 
   const category = response?.data.category
-
+  const headerMenu =
+    response?.data.headerMenu?.edges[0]?.node?.menuItems.nodes || null
   const wpSettings = {
     ...response?.data.wpSettings,
   }
@@ -96,6 +100,7 @@ export async function getStaticProps({ params = {} } = {}) {
   return {
     props: {
       category,
+      headerMenu,
       wpSettings,
     },
     revalidate: 10,

@@ -7,14 +7,15 @@ import { CALL_TO_ACTION_FIELDS } from '@/components/blocks/CallToAction/CallToAc
 import { FREEFORM_FIELDS } from '@/components/blocks/Freeform/Freeform'
 import Shell from '@/components/structure/Shell'
 import { POST_SEO_FIELDS } from '@/components/structure/Shell/Head/Head'
+import { NAVIGATION_FIELDS } from '@/components/structure/Shell/Navigation/Navigation'
 import { WP_SETTINGS_FIELDS } from '@/components/structure/Shell/Shell'
 import phpDateTokensToUnicode from '@/lib/php-date-tokens-to-unicode'
 import { gql } from '@apollo/client'
 
-export default function Post({ post, wpSettings }) {
+export default function Post({ post, headerMenu, wpSettings }) {
   if (!post) return '' // TODO: forward to 404 page
   return (
-    <Shell wpSettings={wpSettings} seo={post.seo}>
+    <Shell wpSettings={wpSettings} headerMenu={headerMenu} seo={post.seo}>
       <main>
         <div className="container max-w-4xl my-16">
           {post?.featuredImage?.node?.sourceUrl && (
@@ -98,6 +99,7 @@ export async function getStaticProps({ params = {} } = {}) {
             }
           }
         }
+      ${NAVIGATION_FIELDS}
         wpSettings: allSettings {
           ...WpSettingsFields
         }
@@ -109,15 +111,17 @@ export async function getStaticProps({ params = {} } = {}) {
   })
 
   const post = response?.data.postBy
-
+  const headerMenu =
+    response?.data.headerMenu?.edges[0]?.node?.menuItems.nodes || null
   const wpSettings = {
     ...response?.data.wpSettings,
   }
 
   return {
     props: {
-      wpSettings,
       post,
+      headerMenu,
+      wpSettings,
     },
     revalidate: 10,
   }
@@ -126,7 +130,7 @@ export async function getStaticProps({ params = {} } = {}) {
 export async function getStaticPaths() {
   const apolloClient = getApolloClient()
 
-  const data = await apolloClient.query({
+  const response = await apolloClient.query({
     query: gql`
       {
         posts(first: 1000) {
@@ -142,7 +146,7 @@ export async function getStaticPaths() {
     `,
   })
 
-  const posts = data?.data.posts.edges.map(({ node }) => node)
+  const posts = response?.data.posts.edges.map(({ node }) => node)
 
   return {
     paths: posts.map(({ slug }) => {

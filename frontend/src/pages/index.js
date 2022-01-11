@@ -5,13 +5,14 @@ import PostCard from '@/components/global/PostCard'
 import { POST_CARD_FIELDS } from '@/components/global/PostCard/PostCard'
 import Shell from '@/components/structure/Shell'
 import { WP_SETTINGS_FIELDS } from '@/components/structure/Shell/Shell'
+import { NAVIGATION_FIELDS } from '@/components/structure/Shell/Navigation/Navigation'
 import { gql } from '@apollo/client'
 
 export default function Home({ posts, headerMenu, footerMenu, wpSettings }) {
   return (
     <Shell
-      headerMenu={headerMenu}
       wpSettings={wpSettings}
+      headerMenu={headerMenu}
       manualSeo={{
         title: `Blog - ${wpSettings.title}`,
         description: 'Blog Description',
@@ -64,19 +65,7 @@ export async function getStaticProps() {
             ...PostCardFields
           }
         }
-        headerMenu: menus(where: { location: HEADER }) {
-          edges {
-            node {
-              menuItems {
-                nodes {
-                  label
-                  path
-                  target
-                }
-              }
-            }
-          }
-        }
+        ${NAVIGATION_FIELDS}
         wpSettings: allSettings {
           ...WpSettingsFields
         }
@@ -106,7 +95,6 @@ export async function getStaticProps() {
     response?.data.headerMenu?.edges[0]?.node?.menuItems.nodes || null
   const footerMenu =
     response?.data.footerMenu?.edges[0]?.node?.menuItems.nodes || null
-
   const wpSettings = {
     ...response?.data.wpSettings,
   }

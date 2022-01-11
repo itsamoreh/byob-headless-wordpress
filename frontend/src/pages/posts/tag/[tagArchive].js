@@ -8,13 +8,15 @@ import Shell from '@/components/structure/Shell'
 // import { TAG_SEO_FIELDS } from '@/components/structure/Shell/Head/Head'
 import { WP_SETTINGS_FIELDS } from '@/components/structure/Shell/Shell'
 import { gql } from '@apollo/client'
+import { NAVIGATION_FIELDS } from '@/components/structure/Shell/Navigation/Navigation'
 
-export default function tagArchive({ tag, wpSettings }) {
+export default function tagArchive({ tag, headerMenu, wpSettings }) {
   const posts = tag?.posts?.nodes || []
 
   return (
     <Shell
       wpSettings={wpSettings}
+      headerMenu={headerMenu}
       seo={tag.seo}
       manualSeo={{
         title: `Posts tagged ${tag.name} - ${wpSettings.title}`,
@@ -23,7 +25,7 @@ export default function tagArchive({ tag, wpSettings }) {
     >
       <ArchiveHeader
         preposition="tag"
-        title={tag?.name}
+        title={`#${tag?.name}`}
         description={tag?.description}
       />
 
@@ -77,6 +79,7 @@ export async function getStaticProps({ params = {} } = {}) {
             }
           }
         }
+        ${NAVIGATION_FIELDS}
         wpSettings: allSettings {
           ...WpSettingsFields
         }
@@ -88,7 +91,8 @@ export async function getStaticProps({ params = {} } = {}) {
   })
 
   const tag = response?.data.tag
-
+  const headerMenu =
+    response?.data.headerMenu?.edges[0]?.node?.menuItems.nodes || null
   const wpSettings = {
     ...response?.data.wpSettings,
   }
@@ -96,6 +100,7 @@ export async function getStaticProps({ params = {} } = {}) {
   return {
     props: {
       tag,
+      headerMenu,
       wpSettings,
     },
     revalidate: 10,

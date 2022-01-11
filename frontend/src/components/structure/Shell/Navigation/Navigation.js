@@ -1,17 +1,21 @@
 import Link from 'next/link'
 import PropTypes from 'prop-types'
 
+import { gql } from '@apollo/client'
+
 export default function Navigation({ menuItems, wpSettings }) {
   const { title } = wpSettings
 
   return (
-    <nav className="flex flex-wrap items-center justify-between h-20 p-6 bg-transparent">
+    <nav className="container flex flex-wrap items-center justify-between h-20 p-6 bg-transparent">
       <div className="flex items-center flex-shrink-0 mr-6">
-        <a href="/">
-          <span className="text-xl font-black tracking-tight text-indigo-600 link-underline link-underline-indigo-600">
-            {title}
-          </span>
-        </a>
+        <Link href="/">
+          <a>
+            <span className="text-xl font-black tracking-tight text-indigo-600 link-underline link-underline-indigo-600">
+              {title}
+            </span>
+          </a>
+        </Link>
       </div>
       <div className="block lg:hidden">
         <button className="flex items-center px-3 py-2 text-indigo-600 hover:opacity-80">
@@ -55,3 +59,19 @@ Navigation.propTypes = {
     title: PropTypes.string,
   }),
 }
+
+export const NAVIGATION_FIELDS = `
+  headerMenu: menus(where: { location: HEADER }) {
+    edges {
+      node {
+        menuItems {
+          nodes {
+            label
+            path
+            target
+          }
+        }
+      }
+    }
+  }
+`

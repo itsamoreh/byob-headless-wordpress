@@ -7,13 +7,15 @@ import { POST_CARD_FIELDS } from '@/components/global/PostCard/PostCard'
 import Shell from '@/components/structure/Shell'
 import { WP_SETTINGS_FIELDS } from '@/components/structure/Shell/Shell'
 import { gql } from '@apollo/client'
+import { NAVIGATION_FIELDS } from '@/components/structure/Shell/Navigation/Navigation'
 
-export default function AuthorSingle({ author, wpSettings }) {
+export default function AuthorSingle({ author, headerMenu, wpSettings }) {
   const posts = author?.posts?.nodes || []
 
   return (
     <Shell
       wpSettings={wpSettings}
+      headerMenu={headerMenu}
       manualSeo={{
         title: `Posts by ${author.name} - ${wpSettings.title}`,
         description: author.description || '',
@@ -75,6 +77,7 @@ export async function getStaticProps({ params = {} } = {}) {
             }
           }
         }
+        ${NAVIGATION_FIELDS}
         wpSettings: allSettings {
           ...WpSettingsFields
         }
@@ -86,7 +89,8 @@ export async function getStaticProps({ params = {} } = {}) {
   })
 
   const author = response?.data.user
-
+  const headerMenu =
+    response?.data.headerMenu?.edges[0]?.node?.menuItems.nodes || null
   const wpSettings = {
     ...response?.data.wpSettings,
   }
@@ -94,6 +98,7 @@ export async function getStaticProps({ params = {} } = {}) {
   return {
     props: {
       author,
+      headerMenu,
       wpSettings,
     },
     revalidate: 10,
