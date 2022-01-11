@@ -249,6 +249,7 @@ textarea:focus,
 .wrap .add-new-h2:active,
 .wrap .page-title-action:active {
   color: var(--byob-white);
+  background-color: var(--byob-primary-dark);
   border-color: var(--byob-primary-dark);
 }
 
@@ -276,8 +277,14 @@ textarea:focus,
   color: var(--byob-white);
 }
 
+#adminmenu a:focus,
+#adminmenu a:hover,
+.folded #adminmenu .wp-submenu-head:hover {
+  box-shadow: inset 4px 0 0 0 var(--byob-white);
+}
+
 #adminmenu div.wp-menu-image:before {
-  color: #f1f2f3;
+  color: var(--byob-white);
 }
 
 #adminmenu a:hover,
@@ -290,7 +297,7 @@ textarea:focus,
 
 #adminmenu li.menu-top:hover div.wp-menu-image:before,
 #adminmenu li.opensub > a.menu-top div.wp-menu-image:before {
-  color: var(--byob-white);
+  color: var(--byob-primary-light);
 }
 
 /* Active tabs use a bottom border color that matches the page background color. */
@@ -443,17 +450,11 @@ ul#adminmenu > li.current > a.current:after {
   color: var(--byob-light-grey);
 }
 
-#wpadminbar:not(.mobile) > #wp-toolbar li:hover span.ab-icon,
-#wpadminbar:not(.mobile) > #wp-toolbar li.hover span.ab-icon,
-#wpadminbar:not(.mobile) > #wp-toolbar a:focus span.ab-icon {
-  color: var(--byob-primary);
-}
-
 #wpadminbar:not(.mobile) li:hover .ab-icon:before,
 #wpadminbar:not(.mobile) li:hover .ab-item:before,
 #wpadminbar:not(.mobile) li:hover .ab-item:after,
 #wpadminbar:not(.mobile) li:hover #adminbarsearch:before {
-  color: var(--byob-primary);
+  color: var(--byob-primary-light);
 }
 
 /* Admin Bar: submenu */
@@ -567,7 +568,7 @@ ul#adminmenu > li.current > a.current:after {
 }
 
 #wpadminbar #wp-admin-bar-user-info a:hover .display-name {
-  color: var(--byob-primary-dark);
+  color: var(--byob-primary);
 }
 
 #wpadminbar #wp-admin-bar-user-info .username {
@@ -731,4 +732,20 @@ div#wp-responsive-toggle a:before {
 
 .contextual-help-tabs-wrap {
   background: var(--byob-white);
+}
+
+/* Health Check and Privacy Settings */
+.health-check-tab.active,
+.privacy-settings-tab.active {
+  box-shadow: inset 0 -3px var(--byob-primary-dark);
+}
+
+.health-check-accordion-trigger:focus,
+.privacy-settings-accordion-trigger:focus {
+  outline: 2px solid var(--byob-primary-dark);
+}
+
+.health-check-accordion-trigger .badge.blue,
+.privacy-settings-accordion-trigger .badge.blue {
+  border: 1px solid var(--byob-primary-dark);
 }
