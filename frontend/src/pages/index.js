@@ -7,9 +7,10 @@ import Shell from '@/components/structure/Shell'
 import { WP_SETTINGS_FIELDS } from '@/components/structure/Shell/Shell'
 import { gql } from '@apollo/client'
 
-export default function Home({ posts, wpSettings }) {
+export default function Home({ posts, headerMenu, footerMenu, wpSettings }) {
   return (
     <Shell
+      headerMenu={headerMenu}
       wpSettings={wpSettings}
       manualSeo={{
         title: `Blog - ${wpSettings.title}`,
@@ -63,6 +64,19 @@ export async function getStaticProps() {
             ...PostCardFields
           }
         }
+        headerMenu: menus(where: { location: HEADER }) {
+          edges {
+            node {
+              menuItems {
+                nodes {
+                  label
+                  path
+                  target
+                }
+              }
+            }
+          }
+        }
         wpSettings: allSettings {
           ...WpSettingsFields
         }
@@ -88,6 +102,11 @@ export async function getStaticProps() {
     posts = uniqBy(posts, 'id')
   }
 
+  const headerMenu =
+    response?.data.headerMenu?.edges[0]?.node?.menuItems.nodes || null
+  const footerMenu =
+    response?.data.footerMenu?.edges[0]?.node?.menuItems.nodes || null
+
   const wpSettings = {
     ...response?.data.wpSettings,
   }
@@ -95,6 +114,8 @@ export async function getStaticProps() {
   return {
     props: {
       posts,
+      headerMenu,
+      footerMenu,
       wpSettings,
     },
     revalidate: 10,

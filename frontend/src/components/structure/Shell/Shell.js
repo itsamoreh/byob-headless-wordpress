@@ -4,13 +4,21 @@ import Head from '@/components/structure/Shell/Head'
 import { WpSettingsContext } from '@/contexts/WpSettingsContext'
 import { gql } from '@apollo/client'
 
-export default function Shell({ wpSettings, seo, manualSeo, children }) {
+import Navigation from './Navigation'
+
+export default function Shell({
+  wpSettings,
+  seo,
+  manualSeo,
+  headerMenu,
+  children,
+}) {
   return (
     <>
       <WpSettingsContext.Provider value={wpSettings}>
         <Head seo={seo} manualSeo={manualSeo} />
 
-        <span>NAVIGATION</span>
+        <Navigation menuItems={headerMenu} wpSettings={wpSettings} />
 
         {children}
 
@@ -31,12 +39,12 @@ Shell.propTypes = {
     postsPerPage: PropTypes.number,
     defaultCategory: PropTypes.number,
   }),
-  link: PropTypes.string,
-  menuItems: PropTypes.array,
   seo: PropTypes.object,
+  manualSeo: PropTypes.object,
+  headerMenu: PropTypes.array,
+  children: PropTypes.node,
 }
 
-// Root Query Fragments
 export const WP_SETTINGS_FIELDS = gql`
   fragment WpSettingsFields on Settings {
     dateFormat: generalSettingsDateFormat

@@ -6,4 +6,23 @@
   body {
     @apply bg-neutral-50;
   }
+
+  /* Fancy link underlines. */
+  .link-underline {
+    @apply pb-1 border-b-0 bg-no-repeat transition-[background-size] duration-500 ease-in-out;
+    background-size: theme('width.0') theme('width.[0.5]');
+    background-position: theme('width.0') theme('width.full');
+  }
+
+  .link-underline:hover {
+    background-size: theme('width.full') theme('width[0.5]');
+  }
+
+  .link-underline-indigo-600 {
+    background-image: linear-gradient(
+        theme('colors.transparent'),
+        theme('colors.transparent')
+      ),
+      linear-gradient(theme('colors.indigo.600'), theme('colors.indigo.600'));
+  }
 }
