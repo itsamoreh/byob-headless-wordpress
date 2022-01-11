@@ -87,6 +87,12 @@ const SEO_FIELDS = `
   }
 `
 
+export const PAGE_SEO_FIELDS = gql`
+  fragment PageSeoFields on Page {
+    ${SEO_FIELDS}
+  }
+`
+
 export const POST_SEO_FIELDS = gql`
   fragment PostSeoFields on Post {
     ${SEO_FIELDS}
