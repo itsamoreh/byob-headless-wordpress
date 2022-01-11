@@ -6,7 +6,8 @@ export default function parseHtml(html) {
     replace: ({ name, attribs, children }) => {
       // Convert internal links to Next.js Link components.
       const isInternalLink =
-        name === 'a' && attribs['data-internal-link'] === 'true'
+        (name === 'a' && attribs['data-internal-link'] === 'true') ||
+        attribs?.href?.includes(process.env.NEXT_PUBLIC_NEXTJS_SITE_URL)
 
       if (isInternalLink) {
         return (
