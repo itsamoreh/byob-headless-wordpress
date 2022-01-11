@@ -40,6 +40,17 @@ add_action(
 );
 
 /**
+ * Hide any links to the customizer.
+ */
+add_action('admin_head', function() {
+	echo '<style>
+    .hide-if-no-customize {
+      display: none !important;
+    }
+  </style>';
+});
+
+/**
  * Remove admin dashboard widgets.
  */
 add_action(
