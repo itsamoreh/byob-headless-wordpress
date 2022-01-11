@@ -15,7 +15,7 @@ if ( ! defined( 'FRONTEND_APP_URL' ) ) {
 	add_action(
 		'admin_notices',
 		function() {
-			$class   = 'notice notice-error is-dismissible';
+			$class   = 'notice notice-error';
 			$error   = '<p></p>';
 			$message = sprintf(
 				'
@@ -36,20 +36,41 @@ if ( ! defined( 'FRONTEND_APP_URL' ) ) {
 }
 
 /**
+ * Warning notice for theme screen.
+ */
+if ( in_array( $pagenow, array( 'themes.php' ), true ) ) {
+	add_action(
+		'admin_notices',
+		function() {
+			$class   = 'notice notice-warning';
+			$message =
+			'
+				<b>Warning! Advanced users only.</b>
+
+				Since this is a headless WordPress setup, themes work a little differently.
+
+				The active theme is probably required. Do not switch themes unless you know what you\'re doing.
+			';
+			printf( '<div class="%1$s">%2$s</div>', esc_attr( $class ), wp_kses_post( wpautop( $message ) ) );
+		}
+	);
+}
+
+/**
  * Warning notice for plugins screens.
  */
 if ( in_array( $pagenow, array( 'plugins.php', 'plugin-install.php' ), true ) ) {
 	add_action(
 		'admin_notices',
 		function() {
-			$class   = 'notice notice-warning is-dismissible';
+			$class   = 'notice notice-warning';
 			$message =
 			'
 				<b>Warning! Advanced users only.</b>
 
 				Since this is a headless WordPress setup, plugins work a little differently.
 
-				Only install, deactivate, or update plugins if you know what you\'re doing.
+				The active plugins are probably required. Only install, deactivate, or update plugins if you know what you\'re doing.
 			';
 			printf( '<div class="%1$s">%2$s</div>', esc_attr( $class ), wp_kses_post( wpautop( $message ) ) );
 		}
@@ -63,7 +84,7 @@ if ( in_array( $pagenow, array( 'options-general.php', 'options-writing.php', 'o
 	add_action(
 		'admin_notices',
 		function() {
-			$class   = 'notice notice-warning is-dismissible';
+			$class   = 'notice notice-warning';
 			$message = '
 			<b>Warning! Advanced users only.</b>
 
