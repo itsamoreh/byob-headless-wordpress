@@ -47,10 +47,9 @@ add_action(
 
 // Remove comments links from admin bar.
 add_action(
-	'init',
-	function() {
-		if ( is_admin_bar_showing() ) {
-			remove_action( 'admin_bar_menu', 'wp_admin_bar_comments_menu', 60 );
-		}
+	'wp_before_admin_bar_render',
+	function(){
+		global $wp_admin_bar;
+		$wp_admin_bar->remove_menu('comments');
 	}
 );
