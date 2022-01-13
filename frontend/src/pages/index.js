@@ -4,8 +4,9 @@ import { getApolloClient } from '@/api/apollo-client'
 import PostCard from '@/components/global/PostCard'
 import { POST_CARD_FIELDS } from '@/components/global/PostCard/PostCard'
 import Shell from '@/components/structure/Shell'
-import { WP_SETTINGS_FIELDS } from '@/components/structure/Shell/Shell'
+import { FOOTER_FIELDS } from '@/components/structure/Shell/Footer/Footer'
 import { NAVIGATION_FIELDS } from '@/components/structure/Shell/Navigation/Navigation'
+import { WP_SETTINGS_FIELDS } from '@/components/structure/Shell/Shell'
 import { gql } from '@apollo/client'
 
 export default function Home({ posts, headerMenu, footerMenu, wpSettings }) {
@@ -13,12 +14,13 @@ export default function Home({ posts, headerMenu, footerMenu, wpSettings }) {
     <Shell
       wpSettings={wpSettings}
       headerMenu={headerMenu}
+      footerMenu={footerMenu}
       manualSeo={{
         title: `Blog - ${wpSettings.title}`,
         description: 'Blog Description',
       }}
     >
-      <main className="mb-16">
+      <main className="my-16">
         <ul className="container max-w-2xl">
           {posts &&
             posts.length > 0 &&
@@ -66,6 +68,7 @@ export async function getStaticProps() {
           }
         }
         ${NAVIGATION_FIELDS}
+        ${FOOTER_FIELDS}
         wpSettings: allSettings {
           ...WpSettingsFields
         }

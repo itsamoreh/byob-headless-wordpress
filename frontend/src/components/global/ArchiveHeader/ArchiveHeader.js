@@ -8,9 +8,9 @@ export default function ArchiveHeader({
   description,
 }) {
   return (
-    <header className="-mt-20 bg-indigo-50">
+    <header className="-mt-24 bg-block-pattern">
       <div className="container flex flex-col mx-auto mb-10 md:mb-16">
-        <div className="max-w-md py-16 mx-auto text-center md:py-20 md:max-w-none md:text-left">
+        <div className="max-w-md py-16 mx-auto text-center md:py-32 md:max-w-none md:text-left">
           {imageUrl && (
             <img
               className="mb-4 md:mb-0 md:mr-10 rounded-full mx-auto object-cover w-48 h-48 aspect-[1/1] shadow-md md:float-left [shape-outside:circle()]"

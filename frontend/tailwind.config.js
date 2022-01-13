@@ -5,8 +5,11 @@ module.exports = {
   ],
   theme: {
     container: {
-      padding: '2rem',
       center: true,
+      padding: '2rem',
+      screens: {
+        xl: '60rem',
+      },
     },
     extend: {},
   },

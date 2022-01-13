@@ -12,9 +12,12 @@ function MyApp({ Component, pageProps = {} }) {
     <>
       <NextNProgress
         color={colors.indigo[600]}
+        height={2}
         options={{ showSpinner: false }}
       />
-      <Component {...pageProps} />
+      <div>
+        <Component {...pageProps} />
+      </div>
     </>
   )
 }

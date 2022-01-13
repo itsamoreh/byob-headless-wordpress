@@ -1,17 +1,18 @@
+import cn from 'classnames'
+import { trimEnd } from 'lodash'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
 
-import { gql } from '@apollo/client'
-
 export default function Navigation({ menuItems, wpSettings }) {
+  const router = useRouter()
   const { title } = wpSettings
-
   return (
-    <nav className="container flex flex-wrap items-center justify-between h-20 p-6 bg-transparent">
+    <nav className="container flex flex-wrap items-center justify-between h-24 p-6 mb-16 bg-transparent">
       <div className="flex items-center flex-shrink-0 mr-6">
         <Link href="/">
           <a>
-            <span className="text-xl font-black tracking-tight text-indigo-600 link-underline link-underline-indigo-600">
+            <span className="text-xl font-black tracking-tight text-indigo-600">
               {title}
             </span>
           </a>
@@ -34,9 +35,17 @@ export default function Navigation({ menuItems, wpSettings }) {
           {menuItems &&
             menuItems.map((item, n) => (
               <Link key={n} href={item.path} target={item.target || ''}>
-                <a className="block mt-4 mr-4 font-medium text-indigo-600 transition-opacity duration-500 text-md lg:inline-block lg:mt-0 text-opacity-80 hover:text-opacity-100">
-                  <span className="link-underline link-underline-indigo-600">
+                <a className="block mt-4 mr-4 font-medium text-indigo-600 transition-opacity duration-500 text-md lg:inline-block lg:mt-0 group">
+                  <span
+                    className={cn(
+                      'opacity-80 link-underline link-underline-indigo-600 group-hover:opacity-100',
+                      // Underline the current link.
+                      router.asPath === trimEnd(item.path, '/') &&
+                        'link-underline-current opacity-100'
+                    )}
+                  >
                     {item.label}
+                    {router.asPath === trimEnd(item.path, '/')}
                   </span>
                 </a>
               </Link>
