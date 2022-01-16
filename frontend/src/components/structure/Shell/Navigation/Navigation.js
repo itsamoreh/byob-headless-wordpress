@@ -8,7 +8,7 @@ export default function Navigation({ menuItems, wpSettings }) {
   const router = useRouter()
   const { title } = wpSettings
   return (
-    <nav className="container flex flex-wrap items-center justify-between h-24 p-6 mb-16 bg-transparent">
+    <nav className="container z-50 flex flex-wrap items-center justify-between p-6 mb-12 bg-transparent">
       <div className="flex items-center flex-shrink-0 mr-6">
         <Link href="/">
           <a>

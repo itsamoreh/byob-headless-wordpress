@@ -8,7 +8,7 @@ export default function ArchiveHeader({
   description,
 }) {
   return (
-    <header className="-mt-24 bg-block-pattern">
+    <header className="-mt-[7.75rem] bg-block-pattern">
       <div className="container flex flex-col mx-auto mb-10 md:mb-16">
         <div className="max-w-md py-16 mx-auto text-center md:py-32 md:max-w-none md:text-left">
           {imageUrl && (

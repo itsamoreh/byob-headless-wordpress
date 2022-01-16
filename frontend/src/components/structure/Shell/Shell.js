@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion'
+import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
 
 import Head from '@/components/structure/Shell/Head'
@@ -15,16 +17,31 @@ export default function Shell({
   footerMenu,
   children,
 }) {
+  const router = useRouter()
+
   return (
     <>
       <WpSettingsContext.Provider value={wpSettings}>
         <Head seo={seo} manualSeo={manualSeo} />
 
-        <Navigation menuItems={headerMenu} wpSettings={wpSettings} />
+        <div className="flex flex-col min-h-screen">
+          <Navigation menuItems={headerMenu} wpSettings={wpSettings} />
 
-        {children}
-
-        <Footer menuItems={footerMenu} wpSettings={wpSettings} />
+          <motion.div
+            key={router.asPath}
+            transition={{
+              type: 'spring',
+            }}
+            initial={{ scale: 0.95, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.95, opacity: 0 }}
+          >
+            {children}
+          </motion.div>
+          <div className="mt-auto">
+            <Footer menuItems={footerMenu} wpSettings={wpSettings} />
+          </div>
+        </div>
       </WpSettingsContext.Provider>
     </>
   )
