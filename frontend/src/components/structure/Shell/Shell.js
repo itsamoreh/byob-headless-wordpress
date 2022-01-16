@@ -18,6 +18,10 @@ export default function Shell({
   children,
 }) {
   const router = useRouter()
+  const routeTransition = {
+    initial: { scale: 0.95, opacity: 0 },
+    animate: { scale: 1, opacity: 1 },
+  }
 
   return (
     <>
@@ -27,20 +31,16 @@ export default function Shell({
         <div className="flex flex-col min-h-screen">
           <Navigation menuItems={headerMenu} wpSettings={wpSettings} />
 
-          <motion.div
-            key={router.asPath}
-            transition={{
-              type: 'spring',
-            }}
-            initial={{ scale: 0.95, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.95, opacity: 0 }}
-          >
+          <motion.div key={`${router.asPath}-children`} {...routeTransition}>
             {children}
           </motion.div>
-          <div className="mt-auto">
+          <motion.div
+            className="mt-auto"
+            key={`${router.asPath}-footer`}
+            {...routeTransition}
+          >
             <Footer menuItems={footerMenu} wpSettings={wpSettings} />
-          </div>
+          </motion.div>
         </div>
       </WpSettingsContext.Provider>
     </>
