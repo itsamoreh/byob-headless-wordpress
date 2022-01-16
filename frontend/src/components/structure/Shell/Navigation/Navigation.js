@@ -69,8 +69,8 @@ Navigation.propTypes = {
   }),
 }
 
-export const NAVIGATION_FIELDS = `
-  headerMenu: menus(where: { location: HEADER }) {
+export const NAVIGATION_MENU = `
+  navigationMenu: menus(where: { location: HEADER }) {
     edges {
       node {
         menuItems {

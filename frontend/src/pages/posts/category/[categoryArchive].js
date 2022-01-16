@@ -5,18 +5,20 @@ import ArchiveHeader from '@/components/global/ArchiveHeader'
 import PostCard from '@/components/global/PostCard'
 import { POST_CARD_FIELDS } from '@/components/global/PostCard/PostCard'
 import Shell from '@/components/structure/Shell'
+import { FOOTER_MENU } from '@/components/structure/Shell/Footer/Footer'
+import { NAVIGATION_MENU } from '@/components/structure/Shell/Navigation/Navigation'
+// TODO: There is an issue with the wp-graphql-the-seo-framework. Category archive SEO does not work.
 // import { CATEGORY_SEO_FIELDS } from '@/components/structure/Shell/Head/Head'
 import { WP_SETTINGS_FIELDS } from '@/components/structure/Shell/Shell'
 import { gql } from '@apollo/client'
-import { NAVIGATION_FIELDS } from '@/components/structure/Shell/Navigation/Navigation'
 
-export default function CategoryArchive({ category, headerMenu, wpSettings }) {
+export default function CategoryArchive({ category, menus, wpSettings }) {
   const posts = category?.posts?.nodes || []
 
   return (
     <Shell
       wpSettings={wpSettings}
-      headerMenu={headerMenu}
+      menus={menus}
       seo={category.seo}
       manualSeo={{
         title: `Posts categorized ${category.name} - ${wpSettings.title}`,
@@ -79,7 +81,8 @@ export async function getStaticProps({ params = {} } = {}) {
             }
           }
         }
-        ${NAVIGATION_FIELDS}
+        ${NAVIGATION_MENU}
+        ${FOOTER_MENU}
         wpSettings: allSettings {
           ...WpSettingsFields
         }
@@ -91,8 +94,14 @@ export async function getStaticProps({ params = {} } = {}) {
   })
 
   const category = response?.data.category
-  const headerMenu =
-    response?.data.headerMenu?.edges[0]?.node?.menuItems.nodes || null
+
+  const menus = {
+    navigationMenu:
+      response?.data.navigationMenu?.edges[0]?.node?.menuItems?.nodes || null,
+    footerMenu:
+      response?.data.footerMenu?.edges[0]?.node?.menuItems?.nodes || null,
+  }
+
   const wpSettings = {
     ...response?.data.wpSettings,
   }
@@ -100,7 +109,7 @@ export async function getStaticProps({ params = {} } = {}) {
   return {
     props: {
       category,
-      headerMenu,
+      menus,
       wpSettings,
     },
     revalidate: 10,

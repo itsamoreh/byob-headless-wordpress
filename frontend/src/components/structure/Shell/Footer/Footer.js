@@ -59,7 +59,7 @@ Footer.propTypes = {
   }),
 }
 
-export const FOOTER_FIELDS = `
+export const FOOTER_MENU = `
   footerMenu: menus(where: { location: FOOTER }) {
     edges {
       node {

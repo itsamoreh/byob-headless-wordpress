@@ -9,14 +9,7 @@ import { gql } from '@apollo/client'
 import Footer from './Footer/Footer'
 import Navigation from './Navigation'
 
-export default function Shell({
-  wpSettings,
-  seo,
-  manualSeo,
-  headerMenu,
-  footerMenu,
-  children,
-}) {
+export default function Shell({ wpSettings, seo, manualSeo, menus, children }) {
   const router = useRouter()
   const routeTransition = {
     initial: { scale: 0.95, opacity: 0 },
@@ -29,7 +22,10 @@ export default function Shell({
         <Head seo={seo} manualSeo={manualSeo} />
 
         <div className="flex flex-col min-h-screen">
-          <Navigation menuItems={headerMenu} wpSettings={wpSettings} />
+          <Navigation
+            menuItems={menus?.navigationMenu}
+            wpSettings={wpSettings}
+          />
 
           <motion.div key={`${router.asPath}-children`} {...routeTransition}>
             {children}
@@ -39,7 +35,7 @@ export default function Shell({
             key={`${router.asPath}-footer`}
             {...routeTransition}
           >
-            <Footer menuItems={footerMenu} wpSettings={wpSettings} />
+            <Footer menuItems={menus?.footerMenu} wpSettings={wpSettings} />
           </motion.div>
         </div>
       </WpSettingsContext.Provider>
@@ -60,8 +56,7 @@ Shell.propTypes = {
   }),
   seo: PropTypes.object,
   manualSeo: PropTypes.object,
-  headerMenu: PropTypes.array,
-  footerMenu: PropTypes.array,
+  menus: PropTypes.object,
   children: PropTypes.node,
 }
 

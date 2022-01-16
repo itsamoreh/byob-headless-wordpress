@@ -4,17 +4,16 @@ import { getApolloClient } from '@/api/apollo-client'
 import PostCard from '@/components/global/PostCard'
 import { POST_CARD_FIELDS } from '@/components/global/PostCard/PostCard'
 import Shell from '@/components/structure/Shell'
-import { FOOTER_FIELDS } from '@/components/structure/Shell/Footer/Footer'
-import { NAVIGATION_FIELDS } from '@/components/structure/Shell/Navigation/Navigation'
+import { FOOTER_MENU } from '@/components/structure/Shell/Footer/Footer'
+import { NAVIGATION_MENU } from '@/components/structure/Shell/Navigation/Navigation'
 import { WP_SETTINGS_FIELDS } from '@/components/structure/Shell/Shell'
 import { gql } from '@apollo/client'
 
-export default function Home({ posts, headerMenu, footerMenu, wpSettings }) {
+export default function Home({ posts, menus, wpSettings }) {
   return (
     <Shell
       wpSettings={wpSettings}
-      headerMenu={headerMenu}
-      footerMenu={footerMenu}
+      menus={menus}
       manualSeo={{
         title: `Blog - ${wpSettings.title}`,
         description: 'Blog Description',
@@ -67,16 +66,14 @@ export async function getStaticProps() {
             ...PostCardFields
           }
         }
-        ${NAVIGATION_FIELDS}
-        ${FOOTER_FIELDS}
+        ${NAVIGATION_MENU}
+        ${FOOTER_MENU}
         wpSettings: allSettings {
           ...WpSettingsFields
         }
       }
     `,
   })
-
-  const stickyPost = response?.data.stickyPost.nodes[0]
 
   let posts = response?.data.posts.edges
     .map(({ node }) => node)
@@ -86,6 +83,8 @@ export async function getStaticProps() {
       }
     })
 
+  const stickyPost = response?.data.stickyPost.nodes[0]
+
   // Push sticky post to the top of the list.
   if (stickyPost) {
     posts.unshift(stickyPost)
@@ -94,19 +93,23 @@ export async function getStaticProps() {
     posts = uniqBy(posts, 'id')
   }
 
-  const headerMenu =
-    response?.data.headerMenu?.edges[0]?.node?.menuItems.nodes || null
-  const footerMenu =
-    response?.data.footerMenu?.edges[0]?.node?.menuItems.nodes || null
-  const wpSettings = {
-    ...response?.data.wpSettings,
+  const menus = {
+    navigationMenu:
+      response?.data.navigationMenu?.edges[0]?.node?.menuItems?.nodes || null,
+    footerMenu:
+      response?.data.footerMenu?.edges[0]?.node?.menuItems?.nodes || null,
   }
+
+  const wpSettings = response?.data?.wpSettings
+    ? {
+        ...response.data.wpSettings,
+      }
+    : null
 
   return {
     props: {
       posts,
-      headerMenu,
-      footerMenu,
+      menus,
       wpSettings,
     },
     revalidate: 10,

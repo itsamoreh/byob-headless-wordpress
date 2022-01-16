@@ -5,17 +5,18 @@ import ArchiveHeader from '@/components/global/ArchiveHeader'
 import PostCard from '@/components/global/PostCard'
 import { POST_CARD_FIELDS } from '@/components/global/PostCard/PostCard'
 import Shell from '@/components/structure/Shell'
+import { FOOTER_MENU } from '@/components/structure/Shell/Footer/Footer'
+import { NAVIGATION_MENU } from '@/components/structure/Shell/Navigation/Navigation'
 import { WP_SETTINGS_FIELDS } from '@/components/structure/Shell/Shell'
 import { gql } from '@apollo/client'
-import { NAVIGATION_FIELDS } from '@/components/structure/Shell/Navigation/Navigation'
 
-export default function AuthorSingle({ author, headerMenu, wpSettings }) {
+export default function AuthorSingle({ author, menus, wpSettings }) {
   const posts = author?.posts?.nodes || []
 
   return (
     <Shell
       wpSettings={wpSettings}
-      headerMenu={headerMenu}
+      menus={menus}
       manualSeo={{
         title: `Posts by ${author.name} - ${wpSettings.title}`,
         description: author.description || '',
@@ -77,7 +78,8 @@ export async function getStaticProps({ params = {} } = {}) {
             }
           }
         }
-        ${NAVIGATION_FIELDS}
+        ${NAVIGATION_MENU}
+        ${FOOTER_MENU}
         wpSettings: allSettings {
           ...WpSettingsFields
         }
@@ -89,8 +91,14 @@ export async function getStaticProps({ params = {} } = {}) {
   })
 
   const author = response?.data.user
-  const headerMenu =
-    response?.data.headerMenu?.edges[0]?.node?.menuItems.nodes || null
+
+  const menus = {
+    navigationMenu:
+      response?.data.navigationMenu?.edges[0]?.node?.menuItems?.nodes || null,
+    footerMenu:
+      response?.data.footerMenu?.edges[0]?.node?.menuItems?.nodes || null,
+  }
+
   const wpSettings = {
     ...response?.data.wpSettings,
   }
@@ -98,7 +106,7 @@ export async function getStaticProps({ params = {} } = {}) {
   return {
     props: {
       author,
-      headerMenu,
+      menus,
       wpSettings,
     },
     revalidate: 10,

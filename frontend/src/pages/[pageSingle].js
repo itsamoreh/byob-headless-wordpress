@@ -6,16 +6,16 @@ import BlockRenderer from '@/components/blocks/BlockRenderer'
 import { CALL_TO_ACTION_FIELDS } from '@/components/blocks/CallToAction/CallToAction'
 import { FREEFORM_FIELDS } from '@/components/blocks/Freeform/Freeform'
 import Shell from '@/components/structure/Shell'
+import { FOOTER_MENU } from '@/components/structure/Shell/Footer/Footer'
 import { PAGE_SEO_FIELDS } from '@/components/structure/Shell/Head/Head'
-import { NAVIGATION_FIELDS } from '@/components/structure/Shell/Navigation/Navigation'
+import { NAVIGATION_MENU } from '@/components/structure/Shell/Navigation/Navigation'
 import { WP_SETTINGS_FIELDS } from '@/components/structure/Shell/Shell'
-import phpDateTokensToUnicode from '@/lib/php-date-tokens-to-unicode'
 import { gql } from '@apollo/client'
 
-export default function Post({ page, headerMenu, wpSettings }) {
+export default function Post({ page, menus, wpSettings }) {
   if (!page) return '' // TODO: forward to 404 page
   return (
-    <Shell wpSettings={wpSettings} headerMenu={headerMenu} seo={page.seo}>
+    <Shell wpSettings={wpSettings} menus={menus} seo={page.seo}>
       <main>
         <BlockRenderer blocks={page.blocks} />
       </main>
@@ -48,7 +48,8 @@ export async function getStaticProps({ params = {} } = {}) {
             }
           }
         }
-      ${NAVIGATION_FIELDS}
+        ${NAVIGATION_MENU}
+        ${FOOTER_MENU}
         wpSettings: allSettings {
           ...WpSettingsFields
         }
@@ -60,8 +61,14 @@ export async function getStaticProps({ params = {} } = {}) {
   })
 
   const page = response?.data.pageBy
-  const headerMenu =
-    response?.data.headerMenu?.edges[0]?.node?.menuItems.nodes || null
+
+  const menus = {
+    navigationMenu:
+      response?.data.navigationMenu?.edges[0]?.node?.menuItems?.nodes || null,
+    footerMenu:
+      response?.data.footerMenu?.edges[0]?.node?.menuItems?.nodes || null,
+  }
+
   const wpSettings = {
     ...response?.data.wpSettings,
   }
@@ -69,7 +76,7 @@ export async function getStaticProps({ params = {} } = {}) {
   return {
     props: {
       page,
-      headerMenu,
+      menus,
       wpSettings,
     },
     revalidate: 10,
