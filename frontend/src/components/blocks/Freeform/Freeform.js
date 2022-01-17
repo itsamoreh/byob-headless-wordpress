@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types'
+import wpautop from 'wpautop'
 
 import parseHtml from '@/lib/html-parser'
 import { gql } from '@apollo/client'
@@ -9,13 +10,14 @@ import { gql } from '@apollo/client'
  * The core Freeform Gutenberg block.
  */
 export default function Freeform({ content }) {
+  console.log(content)
   return (
     <div
       // tailwindcss-typography (prose) can be customized using the low-level customization API
       // @see https://github.com/tailwindlabs/tailwindcss-typography#customization
       className="container mb-8 prose prose-indigo"
     >
-      {parseHtml(content)}
+      {parseHtml(wpautop(content))}
     </div>
   )
 }
