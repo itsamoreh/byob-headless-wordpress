@@ -2,3 +2,21 @@
 !composer*
 !.htaccess
 !.gitignore
+
+# Track custom plugins
+!/wp-content/
+!/wp-content/plugins/
+
+# Track the BYOB core plugin
+!/wp-content/plugins/byob-core
+!/wp-content/plugins/byob-core/**/*
+
+# Track the BYOB acf plugin
+!/wp-content/plugins/byob-acf
+!/wp-content/plugins/byob-acf/**/*
+
+# Track the BYOB theme
+!/wp-content/
+!/wp-content/themes/
+!/wp-content/themes/byob
+!/wp-content/themes/byob/**/*

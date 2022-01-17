@@ -1,46 +1,32 @@
-import Head from 'next/head'
-import Link from 'next/link'
+import { uniqBy } from 'lodash'
+
+import { getApolloClient } from '@/api/apollo-client'
+import PostCard from '@/components/global/PostCard'
+import { POST_CARD_FIELDS } from '@/components/global/PostCard/PostCard'
+import Shell from '@/components/structure/Shell'
+import { FOOTER_MENU } from '@/components/structure/Shell/Footer/Footer'
+import { NAVIGATION_MENU } from '@/components/structure/Shell/Navigation/Navigation'
+import { WP_SETTINGS_FIELDS } from '@/components/structure/Shell/Shell'
 import { gql } from '@apollo/client'
 
-import { getApolloClient } from 'lib/apollo-client'
-
-import styles from '../styles/Home.module.css'
-
-export default function Home({ page, posts }) {
-  const { title, description } = page
+export default function Home({ posts, menus, wpSettings }) {
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>{title}</title>
-        <meta name="description" content={description} />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>{title}</h1>
-
-        <p className={styles.description}>{description}</p>
-
-        <ul className={styles.grid}>
+    <Shell
+      wpSettings={wpSettings}
+      menus={menus}
+      manualSeo={{
+        title: `Blog - ${wpSettings.title}`,
+        description: 'Blog Description',
+      }}
+    >
+      <main className="my-16">
+        <ul className="container max-w-2xl">
           {posts &&
             posts.length > 0 &&
             posts.map((post) => {
               return (
-                <li key={post.slug} className={styles.card}>
-                  <Link href={post.path}>
-                    <a>
-                      <h3
-                        dangerouslySetInnerHTML={{
-                          __html: post.title,
-                        }}
-                      />
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: post.excerpt,
-                        }}
-                      />
-                    </a>
-                  </Link>
+                <li key={post.id}>
+                  <PostCard {...post} />
                 </li>
               )
             })}
@@ -48,56 +34,84 @@ export default function Home({ page, posts }) {
           {!posts ||
             (posts.length === 0 && (
               <li>
-                <p>Oops, no posts found!</p>
+                <p className="text-center">Oops, no posts found!</p>
               </li>
             ))}
         </ul>
       </main>
-    </div>
+    </Shell>
   )
 }
 
 export async function getStaticProps() {
   const apolloClient = getApolloClient()
 
-  const data = await apolloClient.query({
+  const response = await apolloClient.query({
     query: gql`
-      {
-        generalSettings {
-          title
-          description
-        }
-        posts(first: 10000) {
+      ${POST_CARD_FIELDS}
+      ${WP_SETTINGS_FIELDS}
+      query PostList {
+        posts(first: 10) {
           edges {
             node {
-              id
-              excerpt
-              title
-              slug
+              ...PostCardFields
             }
           }
+        }
+        stickyPost: posts(
+          where: { onlySticky: true, orderby: { field: MODIFIED, order: DESC } }
+          first: 1
+        ) {
+          nodes {
+            ...PostCardFields
+          }
+        }
+        ${NAVIGATION_MENU}
+        ${FOOTER_MENU}
+        wpSettings: allSettings {
+          ...WpSettingsFields
         }
       }
     `,
   })
 
-  const posts = data?.data.posts.edges
+  let posts = response?.data.posts.edges
     .map(({ node }) => node)
     .map((post) => {
       return {
         ...post,
-        path: `/posts/${post.slug}`,
       }
     })
 
-  const page = {
-    ...data?.data.generalSettings,
+  const stickyPost = response?.data.stickyPost.nodes[0]
+
+  // Push sticky post to the top of the list.
+  if (stickyPost) {
+    posts.unshift(stickyPost)
+
+    // Make sure there are no duplicates.
+    posts = uniqBy(posts, 'id')
   }
+
+  const menus = {
+    navigationMenu:
+      response?.data.navigationMenu?.edges[0]?.node?.menuItems?.nodes || null,
+    footerMenu:
+      response?.data.footerMenu?.edges[0]?.node?.menuItems?.nodes || null,
+  }
+
+  const wpSettings = response?.data?.wpSettings
+    ? {
+        ...response.data.wpSettings,
+      }
+    : null
 
   return {
     props: {
-      page,
       posts,
+      menus,
+      wpSettings,
     },
+    revalidate: 10,
   }
 }

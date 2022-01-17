@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types'
-import styles from './Freeform.module.css'
-import cn from 'classnames'
+import wpautop from 'wpautop'
+
+import parseHtml from '@/lib/html-parser'
+import { gql } from '@apollo/client'
 
 /**
  * Freeform Block
@@ -10,9 +12,12 @@ import cn from 'classnames'
 export default function Freeform({ content }) {
   return (
     <div
-      className={cn(styles.freeform)}
-      dangerouslySetInnerHTML={{ __html: content }}
-    />
+      // tailwindcss-typography (prose) can be customized using the low-level customization API
+      // @see https://github.com/tailwindlabs/tailwindcss-typography#customization
+      className="container mb-8 prose prose-indigo"
+    >
+      {parseHtml(wpautop(content))}
+    </div>
   )
 }
 
@@ -23,3 +28,12 @@ Freeform.propTypes = {
 Freeform.defaultProps = {
   content: '',
 }
+
+export const FREEFORM_FIELDS = gql`
+  fragment FreeformFields on CoreFreeformBlock {
+    name
+    attributes {
+      content
+    }
+  }
+`
