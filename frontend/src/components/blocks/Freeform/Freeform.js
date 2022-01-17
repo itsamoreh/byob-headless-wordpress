@@ -10,7 +10,6 @@ import { gql } from '@apollo/client'
  * The core Freeform Gutenberg block.
  */
 export default function Freeform({ content }) {
-  console.log(content)
   return (
     <div
       // tailwindcss-typography (prose) can be customized using the low-level customization API
