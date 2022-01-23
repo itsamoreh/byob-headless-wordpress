@@ -18,7 +18,7 @@ export default function Post({ post, menus, wpSettings }) {
   return (
     <Shell wpSettings={wpSettings} menus={menus} seo={post.seo}>
       <main>
-        <div className="container max-w-4xl my-16">
+        <div className="container max-w-4xl mb-8 lg:my-16">
           {post?.featuredImage?.node?.sourceUrl && (
             <img
               className="mb-16 rounded-lg mx-auto object-cover w-full aspect-[5/2] shadow-md"

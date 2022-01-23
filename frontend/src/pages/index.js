@@ -19,7 +19,7 @@ export default function Home({ posts, menus, wpSettings }) {
         description: 'Blog Description',
       }}
     >
-      <main className="my-16">
+      <main className="mb-8 lg:my-16">
         <ul className="container max-w-2xl">
           {posts &&
             posts.length > 0 &&
