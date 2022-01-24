@@ -749,3 +749,8 @@ div#wp-responsive-toggle a:before {
 .privacy-settings-accordion-trigger .badge.blue {
   border: 1px solid var(--byob-primary-dark);
 }
+
+/* Login Modal */
+#wp-auth-check-wrap #wp-auth-check {
+  background-color: var(--byob-white);
+}
