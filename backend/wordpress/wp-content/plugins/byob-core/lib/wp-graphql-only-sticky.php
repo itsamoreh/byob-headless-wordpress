@@ -1,6 +1,6 @@
 <?php
 /**
- * Register GraphQL types.
+ * A WPGraphQL Extension that registers GraphQL onlySticky argument for posts.
  *
  * @package byob-core
  */
@@ -18,7 +18,7 @@ add_action(
 			'onlySticky',
 			array(
 				'type'        => 'Boolean',
-				'description' => __( 'Whether to only include sticky posts', 'your-textdomain' ),
+				'description' => __( 'Whether to only include sticky posts', 'byob-core' ),
 			)
 		);
 	}

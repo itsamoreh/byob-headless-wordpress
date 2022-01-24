@@ -14,9 +14,12 @@
 // Block allowlist.
 require_once dirname( __FILE__ ) . '/byob-allowlist.php';
 
-/**
- * Includes.
- */
+// GraphQL Extensions
+foreach ( glob( dirname( __FILE__ ) . '/lib/*.php' ) as $include ) {
+	require $include;
+}
+
+// Includes
 foreach ( glob( dirname( __FILE__ ) . '/inc/*.php' ) as $include ) {
 	require $include;
 }
