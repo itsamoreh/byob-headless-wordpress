@@ -32,4 +32,4 @@ jobs:
 
       - name: Run build
         working-directory: ./backend
-        run: docker-compose up -d
+        run: docker-compose up -d --force-recreate
