@@ -20,10 +20,11 @@ jobs:
           echo 'PMA_HOST=${{ secrets.PMA_HOST }}' >> .env
           echo 'PMA_PORT=${{ secrets.PMA_PORT }}' >> .env
           echo 'PMA_ARBITRARY=${{ secrets.PMA_ARBITRARY }}' >> .env
-          echo 'WORDPRESS_DB_HOSTY=${{ secrets.WORDPRESS_DB_HOST }}' >> .env
+          echo 'WORDPRESS_DB_HOST=${{ secrets.WORDPRESS_DB_HOST }}' >> .env
           echo 'WORDPRESS_DB_NAME=${{ secrets.WORDPRESS_DB_NAME }}' >> .env
           echo 'WORDPRESS_DB_USER=${{ secrets.WORDPRESS_DB_USER }}' >> .env
           echo 'WORDPRESS_DB_PASSWORD=${{ secrets.WORDPRESS_DB_PASSWORD }}' >> .env
+          echo 'WORDPRESS_PORT'=${{ secrets.WORDPRESS_PORT }} >> .env
           echo 'FRONTEND_APP_URL=${{ secrets.FRONTEND_APP_URL }}' >> .env
           
       - name: Run build
