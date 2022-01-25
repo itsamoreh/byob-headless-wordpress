@@ -7,19 +7,27 @@ import Shell from '@/components/structure/Shell'
 import { FOOTER_MENU } from '@/components/structure/Shell/Footer/Footer'
 import { NAVIGATION_MENU } from '@/components/structure/Shell/Navigation/Navigation'
 import { WP_SETTINGS_FIELDS } from '@/components/structure/Shell/Shell'
+import { CALL_TO_ACTION_FIELDS } from '@/components/blocks/CallToAction/CallToAction'
+import { FREEFORM_FIELDS } from '@/components/blocks/Freeform/Freeform'
 import { gql } from '@apollo/client'
+import { PAGE_FIELDS } from '@/pages/[pageSingle]'
+import { PAGE_SEO_FIELDS } from '@/components/structure/Shell/Head/Head'
+import BlockRenderer from '@/components/blocks/BlockRenderer'
 
-export default function PostArchive({ posts, menus, wpSettings }) {
+export default function PostArchive({ page, posts, menus, wpSettings }) {
+  console.log(page)
   return (
     <Shell
       wpSettings={wpSettings}
       menus={menus}
+      seo={page.seo}
       manualSeo={{
         title: `Blog - ${wpSettings.title}`,
         description: 'Blog Description',
       }}
     >
       <main className="mb-8 lg:my-16">
+        <BlockRenderer blocks={page.blocks} />
         <ul className="container max-w-2xl">
           {posts &&
             posts.length > 0 &&
@@ -49,8 +57,24 @@ export async function getStaticProps() {
   const response = await apolloClient.query({
     query: gql`
       ${POST_CARD_FIELDS}
+      ${PAGE_FIELDS}
+      ${PAGE_SEO_FIELDS}
+      ${CALL_TO_ACTION_FIELDS}
+      ${FREEFORM_FIELDS}
       ${WP_SETTINGS_FIELDS}
       query PostList {
+        pageBy(uri: "posts") {
+          ...PageFields
+          ...PageSeoFields
+          blocks {
+            ... on CoreFreeformBlock {
+              ...FreeformFields
+            }
+            ... on AcfByobCallToActionBlock {
+              ...CallToActionFields
+            }
+          }
+        }
         posts(first: 10) {
           edges {
             node {
@@ -74,6 +98,8 @@ export async function getStaticProps() {
       }
     `,
   })
+
+  const page = response?.data.pageBy
 
   let posts = response?.data.posts.edges
     .map(({ node }) => node)
@@ -108,6 +134,7 @@ export async function getStaticProps() {
 
   return {
     props: {
+      page,
       posts,
       menus,
       wpSettings,
