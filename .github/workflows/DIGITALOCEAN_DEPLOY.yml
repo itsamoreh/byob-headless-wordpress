@@ -1,0 +1,29 @@
+name: DIGITALOCEAN_DEPLOY
+
+on:
+  push:
+    branches: [ main ]
+    
+jobs:
+  build:
+    runs-on: self-hosted
+    
+    steps:
+      - uses: actions/checkout
+      - name: Create .env
+        run: |
+          echo 'MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}' > .env
+          echo 'MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}' > .env
+          echo 'MYSQL_USER=${{ secrets.MYSQL_USER }}' > .env
+          echo 'MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}' > .env
+          echo 'PMA_HOST=${{ secrets.PMA_HOST }}' > .env
+          echo 'PMA_PORT=${{ secrets.PMA_PORT }}' > .env
+          echo 'PMA_ARBITRARY=${{ secrets.PMA_ARBITRARY }}' > .env
+          echo 'WORDPRESS_DB_HOSTY=${{ secrets.WORDPRESS_DB_HOST }}' > .env
+          echo 'WORDPRESS_DB_NAME=${{ secrets.WORDPRESS_DB_NAME }}' > .env
+          echo 'WORDPRESS_DB_USER=${{ secrets.WORDPRESS_DB_USER }}' > .env
+          echo 'WORDPRESS_DB_PASSWORD=${{ secrets.WORDPRESS_DB_PASSWORD }}' > .env
+          echo 'FRONTEND_APP_URL=${{ secrets.FRONTEND_APP_URL }}' > .env
+          
+      - name: Run build
+        run: docker-compose up -d
