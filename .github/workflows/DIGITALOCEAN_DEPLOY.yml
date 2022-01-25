@@ -27,4 +27,5 @@ jobs:
           echo 'FRONTEND_APP_URL=${{ secrets.FRONTEND_APP_URL }}' > .env
           
       - name: Run build
+        working-directory: ./backend
         run: docker-compose up -d
