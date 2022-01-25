@@ -9,6 +9,9 @@ jobs:
     runs-on: self-hosted
 
     steps:
+      - name: Change permissions
+        run: sudo -S ${{ secrets.DEPLOY_USER_PASSWORD }} chown -R $USER:$USER /home/github/actions-runner/_work/byob-headless-wordpress
+
       - uses: actions/checkout@main
       - name: Create .env
         working-directory: ./backend
@@ -26,4 +29,7 @@ jobs:
           echo 'WORDPRESS_DB_PASSWORD=${{ secrets.WORDPRESS_DB_PASSWORD }}' >> .env
           echo 'WORDPRESS_PORT'=${{ secrets.WORDPRESS_PORT }} >> .env
           echo 'FRONTEND_APP_URL=${{ secrets.FRONTEND_APP_URL }}' >> .env
-          docker-compose up -d
+
+      - name: Run build
+        working-directory: ./backend
+        run: docker-compose up -d
