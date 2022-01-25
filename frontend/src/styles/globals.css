@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+  *:focus-visible {
+    @apply rounded-sm outline-indigo-600 outline-dashed outline-2 outline-offset-4;
+  }
+
   body {
     @apply bg-neutral-50;
   }

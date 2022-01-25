@@ -42,7 +42,7 @@ export default function PostCard({
           {/* Content */}
           <div className="p-6">
             <Link href={uri}>
-              <a className="before:absolute before:inset-0">
+              <a className="block before:absolute before:inset-0">
                 <h3 className="block mb-3 text-2xl font-black truncate transition-colors text-zinc-800 group-hover:text-indigo-600">
                   {title}
                   {isSticky && <span className="ml-2 text-indigo-600">★</span>}

@@ -46,6 +46,10 @@ services:
       WORDPRESS_CONFIG_EXTRA: |
         /* Headless Frontend URL */
         define( 'FRONTEND_APP_URL', 'http://localhost:3000' );
+        /* Don't install bundled themes or plugins during WordPress updates */
+        define( 'CORE_UPGRADE_SKIP_NEW_BUNDLED', true );
+        /* Limit number of saved post revisions */
+        define( 'WP_POST_REVISIONS', 5 );
     volumes:
       - ./wordpress:/var/www/html
 

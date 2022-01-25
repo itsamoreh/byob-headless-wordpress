@@ -2,7 +2,7 @@ export default function phpDateTokensToUnicode(tokens) {
   // Convert PHP date tokens to Unicode Locale Data Markup.
   // @see https://www.php.net/manual/en/datetime.format.php
   // @see https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table
-  var conversions = {
+  const conversions = Object.freeze({
     d: 'dd',
     D: 'iii',
     j: 'd',
@@ -41,7 +41,7 @@ export default function phpDateTokensToUnicode(tokens) {
     c: '', // ISO 8601 date - 2004-02-12T15:19:21+00:00
     r: '', // RFC 2822 formatted date - Thu, 21 Dec 2000 16:01:07 +0200
     U: '',
-  }
+  })
 
   return tokens.replace(/[A-Za-z]+/g, function (match) {
     return conversions[match] || match
