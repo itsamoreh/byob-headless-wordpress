@@ -36,7 +36,7 @@ services:
       - mysql
       - composer
     ports:
-      - "8080:80"
+      - "${WORDPRESS_PORT:-8080}:80"
     restart: always
     environment:
       WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST:-mysql:3306}
