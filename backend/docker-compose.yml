@@ -11,10 +11,10 @@ services:
     image: mariadb:10.6.5
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: wordpress
-      MYSQL_USER: wordpress
-      MYSQL_PASSWORD: wordpress
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-wordpress}
+      MYSQL_USER: ${MYSQL_USER:-wordpress}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-wordpress}
     volumes:
       - ./mysql:/var/lib/mysql
 
@@ -39,13 +39,13 @@ services:
       - "8080:80"
     restart: always
     environment:
-      WORDPRESS_DB_HOST: mysql:3306
-      WORDPRESS_DB_USER: wordpress
-      WORDPRESS_DB_PASSWORD: wordpress
-      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST:-mysql:3306}
+      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER:-wordpress}
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD:-wordpress}
+      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME:-wordpress}
       WORDPRESS_CONFIG_EXTRA: |
         /* Headless Frontend URL */
-        define( 'FRONTEND_APP_URL', 'http://localhost:3000' );
+        define( 'FRONTEND_APP_URL', '${FRONTEND_APP_URL:-http://localhost:3000}' );
         /* Don't install bundled themes or plugins during WordPress updates */
         define( 'CORE_UPGRADE_SKIP_NEW_BUNDLED', true );
         /* Limit number of saved post revisions */
