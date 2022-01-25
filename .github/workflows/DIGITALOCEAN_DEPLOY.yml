@@ -26,4 +26,4 @@ jobs:
           echo 'WORDPRESS_DB_PASSWORD=${{ secrets.WORDPRESS_DB_PASSWORD }}' >> .env
           echo 'WORDPRESS_PORT'=${{ secrets.WORDPRESS_PORT }} >> .env
           echo 'FRONTEND_APP_URL=${{ secrets.FRONTEND_APP_URL }}' >> .env
-        run: docker-compose up -d
+          docker-compose up -d
