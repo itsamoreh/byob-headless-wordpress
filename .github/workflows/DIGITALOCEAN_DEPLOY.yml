@@ -10,7 +10,7 @@ jobs:
 
     steps:
       - name: Change permissions
-        run: echo ${{ secrets.DEPLOY_USER_PASSWORD }} | sudo -S chown -R $USER:$USER /home/github/actions-runner/_work/byob-headless-wordpress
+        run: sudo -S <<< ${{ secrets.DEPLOY_USER_PASSWORD }} chown -R $USER:$USER /home/github/actions-runner/_work/byob-headless-wordpress
 
       - uses: actions/checkout@main
       - name: Create .env
