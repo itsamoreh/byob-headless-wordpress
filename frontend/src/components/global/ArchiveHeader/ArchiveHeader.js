@@ -8,17 +8,17 @@ export default function ArchiveHeader({
   description,
 }) {
   return (
-    <header className="-mt-[7.75rem] bg-block-pattern">
-      <div className="container flex flex-col mx-auto mb-10 md:mb-16">
-        <div className="max-w-md py-16 mx-auto text-center md:py-32 md:max-w-none md:text-left">
+    <header className="bg-block-pattern -mt-[7.75rem]">
+      <div className="container mx-auto mb-10 flex flex-col md:mb-16">
+        <div className="mx-auto max-w-md py-16 text-center md:max-w-none md:py-32 md:text-left">
           {imageUrl && (
             <img
-              className="mb-4 md:mb-0 md:mr-10 rounded-full mx-auto object-cover w-48 h-48 aspect-[1/1] shadow-md md:float-left [shape-outside:circle()]"
+              className="mx-auto mb-4 aspect-[1/1] h-48 w-48 rounded-full object-cover shadow-md [shape-outside:circle()] md:float-left md:mb-0 md:mr-10"
               src={imageUrl}
               alt={imageAlt || ''}
             />
           )}
-          <h1 className="text-3xl font-extrabold leading-tight break-words md:text-4xl">
+          <h1 className="break-words text-3xl font-extrabold leading-tight md:text-4xl">
             {preposition}{' '}
             <span className="text-4xl text-indigo-600 md:text-5xl">
               {title}
@@ -26,7 +26,7 @@ export default function ArchiveHeader({
           </h1>
 
           {description && (
-            <p className="mt-2 md:mt-4 max-w-[75ch] text-sm text-gray-600 md:text-base">
+            <p className="mt-2 max-w-[75ch] text-sm text-gray-600 md:mt-4 md:text-base">
               {description}
             </p>
           )}

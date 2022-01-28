@@ -26,11 +26,11 @@ export default function PostCard({
   return (
     <WpSettingsContext.Consumer>
       {(wpSettings) => (
-        <article className="relative mx-auto mb-8 overflow-hidden transition-shadow bg-white rounded-lg shadow-md group hover:shadow-lg">
+        <article className="group relative mx-auto mb-8 overflow-hidden rounded-lg bg-white shadow-md transition-shadow hover:shadow-lg">
           {/* Image */}
           {featuredImage?.node?.sourceUrl && (
             <img
-              className="object-cover w-full aspect-[5/2]"
+              className="aspect-[5/2] w-full object-cover"
               srcSet={featuredImage?.node?.srcSet}
               src={featuredImage?.node?.sourceUrl}
               alt={
@@ -43,7 +43,7 @@ export default function PostCard({
           <div className="p-6">
             <Link href={uri}>
               <a className="block before:absolute before:inset-0">
-                <h3 className="block mb-3 text-2xl font-black truncate transition-colors text-zinc-800 group-hover:text-indigo-600">
+                <h3 className="mb-3 block truncate text-2xl font-black text-zinc-800 transition-colors group-hover:text-indigo-600">
                   {title}
                   {isSticky && <span className="ml-2 text-indigo-600">★</span>}
                 </h3>
@@ -64,7 +64,7 @@ export default function PostCard({
                     return
                   return (
                     <Link href={category?.uri} key={category?.id}>
-                      <a className="relative mb-2 text-xs font-medium text-indigo-600 uppercase hover:underline">
+                      <a className="relative mb-2 text-xs font-medium uppercase text-indigo-600 hover:underline">
                         /{category?.name}
                       </a>
                     </Link>
@@ -74,7 +74,7 @@ export default function PostCard({
                 tags.nodes.map((tag) => {
                   return (
                     <Link href={tag?.uri} key={tag?.id}>
-                      <a className="relative mb-2 text-xs font-medium text-indigo-600 uppercase hover:underline">
+                      <a className="relative mb-2 text-xs font-medium uppercase text-indigo-600 hover:underline">
                         #{tag?.name}
                       </a>
                     </Link>
@@ -89,13 +89,13 @@ export default function PostCard({
                   <div className="mr-3 shrink-0">
                     {author?.node?.avatar?.url && (
                       <img
-                        className="object-cover h-8 rounded-full"
+                        className="h-8 rounded-full object-cover"
                         src={author.node.avatar.url}
                         alt={`Avatar for ${author?.node?.name}`}
                       />
                     )}
                   </div>
-                  <div className="flex-1 min-w-0 mr-4">
+                  <div className="mr-4 min-w-0 flex-1">
                     <p className="text-xs font-medium">{author?.node?.name}</p>
                   </div>
                 </a>

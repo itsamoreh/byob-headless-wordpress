@@ -19,7 +19,7 @@ export default function Home({ homepage, posts, menus, wpSettings }) {
     return (
       <Shell wpSettings={wpSettings} menus={menus} seo={homepage.seo}>
         <main>
-          <h1 className="mb-8 text-6xl font-extrabold leading-tight text-center break-words">
+          <h1 className="mb-8 break-words text-center text-6xl font-extrabold leading-tight">
             {homepage.title}
           </h1>
           <BlockRenderer blocks={homepage.blocks} />

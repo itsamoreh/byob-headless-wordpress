@@ -17,7 +17,7 @@ export default function Post({ page, menus, wpSettings }) {
   return (
     <Shell wpSettings={wpSettings} menus={menus} seo={page.seo}>
       <main>
-        <h1 className="mb-8 text-6xl font-extrabold leading-tight text-center break-words">
+        <h1 className="mb-8 break-words text-center text-6xl font-extrabold leading-tight">
           {page.title}
         </h1>
         <BlockRenderer blocks={page.blocks} />

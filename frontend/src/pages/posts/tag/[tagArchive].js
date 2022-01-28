@@ -49,7 +49,7 @@ export default function tagArchive({ tag, menus, wpSettings }) {
       </main>
 
       <div className="container pb-16">
-        <div className="mx-auto prose prose-indigo">
+        <div className="prose prose-indigo mx-auto">
           <hr />
           <Link href="/">
             <a>← Back to home</a>
