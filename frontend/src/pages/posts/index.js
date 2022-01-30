@@ -15,7 +15,6 @@ import { PAGE_SEO_FIELDS } from '@/components/structure/Shell/Head/Head'
 import BlockRenderer from '@/components/blocks/BlockRenderer'
 
 export default function PostArchive({ page, posts, menus, wpSettings }) {
-  console.log(page)
   return (
     <Shell
       wpSettings={wpSettings}
