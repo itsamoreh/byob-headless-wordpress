@@ -11,6 +11,7 @@
     @apply bg-neutral-50;
   }
 
+  /* TODO: This stuff should be in @layer components */
   /* Fancy link underlines. */
   .link-underline {
     @apply border-b-0 bg-no-repeat pb-1 transition-[background-size] duration-500 ease-in-out;

@@ -1,6 +1,5 @@
-import PropTypes from 'prop-types'
-
 import { gql } from '@apollo/client'
+import PropTypes from 'prop-types'
 
 /**
  * Call to Action Block

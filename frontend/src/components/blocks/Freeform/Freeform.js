@@ -1,8 +1,8 @@
+import { gql } from '@apollo/client'
 import PropTypes from 'prop-types'
 import wpautop from 'wpautop'
 
 import parseHtml from '@/lib/html-parser'
-import { gql } from '@apollo/client'
 
 /**
  * Freeform Block

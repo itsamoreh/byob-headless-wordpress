@@ -1,17 +1,20 @@
+import { gql } from '@apollo/client'
 import parse from 'date-fns/format'
 import Link from 'next/link'
 
+import phpDateTokensToUnicode from '@/lib/php-date-tokens-to-unicode'
+
 import { getApolloClient } from '@/api/apollo-client'
-import BlockRenderer from '@/components/blocks/BlockRenderer'
-import { CALL_TO_ACTION_FIELDS } from '@/components/blocks/CallToAction/CallToAction'
-import { FREEFORM_FIELDS } from '@/components/blocks/Freeform/Freeform'
+
 import Shell from '@/components/structure/Shell'
 import { FOOTER_MENU } from '@/components/structure/Shell/Footer/Footer'
 import { POST_SEO_FIELDS } from '@/components/structure/Shell/Head/Head'
 import { NAVIGATION_MENU } from '@/components/structure/Shell/Navigation/Navigation'
 import { WP_SETTINGS_FIELDS } from '@/components/structure/Shell/Shell'
-import phpDateTokensToUnicode from '@/lib/php-date-tokens-to-unicode'
-import { gql } from '@apollo/client'
+
+import BlockRenderer from '@/components/blocks/BlockRenderer'
+import { CALL_TO_ACTION_FIELDS } from '@/components/blocks/CallToAction/CallToAction'
+import { FREEFORM_FIELDS } from '@/components/blocks/Freeform/Freeform'
 
 export default function Post({ post, menus, wpSettings }) {
   if (!post) return '' // TODO: forward to 404 page

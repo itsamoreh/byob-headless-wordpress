@@ -1,10 +1,10 @@
+import { WpSettingsContext } from '@/contexts/WpSettingsContext'
+import { gql } from '@apollo/client'
 import { motion } from 'framer-motion'
 import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
 
 import Head from '@/components/structure/Shell/Head'
-import { WpSettingsContext } from '@/contexts/WpSettingsContext'
-import { gql } from '@apollo/client'
 
 import Footer from './Footer/Footer'
 import Navigation from './Navigation'

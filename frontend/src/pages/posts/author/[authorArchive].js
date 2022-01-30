@@ -1,14 +1,16 @@
+import { gql } from '@apollo/client'
 import Link from 'next/link'
 
 import { getApolloClient } from '@/api/apollo-client'
-import ArchiveHeader from '@/components/global/ArchiveHeader'
-import PostCard from '@/components/global/PostCard'
-import { POST_CARD_FIELDS } from '@/components/global/PostCard/PostCard'
+
 import Shell from '@/components/structure/Shell'
 import { FOOTER_MENU } from '@/components/structure/Shell/Footer/Footer'
 import { NAVIGATION_MENU } from '@/components/structure/Shell/Navigation/Navigation'
 import { WP_SETTINGS_FIELDS } from '@/components/structure/Shell/Shell'
-import { gql } from '@apollo/client'
+
+import ArchiveHeader from '@/components/global/ArchiveHeader'
+import PostCard from '@/components/global/PostCard'
+import { POST_CARD_FIELDS } from '@/components/global/PostCard/PostCard'
 
 export default function AuthorSingle({ author, menus, wpSettings }) {
   const posts = author?.posts?.nodes || []
