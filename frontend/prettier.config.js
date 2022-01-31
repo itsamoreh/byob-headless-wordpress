@@ -1,6 +1,5 @@
 // https://prettier.io/docs/en/configuration.html
 module.exports = {
-  tailwindConfig: './styles/tailwind.config.js',
   semi: false,
   singleQuote: true,
   tabWidth: 2,
