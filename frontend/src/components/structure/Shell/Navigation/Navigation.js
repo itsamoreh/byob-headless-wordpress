@@ -12,8 +12,8 @@ export default function Navigation({ menuItems, wpSettings }) {
   const router = useRouter()
 
   return (
-    <nav className="container z-50 flex flex-wrap items-center justify-between p-6 mb-12 bg-transparent">
-      <div className="z-50 flex items-center flex-shrink-0 mr-6">
+    <nav className="container z-50 mb-12 flex flex-wrap items-center justify-between bg-transparent p-6">
+      <div className="z-50 mr-6 flex flex-shrink-0 items-center">
         <Link href="/">
           <a>
             <span className="text-xl font-black tracking-tight text-indigo-600">
@@ -30,7 +30,7 @@ export default function Navigation({ menuItems, wpSettings }) {
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
           <svg
-            className="w-3 h-3 fill-current"
+            className="h-3 w-3 fill-current"
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -41,19 +41,19 @@ export default function Navigation({ menuItems, wpSettings }) {
       </div>
       <div
         className={cn(
-          'absolute inset-0 px-6 pt-[4.75rem] bg-white flex-grow block w-full',
-          'lg:static lg:mt-0 lg:px-0 lg:pt-0 lg:bg-transparent lg:flex lg:items-center lg:w-auto',
+          'absolute inset-0 block w-full flex-grow bg-white px-6 pt-[4.75rem]',
+          'lg:static lg:mt-0 lg:flex lg:w-auto lg:items-center lg:bg-transparent lg:px-0 lg:pt-0',
           mobileMenuOpen ? 'block' : 'hidden'
         )}
       >
-        <div className="lg:flex-grow lg:flex">
+        <div className="lg:flex lg:flex-grow">
           {menuItems &&
             menuItems.map((item, n) => (
               <Link key={n} href={item.path} target={item.target || ''}>
-                <a className="block mt-4 mr-4 font-medium text-indigo-600 transition-opacity duration-500 text-md lg:mt-0 group">
+                <a className="text-md group mt-4 mr-4 block font-medium text-indigo-600 transition-opacity duration-500 lg:mt-0">
                   <span
                     className={cn(
-                      'opacity-80 link-underline link-underline-indigo-600 group-hover:opacity-100',
+                      'link-underline link-underline-indigo-600 opacity-80 group-hover:opacity-100',
                       // Underline the current link.
                       router.asPath === trimEnd(item.path, '/') &&
                         'link-underline-current opacity-100'

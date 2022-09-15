@@ -8,9 +8,9 @@ export default function Footer({ menuItems, wpSettings }) {
   const router = useRouter()
   const { title } = wpSettings
   return (
-    <nav className="flex flex-wrap items-center justify-between p-6 mt-16 bg-indigo-100 bg-block-pattern">
+    <nav className="bg-block-pattern mt-16 flex flex-wrap items-center justify-between bg-indigo-100 p-6">
       <div className="container">
-        <div className="flex items-center flex-shrink-0 mb-6">
+        <div className="mb-6 flex flex-shrink-0 items-center">
           <Link href="/">
             <a>
               <span className="text-xl font-black tracking-tight text-indigo-600">
@@ -19,15 +19,15 @@ export default function Footer({ menuItems, wpSettings }) {
             </a>
           </Link>
         </div>
-        <div className="flex-grow block w-full lg:flex lg:items-center lg:w-auto">
+        <div className="block w-full flex-grow lg:flex lg:w-auto lg:items-center">
           <div className="lg:flex-grow">
             {menuItems &&
               menuItems.map((item, n) => (
                 <Link key={n} href={item.path} target={item.target || ''}>
-                  <a className="block mt-4 mr-4 font-medium text-indigo-600 transition-opacity duration-500 text-md lg:inline-block lg:mt-0 group">
+                  <a className="text-md group mt-4 mr-4 block font-medium text-indigo-600 transition-opacity duration-500 lg:mt-0 lg:inline-block">
                     <span
                       className={cn(
-                        'opacity-80 link-underline link-underline-indigo-600 group-hover:opacity-100',
+                        'link-underline link-underline-indigo-600 opacity-80 group-hover:opacity-100',
                         // Underline the current link.
                         router.asPath === trimEnd(item.path, '/') &&
                           'link-underline-current opacity-100'

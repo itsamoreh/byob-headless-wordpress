@@ -1,27 +1,30 @@
+import { gql } from '@apollo/client'
 import parse from 'date-fns/format'
 import Link from 'next/link'
 
+import phpDateTokensToUnicode from '@/lib/php-date-tokens-to-unicode'
+
 import { getApolloClient } from '@/api/apollo-client'
-import BlockRenderer from '@/components/blocks/BlockRenderer'
-import { CALL_TO_ACTION_FIELDS } from '@/components/blocks/CallToAction/CallToAction'
-import { FREEFORM_FIELDS } from '@/components/blocks/Freeform/Freeform'
+
 import Shell from '@/components/structure/Shell'
 import { FOOTER_MENU } from '@/components/structure/Shell/Footer/Footer'
 import { POST_SEO_FIELDS } from '@/components/structure/Shell/Head/Head'
 import { NAVIGATION_MENU } from '@/components/structure/Shell/Navigation/Navigation'
 import { WP_SETTINGS_FIELDS } from '@/components/structure/Shell/Shell'
-import phpDateTokensToUnicode from '@/lib/php-date-tokens-to-unicode'
-import { gql } from '@apollo/client'
+
+import BlockRenderer from '@/components/blocks/BlockRenderer'
+import { CALL_TO_ACTION_FIELDS } from '@/components/blocks/CallToAction/CallToAction'
+import { FREEFORM_FIELDS } from '@/components/blocks/Freeform/Freeform'
 
 export default function Post({ post, menus, wpSettings }) {
   if (!post) return '' // TODO: forward to 404 page
   return (
     <Shell wpSettings={wpSettings} menus={menus} seo={post.seo}>
       <main>
-        <div className="container max-w-4xl mb-8 lg:my-16">
+        <div className="container mb-8 max-w-4xl lg:my-16">
           {post?.featuredImage?.node?.sourceUrl && (
             <img
-              className="mb-16 rounded-lg mx-auto object-cover w-full aspect-[5/2] shadow-md"
+              className="mx-auto mb-16 aspect-[5/2] w-full rounded-lg object-cover shadow-md"
               srcSet={post?.featuredImage?.node?.srcSet}
               src={post?.featuredImage?.node?.sourceUrl}
               alt={
@@ -30,11 +33,11 @@ export default function Post({ post, menus, wpSettings }) {
               }
             />
           )}
-          <h1 className="mb-8 text-6xl font-extrabold leading-tight text-center break-words">
+          <h1 className="mb-8 break-words text-center text-6xl font-extrabold leading-tight">
             {post.title}
           </h1>
 
-          <div className="mx-auto text-sm leading-snug text-center text-gray-600">
+          <div className="mx-auto text-center text-sm leading-snug text-gray-600">
             <span>
               {parse(
                 new Date(post.date),
@@ -63,7 +66,7 @@ export default function Post({ post, menus, wpSettings }) {
         <BlockRenderer blocks={post.blocks} />
 
         <div className="container pb-16">
-          <div className="mx-auto prose prose-indigo">
+          <div className="prose prose-indigo mx-auto">
             <hr />
             <Link href="/">
               <a>← Back to home</a>

@@ -26,7 +26,7 @@ Add more margin around the blocks.
 --------------------------------------------------------------*/
 .wp-block {
   margin-top: 0;
-  margin-bottom: 3px;
+  margin-bottom: 4px;
 }
 
 .wp-block:last-child {
@@ -36,9 +36,12 @@ Add more margin around the blocks.
 /*--------------------------------------------------------------
 Fix misaligned block inserter after disabling core bocks.
 --------------------------------------------------------------*/
-.block-list-appender > .block-editor-inserter {
-  display: flex;
-  justify-content: center;
+.block-list-appender
+  > .block-editor-inserter
+  .block-editor-button-block-appender {
+  box-shadow: none;
+  border-radius: 0;
+  outline: 1px solid #e0e0e0;
 }
 
 /*--------------------------------------------------------------

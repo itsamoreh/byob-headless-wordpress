@@ -1,8 +1,8 @@
+import camelizeKeys from '@/lib/camelize-keys'
 import Head from 'next/head'
 import Script from 'next/script'
 
 import BlockRenderer from '@/components/blocks/BlockRenderer'
-import camelizeKeys from '@/lib/camelize-keys'
 
 export default function Block({ block }) {
   return (

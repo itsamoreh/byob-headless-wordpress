@@ -1,6 +1,5 @@
-import PropTypes from 'prop-types'
-
 import { gql } from '@apollo/client'
+import PropTypes from 'prop-types'
 
 /**
  * Call to Action Block
@@ -15,26 +14,26 @@ export default function CallToAction({
 }) {
   return (
     <div className="mb-8 bg-indigo-50">
-      <div className="max-w-5xl px-4 py-12 mx-auto sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
+      <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:flex lg:items-center lg:justify-between lg:py-16 lg:px-8">
         <h2 className="text-3xl font-extrabold tracking-tight text-zinc-900 sm:text-4xl">
           <span className="block">{headingQuestion ?? ''}</span>
           <span className="block text-indigo-600">{headingCall ?? ''}</span>
         </h2>
-        <div className="flex mt-8 lg:mt-0 lg:flex-shrink-0">
+        <div className="mt-8 flex lg:mt-0 lg:flex-shrink-0">
           <div className="inline-flex rounded-md shadow">
             <a
               href={primaryCta?.url ?? ''}
               target={primaryCta?.target ?? ''}
-              className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-700"
+              className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-5 py-3 text-base font-medium text-white hover:bg-indigo-700"
             >
               {primaryCta?.title ?? ''}
             </a>
           </div>
-          <div className="inline-flex ml-3 rounded-md shadow">
+          <div className="ml-3 inline-flex rounded-md shadow">
             <a
               href={secondaryCta?.url ?? ''}
               target={secondaryCta?.target ?? ''}
-              className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-indigo-600 bg-white border border-transparent rounded-md hover:bg-gray-50"
+              className="inline-flex items-center justify-center rounded-md border border-transparent bg-white px-5 py-3 text-base font-medium text-indigo-600 hover:bg-gray-50"
             >
               {secondaryCta?.title ?? ''}
             </a>

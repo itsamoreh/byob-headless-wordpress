@@ -1,21 +1,24 @@
+import { gql } from '@apollo/client'
 import { uniqBy } from 'lodash'
 
 import { getApolloClient } from '@/api/apollo-client'
-import PostCard from '@/components/global/PostCard'
-import { POST_CARD_FIELDS } from '@/components/global/PostCard/PostCard'
+
+import { PAGE_FIELDS } from '@/pages/[pageSingle]'
+
 import Shell from '@/components/structure/Shell'
 import { FOOTER_MENU } from '@/components/structure/Shell/Footer/Footer'
+import { PAGE_SEO_FIELDS } from '@/components/structure/Shell/Head/Head'
 import { NAVIGATION_MENU } from '@/components/structure/Shell/Navigation/Navigation'
 import { WP_SETTINGS_FIELDS } from '@/components/structure/Shell/Shell'
+
+import PostCard from '@/components/global/PostCard'
+import { POST_CARD_FIELDS } from '@/components/global/PostCard/PostCard'
+
+import BlockRenderer from '@/components/blocks/BlockRenderer'
 import { CALL_TO_ACTION_FIELDS } from '@/components/blocks/CallToAction/CallToAction'
 import { FREEFORM_FIELDS } from '@/components/blocks/Freeform/Freeform'
-import { gql } from '@apollo/client'
-import { PAGE_FIELDS } from '@/pages/[pageSingle]'
-import { PAGE_SEO_FIELDS } from '@/components/structure/Shell/Head/Head'
-import BlockRenderer from '@/components/blocks/BlockRenderer'
 
 export default function PostArchive({ page, posts, menus, wpSettings }) {
-  console.log(page)
   return (
     <Shell
       wpSettings={wpSettings}

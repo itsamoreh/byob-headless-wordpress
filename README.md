@@ -11,7 +11,7 @@ cd nextjs-headless-wordpress
 
 Next install Docker from [docs.docker.com/get-docker](https://docs.docker.com/get-docker/) and make sure Docker is running before you continue.
 
-Set up the project with: `./wp-byob configure`. You'll be asked a few questions.
+Set up the project with: `./app configure`. You'll be asked a few questions.
 
 **Would you like to use this project's WordPress backend setup?**
 
@@ -51,11 +51,11 @@ The **Next.js frontend** will be available on at [http://localhost:3000](http://
 Useful commands (run these from the project root):
 
 ```bash
-./wp-byob configure       # Run the configuration wizard to set up the backend, frontend and create an .env file.
-./wp-byob start-all       # Create and start the WordPress docker environment and run the Next.js development server.
-./wp-byob start-backend   # Start the WordPress docker environment.
-./wp-byob start-frontend  # Run Next.js development server.
-./wp-byob stop            # Stop the WordPress docker environment.
+./app configure       # Run the configuration wizard to set up the backend, frontend and create an .env file.
+./app start-all       # Create and start the WordPress docker environment and run the Next.js development server.
+./app start-backend   # Start the WordPress docker environment.
+./app start-frontend  # Run Next.js development server.
+./app stop            # Stop the WordPress docker environment.
 ```
 
 ## Debugging
