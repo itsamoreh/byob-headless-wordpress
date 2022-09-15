@@ -1,6 +1,9 @@
 {
   "name": "byob-frontend",
   "version": "0.1.0",
+  "engines": {
+    "node": "14.20.0"
+  },
   "private": true,
   "scripts": {
     "dev": "next dev",
