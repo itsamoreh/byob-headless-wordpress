@@ -62,5 +62,25 @@
     "backend/wordpress/wp-signup.php": true,
     "backend/wordpress/wp-trackback.php": true,
     "backend/wordpress/xmlrpc.php": true
-  }
+  },
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#7a73eb",
+    "activityBar.background": "#7a73eb",
+    "activityBar.foreground": "#15202b",
+    "activityBar.inactiveForeground": "#15202b99",
+    "activityBarBadge.background": "#f3b0ab",
+    "activityBarBadge.foreground": "#15202b",
+    "commandCenter.border": "#e7e7e799",
+    "sash.hoverBorder": "#7a73eb",
+    "statusBar.background": "#4f46e5",
+    "statusBar.foreground": "#e7e7e7",
+    "statusBarItem.hoverBackground": "#7a73eb",
+    "statusBarItem.remoteBackground": "#4f46e5",
+    "statusBarItem.remoteForeground": "#e7e7e7",
+    "titleBar.activeBackground": "#4f46e5",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#4f46e599",
+    "titleBar.inactiveForeground": "#e7e7e799"
+  },
+  "peacock.color": "4f46e5"
 }

@@ -1,25 +1,29 @@
+import { gql } from '@apollo/client'
 import { uniqBy } from 'lodash'
 
 import { getApolloClient } from '@/api/apollo-client'
-import BlockRenderer from '@/components/blocks/BlockRenderer'
-import { CALL_TO_ACTION_FIELDS } from '@/components/blocks/CallToAction/CallToAction'
-import { FREEFORM_FIELDS } from '@/components/blocks/Freeform/Freeform'
-import PostCard from '@/components/global/PostCard'
-import { POST_CARD_FIELDS } from '@/components/global/PostCard/PostCard'
+
+import { PAGE_FIELDS } from '@/pages/[pageSingle]'
+
 import Shell from '@/components/structure/Shell'
 import { FOOTER_MENU } from '@/components/structure/Shell/Footer/Footer'
 import { PAGE_SEO_FIELDS } from '@/components/structure/Shell/Head/Head'
 import { NAVIGATION_MENU } from '@/components/structure/Shell/Navigation/Navigation'
 import { WP_SETTINGS_FIELDS } from '@/components/structure/Shell/Shell'
-import { PAGE_FIELDS } from '@/pages/[pageSingle]'
-import { gql } from '@apollo/client'
+
+import PostCard from '@/components/global/PostCard'
+import { POST_CARD_FIELDS } from '@/components/global/PostCard/PostCard'
+
+import BlockRenderer from '@/components/blocks/BlockRenderer'
+import { CALL_TO_ACTION_FIELDS } from '@/components/blocks/CallToAction/CallToAction'
+import { FREEFORM_FIELDS } from '@/components/blocks/Freeform/Freeform'
 
 export default function Home({ homepage, posts, menus, wpSettings }) {
   if (homepage) {
     return (
       <Shell wpSettings={wpSettings} menus={menus} seo={homepage.seo}>
         <main>
-          <h1 className="mb-8 text-6xl font-extrabold leading-tight text-center break-words">
+          <h1 className="mb-8 break-words text-center text-6xl font-extrabold leading-tight">
             {homepage.title}
           </h1>
           <BlockRenderer blocks={homepage.blocks} />

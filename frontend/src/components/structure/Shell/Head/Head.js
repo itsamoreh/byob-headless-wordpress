@@ -1,7 +1,6 @@
+import { gql } from '@apollo/client'
 import NextHead from 'next/head'
 import PropTypes from 'prop-types'
-
-import { gql } from '@apollo/client'
 
 export default function Head({ seo, manualSeo }) {
   return (

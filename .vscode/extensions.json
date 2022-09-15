@@ -2,7 +2,6 @@
   "recommendations": [
     "amatiasq.sort-imports",
     "apollographql.vscode-apollo",
-    "devine-davies.make-hidden",
-    "heybourn.headwind"
+    "devine-davies.make-hidden"
   ]
 }

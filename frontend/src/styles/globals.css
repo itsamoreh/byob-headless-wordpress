@@ -4,16 +4,17 @@
 
 @layer base {
   *:focus-visible {
-    @apply rounded-sm outline-indigo-600 outline-dashed outline-2 outline-offset-4;
+    @apply rounded-sm outline-dashed outline-2 outline-offset-4 outline-indigo-600;
   }
 
   body {
     @apply bg-neutral-50;
   }
 
+  /* TODO: This stuff should be in @layer components */
   /* Fancy link underlines. */
   .link-underline {
-    @apply pb-1 border-b-0 bg-no-repeat transition-[background-size] duration-500 ease-in-out;
+    @apply border-b-0 bg-no-repeat pb-1 transition-[background-size] duration-500 ease-in-out;
     background-size: theme('width.0') theme('width.[0.5]');
     background-position: theme('width.0') theme('width.full');
   }
