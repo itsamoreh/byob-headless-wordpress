@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
  * Block Renderer
  *
  * Render all of the Gutenberg blocks that make up the page.
+ * Add new blocks to the switch statement to render them on the frontend.
  */
 export default function BlockRenderer({ blocks }) {
   return (
